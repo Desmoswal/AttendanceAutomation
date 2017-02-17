@@ -13,14 +13,12 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Desmoswal
+ * @author boldi
  */
-public class Attendance extends Application
-{
+public class Attendance extends Application {
     
     @Override
-    public void start(Stage stage) throws Exception
-    {
+    public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
@@ -32,8 +30,7 @@ public class Attendance extends Application
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         launch(args);
     }
     

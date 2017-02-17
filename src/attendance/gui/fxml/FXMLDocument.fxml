@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.FXMLDocumentController">
+   <children>
+      <GridPane fx:id="MainGrid" alignment="CENTER" prefHeight="600.0" prefWidth="600.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="259.0" minWidth="10.0" prefWidth="258.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.0" minWidth="10.0" prefWidth="278.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="195.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="487.0" minHeight="10.0" prefHeight="469.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="214.0" minHeight="0.0" prefHeight="42.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane prefHeight="436.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="74.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="191.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="198.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="185.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+               <children>
+                  <Button fx:id="btnCourses" mnemonicParsing="false" onAction="#TodaysButtonAction" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Today's Courses" GridPane.rowIndex="1" />
+                  <Button fx:id="btnCheckIn" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Check-In" GridPane.rowIndex="2" />
+                  <Button fx:id="btnOnline" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Online Users" GridPane.rowIndex="3" />
+                  <Button fx:id="btnMyAttandance" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="My attandance details" GridPane.rowIndex="4" />
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Log out" GridPane.rowIndex="5" />
+                  <Label alignment="TOP_LEFT" text="Menu" />
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="82.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="177.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Welcome:">
+                     <opaqueInsets>
+                        <Insets left="10.0" />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="10.0" />
+                     </GridPane.margin></Label>
+                  <Label fx:id="lblName" prefHeight="21.0" prefWidth="189.0" text="Name" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <Label text="Date:" GridPane.columnIndex="1">
+               <padding>
+                  <Insets left="10.0" />
+               </padding></Label>
+            <DatePicker fx:id="DatePicker" prefHeight="31.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </DatePicker>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
