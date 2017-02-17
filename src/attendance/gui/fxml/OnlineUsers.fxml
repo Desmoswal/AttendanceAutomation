@@ -17,8 +17,8 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="195.0" minHeight="0.0" prefHeight="72.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="487.0" minHeight="10.0" prefHeight="469.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="214.0" minHeight="0.0" prefHeight="42.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="489.0" minHeight="10.0" prefHeight="489.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="214.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane prefHeight="436.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.rowIndex="1">
@@ -33,7 +33,7 @@
                   <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="185.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <GridPane.margin>
-                  <Insets left="10.0" />
+                  <Insets left="10.0" right="10.0" />
                </GridPane.margin>
                <children>
                   <Button fx:id="btnCourses" mnemonicParsing="false" onAction="#TodaysButtonAction" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Today's Courses" GridPane.rowIndex="1">
@@ -52,7 +52,7 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Label alignment="TOP_LEFT" text="Menu:">
+                  <Label alignment="TOP_LEFT" text="Menu">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Label>
@@ -90,11 +90,12 @@
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-            <DatePicker fx:id="DatePicker" prefHeight="31.0" prefWidth="280.0" promptText="Pick a date" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </DatePicker>
+            <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn prefWidth="152.0" text="Name" />
+                <TableColumn prefWidth="152.0" text="Email" />
+              </columns>
+            </TableView>
          </children>
       </GridPane>
    </children>
