@@ -5,7 +5,10 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Student;
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,13 +36,30 @@ public class AdminCheckinController implements Initializable
     @FXML
     private Label lblCourse;
 
+    private AttendanceModel model = new AttendanceModel();
+    private LinkedList<Student> checkinList;
+    private LinkedList<CheckBox> checkinboxes = new LinkedList<>();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        checkinList = model.getCheckinList();
+        if(!checkinList.isEmpty()) {
+            for (Student student : checkinList) {
+                CheckBox cb = new CheckBox(student.getName());
+                if(student.isCheckedIn()) {
+                    cb.selectedProperty().set(true);
+                } else {
+                    cb.selectedProperty().set(false);
+                }
+                checkinboxes.add(cb);
+            }
+            listStudents.getChildrenUnmodifiable().addAll(checkinboxes);
+        }
+        
+        
     }    
     
 }
