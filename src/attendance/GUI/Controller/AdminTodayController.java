@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -27,6 +28,8 @@ public class AdminTodayController implements Initializable
     private TableColumn<?, ?> colClass;
     @FXML
     private TableColumn<?, ?> colRoom;
+    @FXML
+    private TableView<?> tblToday;
 
     /**
      * Initializes the controller class.

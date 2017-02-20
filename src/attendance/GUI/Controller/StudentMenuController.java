@@ -11,26 +11,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
  *
  * @author Desmoswal
  */
-public class OnlineUsersController implements Initializable
+public class StudentMenuController implements Initializable
 {
 
     @FXML
-    private TableView<?> tblOnline;
+    private Button btnCourses;
     @FXML
-    private TableColumn<?, ?> colName;
+    private Button btnOnline;
     @FXML
-    private TableColumn<?, ?> colEmail;
-
+    private Button btnMyAttandance;
+    @FXML
+    private Button btnLogOut;
 
     /**
      * Initializes the controller class.

@@ -11,7 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -23,7 +26,19 @@ public class TodaysCoursesController implements Initializable
 {
 
     @FXML
-    private Button btnMyAttandance1;
+    private TableView<?> tblCourse;
+    @FXML
+    private TableColumn<?, ?> colTime;
+    @FXML
+    private TableColumn<?, ?> colClass;
+    @FXML
+    private TableColumn<?, ?> colTeacher;
+    @FXML
+    private TableColumn<?, ?> colRoom;
+    @FXML
+    private ComboBox<?> cmbCourse;
+    @FXML
+    private Button btnCheckIn;
 
     /**
      * Initializes the controller class.

@@ -23,15 +23,15 @@ public class AdminCheckinController implements Initializable
 {
 
     @FXML
-    private Label labClass;
-    @FXML
-    private Label labCourse;
-    @FXML
     private ListView<?> listStudents;
     @FXML
     private CheckBox chkStudent;
     @FXML
     private Button btnClose;
+    @FXML
+    private Label lblClass;
+    @FXML
+    private Label lblCourse;
 
     /**
      * Initializes the controller class.

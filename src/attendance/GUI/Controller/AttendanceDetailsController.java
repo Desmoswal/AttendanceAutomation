@@ -7,7 +7,12 @@ package attendance.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 /**
  * FXML Controller class
@@ -16,6 +21,25 @@ import javafx.fxml.Initializable;
  */
 public class AttendanceDetailsController implements Initializable
 {
+
+    @FXML
+    private TableView<?> tblMissed;
+    @FXML
+    private TableColumn<?, ?> colDate;
+    @FXML
+    private TableColumn<?, ?> colTime;
+    @FXML
+    private TableColumn<?, ?> colClass;
+    @FXML
+    private TableColumn<?, ?> colTeacher;
+    @FXML
+    private Label tblTotal;
+    @FXML
+    private Label lblAttendance;
+    @FXML
+    private Label lblMissed;
+    @FXML
+    private ComboBox<?> cmbClass;
 
     /**
      * Initializes the controller class.
