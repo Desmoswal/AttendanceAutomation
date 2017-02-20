@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.TodaysCoursesController">
+   <children>
+      <GridPane prefHeight="477.0" prefWidth="304.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="240.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="423.0" minHeight="10.0" prefHeight="423.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tblCourse" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="colTime" prefWidth="64.0" text="Time" />
+                <TableColumn fx:id="colClass" prefWidth="101.0" text="Class Name" />
+                  <TableColumn fx:id="colTeacher" prefWidth="75.0" text="Teacher" />
+                  <TableColumn fx:id="colRoom" prefWidth="61.0" text="Room" />
+              </columns>
+            </TableView>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ComboBox fx:id="cmbCourse" prefWidth="150.0" promptText="Select Course" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" />
+                  <Button fx:id="btnCheckIn" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Check-In" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets left="25.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

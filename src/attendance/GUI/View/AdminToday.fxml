@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="504.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminTodayController">
+    <stylesheets>
+        <URL value="@/attendance/Attendance.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="tblToday" layoutX="8.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="348.0" prefWidth="484.0">
+        <columns>
+          <TableColumn fx:id="colTime" prefWidth="117.0" resizable="false" text="Time" />
+          <TableColumn fx:id="colCourseName" prefWidth="123.0" resizable="false" text="Course name" />
+            <TableColumn fx:id="colClass" prefWidth="129.0" resizable="false" text="Class" />
+            <TableColumn fx:id="colRoom" prefWidth="114.0" resizable="false" text="Room" />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Double click on a course to see checkin list" />
+   </children>
+</AnchorPane>
