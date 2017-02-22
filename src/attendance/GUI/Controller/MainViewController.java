@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,9 +19,11 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+
 
 /**
  * FXML Controller class
@@ -39,6 +42,9 @@ public class MainViewController implements Initializable
     @FXML
     private AnchorPane paneItem;
 
+    private AttendanceModel model = new AttendanceModel();
+    @FXML
+    private AnchorPane anchorpane;
     /**
      * Initializes the controller class.
      */
@@ -47,12 +53,26 @@ public class MainViewController implements Initializable
     {
         
         try
-        {
-              AnchorPane menuPane = FXMLLoader.load(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
-              paneMenu.getChildren().add(menuPane);
-              
-              AnchorPane itemPane = FXMLLoader.load(getClass().getResource("/attendance/GUI/View/AttendanceDetails.fxml"));
-              paneItem.getChildren().add(itemPane);
+        {     
+              if(model.getUser() != null)
+              {
+                  FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
+                  AnchorPane menuPane = menuLoader.load();
+                  AdminMenuController menuController = menuLoader.getController();
+                  paneMenu.getChildren().add(menuPane);
+                  
+                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminToday.fxml"));
+                  AnchorPane itemPane = itemLoader.load();
+                  AdminTodayController itemController = itemLoader.getController();
+                  paneItem.getChildren().add(itemPane);
+              }
+              else
+              {
+                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
+                  AnchorPane menuPane = loader.load();
+                  AdminMenuController controller = loader.getController();
+                  paneMenu.getChildren().add(menuPane);
+              }
             
         } catch (IOException ex)
         {

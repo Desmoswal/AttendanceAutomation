@@ -6,6 +6,7 @@
 package attendance.GUI.Model;
 
 import attendance.BE.Student;
+import attendance.BE.User;
 import java.util.LinkedList;
 
 /**
@@ -16,6 +17,11 @@ public class AttendanceModel {
 
     public LinkedList<Student> getCheckinList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public User getUser()
+    {
+        return new User(true);
     }
     
 }
