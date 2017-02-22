@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.StudentMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.StudentMenuController">
    <children>
     <GridPane prefHeight="436.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" GridPane.rowIndex="1">
               <columnConstraints>
@@ -26,23 +31,23 @@
                   <Insets left="10.0" />
                </GridPane.margin>
                <children>
-                  <Button fx:id="btnCourses" mnemonicParsing="false"  style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Today's Courses" GridPane.rowIndex="1">
+                  <Button fx:id="btnCourses" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Today's Courses" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnOnline" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Online Users" GridPane.rowIndex="2">
+                  <Button fx:id="btnOnline" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Online Users" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnMyAttandance" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="My attandance details" GridPane.rowIndex="3">
+                  <Button fx:id="btnMyAttandance" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="My attandance details" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black; -fx-border-width: 2;" text="Log out" GridPane.rowIndex="4">
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Log out" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Button>
-                  <Label alignment="TOP_LEFT" text="Menu:">
+                  <Label alignment="TOP_LEFT" stylesheets="@../../Attendance.css" text="Menu:">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Label>
