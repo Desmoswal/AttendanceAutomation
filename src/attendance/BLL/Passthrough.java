@@ -5,13 +5,15 @@
  */
 package attendance.BLL;
 
+import attendance.BE.User;
 import attendance.DAL.UserManager;
+import java.util.List;
 
 /**
  *
  * @author Kristof
  */
-public class Passthrough {
+/*public class Passthrough {
     private UserManager userman = new UserManager();
     
     public byte checkIfAdmin(String name) {
@@ -23,4 +25,16 @@ public class Passthrough {
             return -1;
         }
     }
+}*/
+
+public class Passthrough
+{
+    private UserManager userManager = new UserManager();
+    
+    
+    public List<String> getUsers()
+    {
+        return userManager.getUsers();
+    }
+    
 }

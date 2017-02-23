@@ -22,9 +22,9 @@ public class AttendanceModel {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public byte checkIfAdmin(String name) {
+    /*public byte checkIfAdmin(String name) {
         return pt.checkIfAdmin(name);
-    }
+    }*/
     
     public User getUser()
     {
