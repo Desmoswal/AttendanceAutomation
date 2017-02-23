@@ -41,20 +41,21 @@ public class MainViewController implements Initializable
     private Label lblName;
     @FXML
     private AnchorPane paneItem;
-
-    private AttendanceModel model = new AttendanceModel();
     @FXML
     private AnchorPane anchorpane;
+    
+    private AttendanceModel model = new AttendanceModel();
+    private String user = null;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
         try
         {     
-              if(model.getUser() != null)
+              if(user.equals("admin"))
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
@@ -67,7 +68,7 @@ public class MainViewController implements Initializable
                   AdminTodayController itemController = itemLoader.getController();
                   paneItem.getChildren().add(itemPane);
               }
-              else
+              else if(user.equals("student"))
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
@@ -83,7 +84,7 @@ public class MainViewController implements Initializable
             
         } catch (IOException ex)
         {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
         } 
 
     }    
@@ -93,5 +94,9 @@ public class MainViewController implements Initializable
         Object controller = itemLoader.getController();
         paneItem.getChildren().clear();
         paneItem.getChildren().add(itemPane);
+    }
+    
+    public void setUserDemo(String set) {
+        this.user = set;
     }
 }

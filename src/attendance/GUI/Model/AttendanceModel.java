@@ -21,7 +21,7 @@ public class AttendanceModel {
     
     public User getUser()
     {
-        return null;
+        return new User(true);
     }
     
 }

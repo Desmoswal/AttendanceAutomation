@@ -55,6 +55,7 @@ public class AdminMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/AdminToday.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnStatsStudent":
@@ -62,6 +63,7 @@ public class AdminMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/AdminAttByStudent.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnStatsClass":
@@ -69,6 +71,7 @@ public class AdminMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/AdminAttByClass.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnOnline":
@@ -76,6 +79,7 @@ public class AdminMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnLogOut":

@@ -52,6 +52,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/TodaysCourses.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnMyAttendance":
@@ -59,6 +60,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/AttendanceDetails.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnOnline":
@@ -66,6 +68,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
+                    System.out.println(e);
                 }
                 break;
             case "btnLogOut":
