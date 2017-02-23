@@ -59,6 +59,7 @@ public class MainViewController implements Initializable
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
                   AdminMenuController menuController = menuLoader.getController();
+                  menuController.setParentController(this);
                   paneMenu.getChildren().add(menuPane);
                   
                   FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminToday.fxml"));
@@ -68,10 +69,15 @@ public class MainViewController implements Initializable
               }
               else
               {
-                  FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
-                  AnchorPane menuPane = loader.load();
-                  AdminMenuController controller = loader.getController();
+                  FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
+                  AnchorPane menuPane = menuLoader.load();
+                  StudentMenuController menuCsontroller = menuLoader.getController();
                   paneMenu.getChildren().add(menuPane);
+                  
+                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/TodaysCourses.fxml"));
+                  AnchorPane itemPane = itemLoader.load();
+                  TodaysCoursesController itemController = itemLoader.getController();
+                  paneItem.getChildren().add(itemPane);
               }
             
         } catch (IOException ex)
@@ -79,6 +85,12 @@ public class MainViewController implements Initializable
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         } 
 
-        
     }    
+    public void openItem(String url) throws IOException {
+        FXMLLoader itemLoader = new FXMLLoader(getClass().getResource(url));
+        AnchorPane itemPane = itemLoader.load();
+        Object controller = itemLoader.getController();
+        paneItem.getChildren().clear();
+        paneItem.getChildren().add(itemPane);
+    }
 }

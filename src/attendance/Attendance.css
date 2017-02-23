@@ -1,4 +1,4 @@
-.button:active
+.button:pressed
 {
     -fx-text-fill: white;
     -fx-background-color: black;
@@ -34,4 +34,13 @@
     -fx-border-width: 2;
     -fx-font-weight: bold;
 }
-
+.menubutton {
+    -fx-font-size: 16px;
+    -fx-font-weight:bold;
+}
+root {
+    -fx-background-color: #777;
+}
+.menubutton-active {
+    -fx-background-color: grey;
+}

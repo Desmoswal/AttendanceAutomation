@@ -5,8 +5,10 @@
  */
 package attendance.GUI.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,6 +29,8 @@ public class AdminMenuController implements Initializable
     private Button btnStatsStudent;
     @FXML
     private Button btnStatsClass;
+    
+    private MainViewController parentCon;
 
     /**
      * Initializes the controller class.
@@ -34,7 +38,46 @@ public class AdminMenuController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        
     }    
     
+    public void setParentController(MainViewController pc) {
+        this.parentCon = pc;
+    }
+    
+    @FXML
+    private void pressedMenuButton(ActionEvent event) {
+        Button pressedButton = (Button) event.getSource();
+        switch(pressedButton.getId()) {
+            case "btnTodays":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/AdminToday.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnStatsStudent":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/AdminAttByStudent.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnStatsClass":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/AdminAttByClass.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnOnline":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+        }
+        
+    }
 }
