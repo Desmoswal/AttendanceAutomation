@@ -45,7 +45,7 @@ public class MainViewController implements Initializable
     private AnchorPane anchorpane;
     
     private AttendanceModel model = new AttendanceModel();
-    private String user = null;
+    private static String user;
     
     /**
      * Initializes the controller class.
@@ -96,7 +96,7 @@ public class MainViewController implements Initializable
         paneItem.getChildren().add(itemPane);
     }
     
-    public void setUserDemo(String set) {
-        this.user = set;
+    public static void setUserDemo(String set) {
+        user = set;
     }
 }

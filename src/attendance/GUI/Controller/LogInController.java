@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,6 +38,7 @@ public class LogInController implements Initializable
     @FXML
     private Button btnLogin;
 
+    private AttendanceModel model = new AttendanceModel();
     /**
      * Initializes the controller class.
      */
@@ -61,28 +63,29 @@ public class LogInController implements Initializable
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
+            MainViewController.setUserDemo("student");
             Parent root = mainloader.load();
-            
             MainViewController controller = mainloader.getController();
-            controller.setUserDemo("student");
-            
+            //controller.setUserDemo("student");
+                    
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
-            stage.close();
             newStage.show();
+            stage.close();
         } else if(user.equals("teacher") && !pass.isEmpty()) {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
+            MainViewController.setUserDemo("admin");
             Parent root = mainloader.load();
-            
+
             MainViewController controller = mainloader.getController();
-            controller.setUserDemo("admin");
+            //controller.setUserDemo("admin");
             
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
-            stage.close();
             newStage.show();
+            stage.close();
         }
     }
 }
