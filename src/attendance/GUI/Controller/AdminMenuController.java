@@ -48,6 +48,7 @@ public class AdminMenuController implements Initializable
     @FXML
     private void pressedMenuButton(ActionEvent event) {
         Button pressedButton = (Button) event.getSource();
+        System.out.println("pressed button: "+event.getSource());
         switch(pressedButton.getId()) {
             case "btnTodays":
                 try {
@@ -76,6 +77,9 @@ public class AdminMenuController implements Initializable
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
                 }
+                break;
+            case "btnLogOut":
+                //do logout
                 break;
         }
         

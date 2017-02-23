@@ -71,7 +71,8 @@ public class MainViewController implements Initializable
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
-                  StudentMenuController menuCsontroller = menuLoader.getController();
+                  StudentMenuController menuController = menuLoader.getController();
+                  menuController.setParentController(this);
                   paneMenu.getChildren().add(menuPane);
                   
                   FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/TodaysCourses.fxml"));

@@ -42,7 +42,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="211.0" prefWidth="195.0" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="btnOnline" layoutX="13.0" layoutY="30.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Online users">
+            <Button fx:id="btnOnline" layoutX="13.0" layoutY="30.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Online users">
                      <font>
                         <Font size="16.0" />
                      </font>

@@ -27,7 +27,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
                <children>
-                  <Button fx:id="btnCourses" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Today's Courses" GridPane.rowIndex="1">
+                  <Button fx:id="btnCourses" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Today's Courses" GridPane.rowIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -35,7 +35,7 @@
                   <String fx:value="button" />
                   <String fx:value="menubutton" />
                </styleClass></Button>
-                  <Button fx:id="btnOnline" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Online Users" GridPane.rowIndex="2">
+                  <Button fx:id="btnOnline" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Online Users" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -43,7 +43,7 @@
                   <String fx:value="button" />
                   <String fx:value="menubutton" />
                </styleClass></Button>
-                  <Button fx:id="btnMyAttandance" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="My attandance details" GridPane.rowIndex="3">
+                  <Button fx:id="btnMyAttendance" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="My attandance details" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -51,7 +51,7 @@
                   <String fx:value="button" />
                   <String fx:value="menubutton" />
                </styleClass></Button>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Log out" GridPane.rowIndex="4">
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Log out" GridPane.rowIndex="4">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,9 +27,11 @@ public class StudentMenuController implements Initializable
     @FXML
     private Button btnOnline;
     @FXML
-    private Button btnMyAttandance;
+    private Button btnMyAttendance;
     @FXML
     private Button btnLogOut;
+    
+    private MainViewController parentCon;
 
     /**
      * Initializes the controller class.
@@ -40,7 +43,38 @@ public class StudentMenuController implements Initializable
     }    
 
     @FXML
-    private void MouseClicked(MouseEvent event) {
-        
+    private void pressedMenuButton(ActionEvent event) {
+        Button pressedButton = (Button) event.getSource();
+        System.out.println("pressed button: "+event.getSource());
+        switch(pressedButton.getId()) {
+            case "btnCourses":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/TodaysCourses.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnMyAttendance":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/AttendanceDetails.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnOnline":
+                try {
+                    parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
+                } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                }
+                break;
+            case "btnLogOut":
+                //do logout
+                break;
+        }
+    }
+    
+    public void setParentController(MainViewController pc) {
+            this.parentCon = pc;
     }
 }
