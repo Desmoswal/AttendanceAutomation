@@ -9,6 +9,7 @@ import attendance.BE.Student;
 import attendance.BE.User;
 import attendance.BLL.Passthrough;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -26,9 +27,9 @@ public class AttendanceModel {
         return pt.checkIfAdmin(name);
     }*/
     
-    public User getUser()
+     public List<String> getUsers()
     {
-        return new User(true);
+        return pt.getUsers();
     }
     
 }
