@@ -6,6 +6,7 @@
 package attendance.GUI.Controller;
 
 import attendance.GUI.Model.AttendanceModel;
+import attendance.BLL.Passthrough;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,6 +40,7 @@ public class LogInController implements Initializable
     private Button btnLogin;
 
     private AttendanceModel model = new AttendanceModel();
+    private Passthrough bll = new Passthrough();
     /**
      * Initializes the controller class.
      */
@@ -60,9 +62,9 @@ public class LogInController implements Initializable
     
     private void checkLogin(String user,String pass) throws IOException {
         //if(user.equals("student") && !pass.isEmpty()) {   <--- Old method
-        System.out.println(model.getUsers());//writing out every user
+        System.out.println(bll.getUsers());//writing out every user
         //Now comes from BLL which gets data from DAL and compares to input
-        if(model.getUsers().contains(user) && user.equals("student") && !pass.isEmpty()){  
+        if(bll.getUsers().contains(user) && user.equals("student") && !pass.isEmpty()){  
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
@@ -77,7 +79,7 @@ public class LogInController implements Initializable
             stage.close();
         } 
         //else if(user.equals("teacher") && !pass.isEmpty()) { <--- Old method
-        else if(model.getUsers().contains(user) && user.equals("teacher") && !pass.isEmpty()){
+        else if(bll.getUsers().contains(user) && user.equals("teacher") && !pass.isEmpty()){
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
