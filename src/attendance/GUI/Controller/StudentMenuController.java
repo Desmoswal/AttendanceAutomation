@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -73,6 +72,7 @@ public class StudentMenuController implements Initializable
                 break;
             case "btnLogOut":
                 //do logout
+                System.exit(0);
                 break;
         }
     }

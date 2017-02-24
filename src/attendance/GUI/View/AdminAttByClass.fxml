@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,34 +7,34 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByClassController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByClassController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" stylesheets="@../../Attendance.css" text="Select a class to see details">
          <font>
             <Font name="System Italic" size="16.0" />
          </font>
       </Label>
-      <TableView fx:id="tblClasses" layoutX="14.0" layoutY="47.0" prefHeight="396.0" prefWidth="105.0" stylesheets="@../../Attendance.css">
+      <TableView fx:id="tblClasses" layoutX="14.0" layoutY="47.0" prefHeight="361.0" prefWidth="105.0" stylesheets="@../../Attendance.css">
         <columns>
           <TableColumn prefWidth="104.0" text="Class" />
         </columns>
       </TableView>
-      <Label layoutX="141.0" layoutY="47.0" stylesheets="@../../Attendance.css" text="Average attendance of whole class:" />
-      <Separator layoutX="141.0" layoutY="72.0" prefHeight="17.0" prefWidth="345.0" />
+      <Label layoutX="141.0" layoutY="51.0" stylesheets="@../../Attendance.css" text="Average attendance of whole class:" />
+      <Separator layoutX="141.0" layoutY="84.0" prefHeight="17.0" prefWidth="345.0" />
       <Label fx:id="lblAvgAttofClass" layoutX="539.0" layoutY="51.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label layoutX="141.0" layoutY="98.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
-      <Label layoutX="141.0" layoutY="127.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
-      <Separator layoutX="141.0" layoutY="156.0" prefHeight="17.0" prefWidth="345.0" />
-      <Label layoutX="141.0" layoutY="180.0" stylesheets="@../../Attendance.css" text="Most missed student:" />
-      <Label layoutX="140.0" layoutY="210.0" stylesheets="@../../Attendance.css" text="Most missed student's most missed course:" />
-      <Separator layoutX="141.0" layoutY="245.0" prefHeight="17.0" prefWidth="345.0" />
-      <Label layoutX="140.0" layoutY="275.0" stylesheets="@../../Attendance.css" text="Most attended student:" />
-      <Label layoutX="140.0" layoutY="306.0" stylesheets="@../../Attendance.css" text="Most attended student's most attended course:" />
-      <Label fx:id="lblMostMissedCourse" layoutX="539.0" layoutY="102.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblMostAttendCourse" layoutX="539.0" layoutY="131.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblMostMissedStud" layoutX="539.0" layoutY="184.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblMostMissedStudCourse" layoutX="539.0" layoutY="214.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblMostAttStud" layoutX="539.0" layoutY="279.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblMostAttStudCourse" layoutX="539.0" layoutY="310.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label layoutX="142.0" layoutY="110.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
+      <Label layoutX="142.0" layoutY="145.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
+      <Separator layoutX="141.0" layoutY="181.0" prefHeight="17.0" prefWidth="345.0" />
+      <Label layoutX="139.0" layoutY="220.0" stylesheets="@../../Attendance.css" text="Most missed student:" />
+      <Label layoutX="140.0" layoutY="255.0" stylesheets="@../../Attendance.css" text="Most missed student's most missed course:" />
+      <Separator layoutX="141.0" layoutY="305.0" prefHeight="17.0" prefWidth="345.0" />
+      <Label layoutX="138.0" layoutY="350.0" stylesheets="@../../Attendance.css" text="Most attended student:" />
+      <Label layoutX="139.0" layoutY="385.0" stylesheets="@../../Attendance.css" text="Most attended student's most attended course:" />
+      <Label fx:id="lblMostMissedCourse" layoutX="539.0" layoutY="110.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblMostAttendCourse" layoutX="539.0" layoutY="145.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblMostMissedStud" layoutX="539.0" layoutY="220.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblMostMissedStudCourse" layoutX="539.0" layoutY="255.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblMostAttStud" layoutX="539.0" layoutY="350.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblMostAttStudCourse" layoutX="539.0" layoutY="385.0" stylesheets="@../../Attendance.css" text="LABEL" />
    </children>
 </AnchorPane>

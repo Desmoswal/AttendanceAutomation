@@ -70,9 +70,10 @@ public class LogInController implements Initializable
             Parent root = mainloader.load();
             MainViewController controller = mainloader.getController();
             //controller.setUserDemo("student");
-                    
+            
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
+            newStage.setMaxWidth(650);
             newStage.show();
             stage.close();
         } 

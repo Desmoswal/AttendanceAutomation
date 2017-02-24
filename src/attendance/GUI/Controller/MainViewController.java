@@ -62,7 +62,7 @@ public class MainViewController implements Initializable
                   AdminMenuController menuController = menuLoader.getController();
                   menuController.setParentController(this);
                   paneMenu.getChildren().add(menuPane);
-                  
+                                    
                   FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminToday.fxml"));
                   AnchorPane itemPane = itemLoader.load();
                   AdminTodayController itemController = itemLoader.getController();
@@ -75,6 +75,7 @@ public class MainViewController implements Initializable
                   StudentMenuController menuController = menuLoader.getController();
                   menuController.setParentController(this);
                   paneMenu.getChildren().add(menuPane);
+                  
                   
                   FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/TodaysCourses.fxml"));
                   AnchorPane itemPane = itemLoader.load();

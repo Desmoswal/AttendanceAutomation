@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -47,7 +48,19 @@ public class AttendanceDetailsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        cmbClass.setButtonCell(new ListCell() {
+            @Override
+            protected void updateItem(Object item, boolean empty) {
+            super.updateItem(item, empty); 
+            if(empty || item==null){
+                // styled like -fx-prompt-text-fill:
+                setStyle("-fx-text-fill: white;");
+            } else {
+                setStyle("-fx-text-fill: white;");
+                setText(item.toString());
+            }
+        }
+        });
     }    
     
 }
