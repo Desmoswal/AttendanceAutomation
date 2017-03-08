@@ -5,8 +5,20 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Schedule;
+import attendance.BE.Teacher;
+import attendance.DAL.SQLConnectionManager;
 import java.net.URL;
+import java.time.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -26,16 +39,18 @@ import javafx.scene.layout.GridPane;
 public class TodaysCoursesController implements Initializable
 {
 
+    SQLConnectionManager conManager;
+
     @FXML
-    private TableView<?> tblCourse;
+    private TableView<Schedule> tblCourse;
     @FXML
-    private TableColumn<?, ?> colTime;
+    private TableColumn<Schedule, Time> colTime;
     @FXML
-    private TableColumn<?, ?> colClass;
+    private TableColumn<Class, String> colClass;
     @FXML
-    private TableColumn<?, ?> colTeacher;
+    private TableColumn<Teacher, String> colTeacher;
     @FXML
-    private TableColumn<?, ?> colRoom;
+    private TableColumn<Schedule, String> colRoom;
     @FXML
     private ComboBox<?> cmbCourse;
     @FXML
@@ -47,20 +62,63 @@ public class TodaysCoursesController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        cmbCourse.setButtonCell(new ListCell() {
+        
+        cmbCourse.setButtonCell(new ListCell()
+        {
             @Override
-            protected void updateItem(Object item, boolean empty) {
-            super.updateItem(item, empty); 
-            if(empty || item==null){
-                // styled like -fx-prompt-text-fill:
-                setStyle("-fx-text-fill: white;");
-            } else {
-                setStyle("-fx-text-fill: white;");
-                setText(item.toString());
+            protected void updateItem(Object item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                if (empty || item == null)
+                {
+                    // styled like -fx-prompt-text-fill:
+                    setStyle("-fx-text-fill: white;");
+                } else
+                {
+                    setStyle("-fx-text-fill: white;");
+                    setText(item.toString());
+                }
             }
-        }
         });
-    }    
+    }
 
+    public ArrayList<String> getStudents()
+    {
+        try (Connection con = conManager.getConnection())
+        {
+            String query = "SELECT Username FROM [Student]";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            ArrayList<String> students = new ArrayList<>();
+            while (rs.next())
+            {
+                String studentString = "";
+                //studentString += rs.getString("id") + " ";
+                //studentString +=rs.getString("name") + " ";
+                //studentString +=rs.getString("classid");
+                studentString += rs.getString("username");
+                students.add(studentString);
+                System.out.println(studentString);
+            }
+
+            return students;
+
+        } catch (SQLException sqle)
+        {
+            System.err.println(sqle);
+            return null;
+        }
+    }
     
+    private void setTableProperties() {
+        colTime.setCellValueFactory(new PropertyValueFactory("time"));
+        colClass.setCellValueFactory(new PropertyValueFactory("class"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
+        colRoom.setCellValueFactory(new PropertyValueFactory("room"));
+    }
+    
+    private void setTableItems() {
+        
+    }
 }
