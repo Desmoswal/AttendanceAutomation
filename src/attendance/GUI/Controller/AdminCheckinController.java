@@ -45,7 +45,7 @@ public class AdminCheckinController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        checkinList = model.getCheckinList();
+        /*checkinList = model.getCheckinList();
         if(!checkinList.isEmpty()) {
             for (Student student : checkinList) {
                 CheckBox cb = new CheckBox(student.getName());
@@ -57,7 +57,7 @@ public class AdminCheckinController implements Initializable
                 checkinboxes.add(cb);
             }
             listStudents.getChildrenUnmodifiable().addAll(checkinboxes);
-        }
+        }*/
         
         
     }    

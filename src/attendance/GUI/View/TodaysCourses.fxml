@@ -22,7 +22,7 @@
           <RowConstraints maxHeight="423.0" minHeight="10.0" prefHeight="423.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="tblCourse" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@../../Attendance.css" GridPane.rowIndex="1">
+            <TableView fx:id="tblCourse" onMousePressed="#pressedOnTable" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@../../Attendance.css" GridPane.rowIndex="1">
               <columns>
                 <TableColumn fx:id="colTime" prefWidth="64.0" text="Time" />
                 <TableColumn fx:id="colClass" prefWidth="101.0" text="Class Name" />
@@ -40,7 +40,7 @@
               </rowConstraints>
                <children>
                   <ComboBox fx:id="cmbCourse" prefHeight="35.0" prefWidth="150.0" promptText="Select Course" styleClass="white-box" stylesheets="@../../Attendance.css" />
-                  <Button fx:id="btnCheckIn" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" stylesheets="@../../Attendance.css" text="Check-In" GridPane.columnIndex="1">
+                  <Button fx:id="btnCheckIn" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#pressedCheckin" prefHeight="30.0" prefWidth="100.0" stylesheets="@../../Attendance.css" text="Check-In" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

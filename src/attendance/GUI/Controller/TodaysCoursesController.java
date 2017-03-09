@@ -5,10 +5,13 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Checkin;
+import attendance.BE.CurrentStudent;
 import attendance.BE.Schedule;
 import attendance.BE.Teacher;
 import attendance.BLL.ScheduleManager;
 import attendance.DAL.SQLConnectionManager;
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.time.*;
 import java.sql.Connection;
@@ -17,6 +20,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -29,9 +33,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -60,6 +66,11 @@ public class TodaysCoursesController implements Initializable
     private ComboBox<?> cmbCourse;
     @FXML
     private Button btnCheckIn;
+    
+    private Schedule selected = null;
+    private CurrentStudent currentStudent = CurrentStudent.getInstance();
+    private AttendanceModel model = new AttendanceModel();
+    private boolean checkedin = false;
 
     /**
      * Initializes the controller class.
@@ -88,6 +99,7 @@ public class TodaysCoursesController implements Initializable
         
         setTableProperties();
         setTableItems();
+        changeCheckedIn();
     }
 
     public ArrayList<String> getStudents()
@@ -133,5 +145,52 @@ public class TodaysCoursesController implements Initializable
         //System.out.println("---");
         System.out.println(scheduleManager.getSchedules());
         tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+    }
+    
+    @FXML
+    private void pressedOnTable(MouseEvent event) {
+        if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+            selected = tblCourse.getSelectionModel().getSelectedItem();
+        }
+    }
+    
+    @FXML
+    private void pressedCheckin(ActionEvent event) {
+        if(selected != null) {
+            model.doCheckin(currentStudent,selected);
+        }
+    }
+    
+    private void updateTable() {
+        tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+        tblCourse.refresh();
+        
+        
+    }
+    
+    private void changeCheckedIn() {
+        ArrayList<Checkin> checkins = model.getCheckins();
+        
+        for (Checkin checkin : checkins) {
+            if(checkin.getStudentId() == currentStudent.getId()) {
+                for (Schedule schedule : tblCourse.getItems()) {
+                    if(checkin.getSchedId() == schedule.getId()) {
+                        Schedule checkedIn = schedule;
+                        checkedin = true;
+                        tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
+                            @Override
+                            public void updateItem(Schedule item,boolean empty) {
+                                super.updateItem(item,empty);
+                                if(item == null) {
+                                    setStyle("");
+                                }
+                            }
+                        });
+                    } else {
+                        checkedin = false;
+                    }
+                }
+            }
+        }
     }
 }

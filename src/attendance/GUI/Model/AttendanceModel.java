@@ -5,10 +5,16 @@
  */
 package attendance.GUI.Model;
 
+import attendance.BE.Checkin;
+import attendance.BE.CurrentStudent;
+import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataManager;
 import attendance.BLL.LoginHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,9 +26,10 @@ public class AttendanceModel {
     
     private DataManager dataManager = new DataManager();
     private LoginHandler loginHandler = new LoginHandler();
+    private CheckinHandler checkinHandler = new CheckinHandler();
 
-    public LinkedList<Student> getCheckinList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Checkin> getCheckins() {
+        return checkinHandler.getCheckins();
     }
     
     /*public byte checkIfAdmin(String name) {
@@ -40,5 +47,9 @@ public class AttendanceModel {
     
     public int checkLogin(String uname, String pass) {
         return loginHandler.checkLogin(uname, pass);
+    }
+    
+    public void doCheckin(CurrentStudent student, Schedule course) {
+        checkinHandler.doCheckin(student,course);
     }
 }
