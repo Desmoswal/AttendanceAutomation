@@ -5,6 +5,7 @@
  */
 package attendance;
 
+import attendance.BE.CurrentStudent;
 import attendance.DAL.SQLConnectionManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 public class Attendance extends Application
 {
     SQLConnectionManager conManager;
+    CurrentStudent cur = CurrentStudent.getInstance();
     
     @Override
     public void start(Stage stage) throws Exception

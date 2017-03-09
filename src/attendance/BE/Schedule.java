@@ -5,23 +5,63 @@
  */
 package attendance.BE;
 
+import java.sql.Time;
+
 /**
  *
  * @author Desmoswal
  */
 public class Schedule
 {
-    String time;
-    String Class;
-    String Teacher;
-    String Room;
+    int id;
+    Time startTime;
+    Time endTime;
+    String classId;
+    String teacher;
+    String room;
+    
+    public String time;
 
-    public Schedule(String time, String Class, String Teacher, String Room)
+    public Schedule(int id, Time startTime, Time endTime, String classId, String subject, String room, String teacher)
     {
-        this.time = time;
-        this.Class = Class;
-        this.Teacher = Teacher;
-        this.Room = Room;
+        this.id = id;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.classId = classId;
+        this.teacher = teacher;
+        this.room = room;
+        
+        this.time = startTime.getHours() + ":" + startTime.getMinutes() + " - " + endTime.getHours() + ":" + endTime.getMinutes();
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public Time getStartTime()
+    {
+        return startTime;
+    }
+
+    public Time getEndTime()
+    {
+        return endTime;
+    }
+
+    public String getClassId()
+    {
+        return classId;
+    }
+
+    public String getTeacher()
+    {
+        return teacher;
+    }
+
+    public String getRoom()
+    {
+        return room;
     }
 
     public String getTime()
@@ -29,21 +69,5 @@ public class Schedule
         return time;
     }
 
-    public String getClassid()
-    {
-        return Class;
-    }
-
-    public String getTeacher()
-    {
-        return Teacher;
-    }
-
-    public String getRoom()
-    {
-        return Room;
-    }
-    
-    
     
 }

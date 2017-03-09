@@ -107,7 +107,7 @@ public class TodaysCoursesController implements Initializable
                 //studentString +=rs.getString("classid");
                 studentString += rs.getString("username");
                 students.add(studentString);
-                System.out.println(studentString);
+                //System.out.println(studentString);
             }
 
             return students;
@@ -121,9 +121,9 @@ public class TodaysCoursesController implements Initializable
     
     private void setTableProperties() {
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
-        colClass.setCellValueFactory(new PropertyValueFactory("Classid"));
-        colTeacher.setCellValueFactory(new PropertyValueFactory("Teacher"));
-        colRoom.setCellValueFactory(new PropertyValueFactory("Room"));
+        colClass.setCellValueFactory(new PropertyValueFactory("classId"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
+        colRoom.setCellValueFactory(new PropertyValueFactory("room"));
     }
     
     private void setTableItems() {
@@ -132,6 +132,6 @@ public class TodaysCoursesController implements Initializable
         //System.out.println(schedule.get(0).getTeacher());
         //System.out.println("---");
         System.out.println(scheduleManager.getSchedules());
-        //tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+        tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
     }
 }
