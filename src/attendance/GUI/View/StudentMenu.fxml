@@ -16,7 +16,6 @@
               <rowConstraints>
                 <RowConstraints maxHeight="74.0" minHeight="0.0" prefHeight="20.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
@@ -33,7 +32,7 @@
                   <String fx:value="button" />
                   <String fx:value="menubutton" />
                </styleClass></Button>
-                  <Button fx:id="btnOnline" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Online Users" GridPane.rowIndex="2">
+                  <Button fx:id="btnMyAttendance" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="My attandance details" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -41,15 +40,7 @@
                   <String fx:value="button" />
                   <String fx:value="menubutton" />
                </styleClass></Button>
-                  <Button fx:id="btnMyAttendance" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="My attandance details" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="menubutton" />
-               </styleClass></Button>
-                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Log out" GridPane.rowIndex="4">
+                  <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#pressedMenuButton" stylesheets="@../../Attendance.css" text="Log out" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -61,7 +52,7 @@
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font></Label>
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                <image>
                   <Image url="@../../EASV.png" />
                </image>

@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.TodaysCoursesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.TodaysCoursesController">
    <children>
       <GridPane prefHeight="477.0" prefWidth="304.0">
         <columnConstraints>
@@ -22,7 +17,7 @@
           <RowConstraints maxHeight="423.0" minHeight="10.0" prefHeight="423.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TableView fx:id="tblCourse" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@../../Attendance.css" GridPane.rowIndex="1">
+            <TableView fx:id="tblCourse" prefHeight="200.0" prefWidth="200.0" stylesheets="@../../Attendance.css" GridPane.rowIndex="1">
               <columns>
                 <TableColumn fx:id="colTime" prefWidth="64.0" text="Time" />
                 <TableColumn fx:id="colClass" prefWidth="101.0" text="Class Name" />
