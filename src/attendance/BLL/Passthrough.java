@@ -5,7 +5,10 @@
  */
 package attendance.BLL;
 
+import attendance.BE.Student;
+import attendance.BE.Teacher;
 import attendance.BE.User;
+import attendance.DAL.LoginManager;
 import attendance.DAL.UserManager;
 import java.util.List;
 
@@ -29,12 +32,15 @@ import java.util.List;
 
 public class Passthrough
 {
-    private UserManager userManager = new UserManager();
+    private LoginManager loginManager = new LoginManager();
     
     
-    public List<String> getUsers()
+    public List<Student> getStudents()
     {
-        return userManager.getUsers();
+        return loginManager.getStudents();
     }
     
+    public List<Teacher> getTeachers() {
+        return loginManager.getTeachers();
+    }
 }

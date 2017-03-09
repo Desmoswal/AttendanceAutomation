@@ -59,17 +59,16 @@ public class LogInController implements Initializable
     }
     
     private void checkLogin(String user,String pass) throws IOException {
-        //if(user.equals("student") && !pass.isEmpty()) {   <--- Old method
-        System.out.println(model.getUsers());//writing out every user
+        
+        System.out.println(model.getStudents());
         //Now comes from BLL which gets data from DAL and compares to input
-        if(model.getUsers().contains(user) && user.equals("student") && !pass.isEmpty()){  
+        if(user.equals("student") && !pass.isEmpty()){  
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
             MainViewController.setUserDemo("student");
             Parent root = mainloader.load();
             MainViewController controller = mainloader.getController();
-            //controller.setUserDemo("student");
             
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));
@@ -78,7 +77,7 @@ public class LogInController implements Initializable
             stage.close();
         } 
         //else if(user.equals("teacher") && !pass.isEmpty()) { <--- Old method
-        else if(model.getUsers().contains(user) && user.equals("teacher") && !pass.isEmpty()){
+        else if(user.equals("teacher") && !pass.isEmpty()){
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             
             FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
@@ -86,7 +85,6 @@ public class LogInController implements Initializable
             Parent root = mainloader.load();
 
             MainViewController controller = mainloader.getController();
-            //controller.setUserDemo("admin");
             
             Stage newStage = new Stage();
             newStage.setScene(new Scene(root));

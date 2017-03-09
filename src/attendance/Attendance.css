@@ -1,15 +1,21 @@
 .button:pressed
 {
     -fx-text-fill: white;
-    -fx-background-color: black;
-    
+    -fx-background-color: linear-gradient(to bottom,#888,#aaa);
+    -fx-scale-x: 0.93;
+    -fx-scale-y: 0.93;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #aaa,#ccc);
 }
 .button
 {
-  -fx-background-color: none;
+  -fx-background-color: linear-gradient(to bottom, #888,#aaa);
   -fx-text-fill: white;  
   -fx-border-color: white;
   -fx-border-width: 2;
+  
 }
 .label
 {
@@ -22,10 +28,15 @@
     -fx-text-fill: black;
     -fx-font-weight: bold;
 }
+.column-header {
+    -fx-background-color: #ccc;
+}
+
 .table-view
 {
-   -fx-border-color: black;
-   -fx-border-width: 2;    
+   /*-fx-border-color: black;
+   -fx-border-width: 2;    */
+   -fx-background-color: rgba(204,204,204,0.5); /* #ccc color with 50% opacity */
 }
 .combo-box
 {
@@ -39,7 +50,7 @@
     -fx-font-weight:bold;
 }
 .root {
-    -fx-background-color: #777;
+    -fx-background-color: #999;
 }
 .menubutton-active {
     -fx-background-color: grey;

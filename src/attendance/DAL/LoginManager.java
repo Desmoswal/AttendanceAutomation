@@ -5,11 +5,14 @@
  */
 package attendance.DAL;
 
+import attendance.BE.Student;
+import attendance.BE.Teacher;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -17,36 +20,65 @@ import java.util.ArrayList;
  */
 public class LoginManager
 {
-    SQLConnectionManager conManager;
+    SQLConnectionManager conManager = new SQLConnectionManager();
+    ArrayList<Student> students = new ArrayList<>();
+    ArrayList<Teacher> teachers = new ArrayList<>();
     
-    public ArrayList<String> getStudents()
+    public ArrayList<Student> getStudents()
     {
+        buildStudents();
+        return students;
+    }
+    
+    public ArrayList<Teacher> getTeachers() {
+        buildTeachers();
+        return teachers;
+    }
+    
+    private void buildStudents() {
+        students = new ArrayList<>();
         try(Connection con = conManager.getConnection())
         {
-            String query = "SELECT Username FROM [Student]";
+            String query = "SELECT * FROM [Student]";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
-            ArrayList<String> students = new ArrayList<>();
             while(rs.next())
             {
-                String studentString = "";
-                //studentString += rs.getString("id") + " ";
-                //studentString +=rs.getString("name") + " ";
-                //studentString +=rs.getString("classid");
-                studentString += rs.getString("username");
-                students.add(studentString);
-                System.out.println(studentString);
+                students.add(new Student(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),Integer.parseInt(rs.getString("Class"))));
             }
-            
-            return students;
-            
-            
+            //System.out.println(students);
+            //System.out.println(students.get(1001).getId());
+            //System.out.println(students.get(1001).getName());
+            con.close();
         }
         catch(SQLException sqle)
         {
             System.err.println(sqle);
-            return null;
         }
+    }
+    
+    private void buildTeachers() {
+        teachers = new ArrayList<>();
+        try(Connection con = conManager.getConnection())
+        {
+            String query = "SELECT * FROM [Teacher]";
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next())
+            {
+                teachers.add(new Teacher(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Monogram"),rs.getString("Email"),rs.getString("Password")));
+            }
+            //System.out.println(students);
+            //System.out.println(students.get(1001).getId());
+            //System.out.println(students.get(1001).getName());
+            con.close();
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+        }
+        
     }
 }

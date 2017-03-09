@@ -6,6 +6,7 @@
 package attendance.GUI.Model;
 
 import attendance.BE.Student;
+import attendance.BE.Teacher;
 import attendance.BE.User;
 import attendance.BLL.Passthrough;
 import java.util.LinkedList;
@@ -27,9 +28,12 @@ public class AttendanceModel {
         return pt.checkIfAdmin(name);
     }*/
     
-    public List<String> getUsers()
+    public List<Student> getStudents()
     {
-        return pt.getUsers();
+        return pt.getStudents();
     }
     
+    public List<Teacher> getTeachers() {
+        return pt.getTeachers();
+    }
 }
