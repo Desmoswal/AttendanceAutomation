@@ -45,7 +45,8 @@ public class MainViewController implements Initializable
     private AnchorPane anchorpane;
     
     private AttendanceModel model = new AttendanceModel();
-    private static String user;
+    private static UserType user = null;
+    public static enum UserType {STUDENT,TEACHER};
     
     /**
      * Initializes the controller class.
@@ -55,7 +56,7 @@ public class MainViewController implements Initializable
     {
         try
         {     
-              if(user.equals("admin"))
+              if(user.equals(UserType.TEACHER))
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
@@ -68,7 +69,7 @@ public class MainViewController implements Initializable
                   AdminTodayController itemController = itemLoader.getController();
                   paneItem.getChildren().add(itemPane);
               }
-              else if(user.equals("student"))
+              else if(user.equals(UserType.STUDENT))
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
@@ -97,7 +98,7 @@ public class MainViewController implements Initializable
         paneItem.getChildren().add(itemPane);
     }
     
-    public static void setUserDemo(String set) {
+    public static void setUserType(UserType set) {
         user = set;
     }
 }

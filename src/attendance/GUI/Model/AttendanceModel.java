@@ -8,6 +8,7 @@ package attendance.GUI.Model;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.BLL.DataManager;
+import attendance.BLL.LoginHandler;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class AttendanceModel {
     
     private DataManager dataManager = new DataManager();
+    private LoginHandler loginHandler = new LoginHandler();
 
     public LinkedList<Student> getCheckinList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,5 +36,9 @@ public class AttendanceModel {
     
     public List<Teacher> getTeachers() {
         return dataManager.getTeachers();
+    }
+    
+    public int checkLogin(String uname, String pass) {
+        return loginHandler.checkLogin(uname, pass);
     }
 }
