@@ -11,5 +11,39 @@ package attendance.BE;
  */
 public class Schedule
 {
+    String time;
+    String Class;
+    String Teacher;
+    String Room;
+
+    public Schedule(String time, String Class, String Teacher, String Room)
+    {
+        this.time = time;
+        this.Class = Class;
+        this.Teacher = Teacher;
+        this.Room = Room;
+    }
+
+    public String getTime()
+    {
+        return time;
+    }
+
+    public String getClassid()
+    {
+        return Class;
+    }
+
+    public String getTeacher()
+    {
+        return Teacher;
+    }
+
+    public String getRoom()
+    {
+        return Room;
+    }
+    
+    
     
 }

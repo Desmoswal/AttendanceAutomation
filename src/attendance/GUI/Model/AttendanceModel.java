@@ -7,8 +7,7 @@ package attendance.GUI.Model;
 
 import attendance.BE.Student;
 import attendance.BE.Teacher;
-import attendance.BE.User;
-import attendance.BLL.Passthrough;
+import attendance.BLL.DataManager;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import java.util.List;
  */
 public class AttendanceModel {
     
-    private Passthrough pt = new Passthrough();
+    private DataManager dataManager = new DataManager();
 
     public LinkedList<Student> getCheckinList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -30,10 +29,10 @@ public class AttendanceModel {
     
     public List<Student> getStudents()
     {
-        return pt.getStudents();
+        return dataManager.getStudents();
     }
     
     public List<Teacher> getTeachers() {
-        return pt.getTeachers();
+        return dataManager.getTeachers();
     }
 }

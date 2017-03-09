@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -44,11 +46,11 @@ public class TodaysCoursesController implements Initializable
     @FXML
     private TableView<Schedule> tblCourse;
     @FXML
-    private TableColumn<Schedule, Time> colTime;
+    private TableColumn<Schedule, String> colTime;
     @FXML
-    private TableColumn<Class, String> colClass;
+    private TableColumn<Schedule, String> colClass;
     @FXML
-    private TableColumn<Teacher, String> colTeacher;
+    private TableColumn<Schedule, String> colTeacher;
     @FXML
     private TableColumn<Schedule, String> colRoom;
     @FXML
@@ -80,6 +82,9 @@ public class TodaysCoursesController implements Initializable
                 }
             }
         });
+        
+        setTableProperties();
+        setTableItems();
     }
 
     public ArrayList<String> getStudents()
@@ -113,12 +118,17 @@ public class TodaysCoursesController implements Initializable
     
     private void setTableProperties() {
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
-        colClass.setCellValueFactory(new PropertyValueFactory("class"));
-        colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
-        colRoom.setCellValueFactory(new PropertyValueFactory("room"));
+        colClass.setCellValueFactory(new PropertyValueFactory("Classid"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory("Teacher"));
+        colRoom.setCellValueFactory(new PropertyValueFactory("Room"));
     }
     
     private void setTableItems() {
-        
+        ArrayList<Schedule> schedule = new ArrayList();
+        schedule.add(new Schedule("10:00", "SCO", "Jeppe Moritz", "A16"));
+
+        System.out.println(schedule.get(0).getTeacher());
+        System.out.println("---");
+        tblCourse.setItems(FXCollections.observableArrayList(schedule));
     }
 }
