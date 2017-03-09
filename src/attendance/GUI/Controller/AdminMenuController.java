@@ -83,7 +83,7 @@ public class AdminMenuController implements Initializable
                 }
                 break;
             case "btnLogOut":
-                //do logout
+                System.exit(0);
                 break;
         }
         

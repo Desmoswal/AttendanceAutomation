@@ -34,8 +34,8 @@
 
 .table-view
 {
-   /*-fx-border-color: black;
-   -fx-border-width: 2;    */
+   -fx-border-color: white;
+   -fx-border-width: 2;    
    -fx-background-color: rgba(204,204,204,0.5); /* #ccc color with 50% opacity */
 }
 .combo-box
