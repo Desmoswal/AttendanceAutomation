@@ -21,7 +21,7 @@ public class ScheduleManager
     private DAOSchedule daoSchedule = new DAOSchedule();
     
     
-    public ArrayList<String> getSchedules()
+    public ArrayList<Schedule> getSchedules()
     {
         return daoSchedule.getSchedules();
     }

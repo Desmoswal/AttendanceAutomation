@@ -86,7 +86,7 @@ public class MainViewController implements Initializable
             
         } catch (IOException ex)
         {
-            System.out.println(ex);
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);//System.out.println(ex);
         } 
 
     }    

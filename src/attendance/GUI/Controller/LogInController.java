@@ -72,7 +72,7 @@ public class LogInController implements Initializable
     private void checkLogin(String user,String pass) throws IOException {
         
         int loginCode = model.checkLogin(user, pass);
-        System.out.println(loginCode);
+        System.out.println("LoginCode: " + loginCode);
         
            if(loginCode == 0) {
                 Stage stage = (Stage) btnLogin.getScene().getWindow();

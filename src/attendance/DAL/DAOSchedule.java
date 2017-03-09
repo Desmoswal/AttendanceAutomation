@@ -5,6 +5,8 @@
  */
 package attendance.DAL;
 
+import attendance.BE.Schedule;
+import attendance.BE.CurrentStudent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,13 +22,14 @@ import java.util.ArrayList;
 public class DAOSchedule
 {
     SQLConnectionManager conManager;
+    CurrentStudent currentStudent = CurrentStudent.getInstance();
     
     public DAOSchedule()
     {
         conManager = new SQLConnectionManager();
     }
     
-    public void addSchedule(int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher)
+    public void addSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher)
     {
         try(Connection con = conManager.getConnection())
         {
@@ -34,8 +37,8 @@ public class DAOSchedule
             "INSERT INTO Schedule(Id, StartTime, EndTime, Subject, Class, Room, Teacher) VALUES(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstat = con.prepareStatement(sqlCommand);
             pstat.setInt(1, id);
-            pstat.setTime(2, startTime);
-            pstat.setTime(3, endTime);
+            pstat.setString(2, startTime);
+            pstat.setString(3, endTime);
             pstat.setInt(4, subject);
             pstat.setInt(5, classId);
             pstat.setString(6, room);
@@ -66,26 +69,37 @@ public class DAOSchedule
         
     }
     
-    public ArrayList<String> getSchedules()
+    public ArrayList<Schedule> getSchedules()
     {
         try(Connection con = conManager.getConnection())
         {
-            String query = "SELECT * FROM [Schedule] ORDER BY Id DESC";
+            //System.out.println(currentStudent.getClassid());
+            String query =  "select Schedule.Id, Subject.Name as 'Subject', Schedule.StartTime, Schedule.EndTime, Class.Name as 'Class', Teacher.Monogram as 'Teacher', Schedule.Room from Class,Schedule,Subject,Teacher where Class.Id = Schedule.Class and Teacher.Id = Schedule.Teacher and Subject.Id = Schedule.Subject and Class.Id = 2";
+                            //"SELECT [Schedule].[Id] FROM Schedule";
+                            //"SELECT [Schedule].[Id], [Subject].[Name] as 'Subject', [Schedule].[StartTime], [Schedule].[EndTime], [Class].[Name] as 'Class', [Teacher].[Monogram] as 'Teacher', Schedule.Room" +
+                            //"from [Class],[Schedule],[Subject],[Teacher]";// +
+                            //"where [Class].[Id] = [Schedule].[Class]" +
+                            //"and [Teacher].[Id] = [Schedule].[Teacher]" +
+                            //"and [Subject].[Id] = [Schedule].[Subject]" +
+                            //"and [Class].[Id] = 2;"; //+ currentStudent.getClassid() +";";
+                    
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
-            ArrayList<String> schedules = new ArrayList<>();
+            ArrayList<Schedule> schedules = new ArrayList<>();
             while(rs.next())
             {
-                String scheduleString = "";
-                scheduleString += rs.getString("Id") + ", ";
-                scheduleString +=rs.getString("StartTime") + ", ";
-                scheduleString +=rs.getString("EndTime") + ", ";
-                scheduleString +=rs.getString("Subject") + ", ";
-                scheduleString +=rs.getString("Class") + ", ";
-                scheduleString +=rs.getString("Room") + ", ";
-                scheduleString +=rs.getString("Teacher");
-                schedules.add(scheduleString);
+                schedules.add(new Schedule(Integer.parseInt(rs.getString("Id")), rs.getTime("StartTime"), rs.getTime("EndTime"),rs.getString("Class"), rs.getString("Subject"), rs.getString("Room"), rs.getString("Teacher")));
+                //schedules.add(new Schedule(Integer.parseInt(rs.getString("Id")), rs.getString("StartTime"), rs.getString("EndTime"), rs.getString("Subject"), rs.getString("Class"), rs.getString("Room"), rs.getString("Teacher")));//Integer.parseInt(rs.getString("Id"), Time.parse(rs.getString("StartTime"), Time.parse(rs.getString("EndTime"), Integer.parseInt("Subject"), rs.getString("Room"), Integer.parseInt("Teacher"))))));
+                //String scheduleString = "";
+                //scheduleString += rs.getString("Id") + ", ";
+                //scheduleString +=rs.getString("StartTime") + ", ";
+                //scheduleString +=rs.getString("EndTime") + ", ";
+                //scheduleString +=rs.getString("Subject") + ", ";
+                //scheduleString +=rs.getString("Class") + ", ";
+                //scheduleString +=rs.getString("Room") + ", ";
+                //scheduleString +=rs.getString("Teacher");
+                //schedules.add(scheduleString);
             }
             return schedules;
             

@@ -5,6 +5,7 @@
  */
 package attendance.BLL;
 
+import attendance.BE.CurrentStudent;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 
@@ -15,6 +16,7 @@ import attendance.BE.Teacher;
 public class LoginHandler {
     
     private DataManager dm = new DataManager();
+    CurrentStudent currentStudent = CurrentStudent.getInstance();
     
     /**
      * checks login credetials and tells if login is approved or not, and which type of login is it.
@@ -41,6 +43,13 @@ public class LoginHandler {
                     if(student.getUsername().equals(username)) { //check current student username matches
                         System.out.println(student.getUsername());
                         if(student.getPassword().equals(password)) { //check current student password matches
+                            currentStudent.setId(student.getId());
+                            currentStudent.setName(student.getName());
+                            currentStudent.setUsername(student.getUsername());
+                            currentStudent.setPassword(student.getPassword());
+                            currentStudent.setEmail(student.getEmail());
+                            currentStudent.setClassid(student.getClassid());
+                            System.out.println("Current Student Name: " + currentStudent.getName());
                             return 0; //return ok
                         } else {
                             return 2; //return invalid pass
