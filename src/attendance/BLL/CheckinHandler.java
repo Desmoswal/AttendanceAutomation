@@ -48,8 +48,11 @@ public class CheckinHandler {
         ArrayList<Integer> checkedin = new ArrayList<>();
         for (Checkin checkin : this.getCheckins()) {
             for (Schedule schedule : sm.getSchedules()) {
-                if(checkin.getSchedId() == schedule.getId())
-                    checkedin.add(schedule.getId());
+                if(CurrentStudent.getInstance().getId() == checkin.getStudentId()) {
+                    if(checkin.getSchedId() == schedule.getId())
+                        checkedin.add(schedule.getId());
+                }
+                
             }
         }
         

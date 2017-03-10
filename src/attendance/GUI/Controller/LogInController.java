@@ -77,9 +77,10 @@ public class LogInController implements Initializable
            if(loginCode == 0) {
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
+                //tell usertype to controller BEFORE it loads
                 MainViewController.setUserType(MainViewController.UserType.STUDENT);
                 Parent root = mainloader.load();
-                MainViewController controller = mainloader.getController();
+                MainViewController controller = mainloader.getController(); //get the controller for future use
 
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
@@ -89,9 +90,10 @@ public class LogInController implements Initializable
             } else if(loginCode == 10) {
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
-                MainViewController.setUserType(MainViewController.UserType.TEACHER);
+                //tell usertype to controler BEFORE it loads
+                MainViewController.setUserType(MainViewController.UserType.TEACHER); 
                 Parent root = mainloader.load();
-                MainViewController controller = mainloader.getController();
+                MainViewController controller = mainloader.getController(); //get the controller for future use
                 
                 Stage newStage = new Stage();
                 newStage.setScene(new Scene(root));
