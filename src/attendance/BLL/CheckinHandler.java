@@ -23,6 +23,7 @@ import java.util.HashMap;
  */
 public class CheckinHandler {
     private CheckinManager chkMan = new CheckinManager();
+    private ScheduleManager sm = new ScheduleManager();
     
     /*public void doCheckin(User user,Schedule sched) throws SQLException {
         Connection con = SQLConnector.getConnection("10.176.111.31","CS2016B_16","CS2016B_16","CS2016B_16_Attendance");
@@ -43,5 +44,15 @@ public class CheckinHandler {
         chkMan.insertCheckin(student, course);
     }
     
-    
+    public ArrayList<Integer> getCheckedInSchedules() {
+        ArrayList<Integer> checkedin = new ArrayList<>();
+        for (Checkin checkin : this.getCheckins()) {
+            for (Schedule schedule : sm.getSchedules()) {
+                if(checkin.getSchedId() == schedule.getId())
+                    checkedin.add(schedule.getId());
+            }
+        }
+        
+        return checkedin;
+    }
 }

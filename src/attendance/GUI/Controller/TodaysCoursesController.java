@@ -159,6 +159,7 @@ public class TodaysCoursesController implements Initializable
         if(selected != null) {
             model.doCheckin(currentStudent,selected);
         }
+        changeCheckedIn();
     }
     
     private void updateTable() {
@@ -169,28 +170,20 @@ public class TodaysCoursesController implements Initializable
     }
     
     private void changeCheckedIn() {
-        ArrayList<Checkin> checkins = model.getCheckins();
-        
-        for (Checkin checkin : checkins) {
-            if(checkin.getStudentId() == currentStudent.getId()) {
-                for (Schedule schedule : tblCourse.getItems()) {
-                    if(checkin.getSchedId() == schedule.getId()) {
-                        Schedule checkedIn = schedule;
-                        checkedin = true;
-                        tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
-                            @Override
-                            public void updateItem(Schedule item,boolean empty) {
-                                super.updateItem(item,empty);
-                                if(item == null) {
-                                    setStyle("");
-                                }
-                            }
-                        });
-                    } else {
-                        checkedin = false;
-                    }
+        tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
+            AttendanceModel model = new AttendanceModel();
+            @Override
+            public void updateItem(Schedule item,boolean empty) {
+                
+                super.updateItem(item,empty);
+                if(item == null) {
+                    setStyle("");
+                }
+                if(item != null) {
+                    if(model.getCheckedInSchedules().contains(item.getId()))
+                    setStyle("-fx-background-color:rgba(38, 201, 44, 0.5);");
                 }
             }
-        }
+        });
     }
 }

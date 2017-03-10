@@ -52,4 +52,8 @@ public class AttendanceModel {
     public void doCheckin(CurrentStudent student, Schedule course) {
         checkinHandler.doCheckin(student,course);
     }
+    
+    public ArrayList<Integer> getCheckedInSchedules() {
+        return checkinHandler.getCheckedInSchedules();
+    }
 }
