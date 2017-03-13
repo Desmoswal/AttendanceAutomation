@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  *
@@ -35,6 +34,9 @@ public class LoginManager
         return teachers;
     }
     
+    /**
+     * Gets all students from database, fills the local list. You can build and get this list by getStudents().
+     */
     private void buildStudents() {
         students = new ArrayList<>();
         try(Connection con = conManager.getConnection())
@@ -47,9 +49,7 @@ public class LoginManager
             {
                 students.add(new Student(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),Integer.parseInt(rs.getString("Class"))));
             }
-            //System.out.println(students);
-            //System.out.println(students.get(1001).getId());
-            //System.out.println(students.get(1001).getName());
+            
             con.close();
         }
         catch(SQLException sqle)
@@ -58,6 +58,9 @@ public class LoginManager
         }
     }
     
+    /**
+     * Gets all teachers from database, fills the local list. You can build and get this list by getTeachers().
+     */
     private void buildTeachers() {
         teachers = new ArrayList<>();
         try(Connection con = conManager.getConnection())
@@ -70,9 +73,7 @@ public class LoginManager
             {
                 teachers.add(new Teacher(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Monogram"),rs.getString("Email"),rs.getString("Password")));
             }
-            //System.out.println(students);
-            //System.out.println(students.get(1001).getId());
-            //System.out.println(students.get(1001).getName());
+            
             con.close();
         }
         catch(SQLException sqle)

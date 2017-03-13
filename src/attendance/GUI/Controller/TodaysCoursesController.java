@@ -11,10 +11,6 @@ import attendance.BLL.ScheduleManager;
 import attendance.DAL.SQLConnectionManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -68,6 +64,7 @@ public class TodaysCoursesController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        //sets combobox's color
         cmbCourse.setButtonCell(new ListCell()
         {
             @Override
@@ -90,32 +87,10 @@ public class TodaysCoursesController implements Initializable
         setTableItems();
         changeCheckedIn();
     }
-
-    public ArrayList<String> getStudents()
-    {
-        try (Connection con = conManager.getConnection())
-        {
-            String query = "SELECT Username FROM [Student]";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            ArrayList<String> students = new ArrayList<>();
-            while (rs.next())
-            {
-                String studentString = "";
-                studentString += rs.getString("username");
-                students.add(studentString);
-            }
-
-            return students;
-
-        } catch (SQLException sqle)
-        {
-            System.err.println(sqle);
-            return null;
-        }
-    }
     
+    /**
+     * setting table's properties
+     */
     private void setTableProperties() {
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
         colClass.setCellValueFactory(new PropertyValueFactory("classId"));
@@ -123,6 +98,9 @@ public class TodaysCoursesController implements Initializable
         colRoom.setCellValueFactory(new PropertyValueFactory("room"));
     }
     
+    /**
+     * sets schedules in table
+     */
     private void setTableItems() {
         ArrayList<Schedule> schedule = new ArrayList();
         System.out.println(scheduleManager.getSchedules());
@@ -144,11 +122,15 @@ public class TodaysCoursesController implements Initializable
         changeCheckedIn();
     }
     
+    //just in case....
     private void updateTable() {
         tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
         tblCourse.refresh();
     }
     
+    /**
+     * Changes courses row color which are already checked in.
+     */
     private void changeCheckedIn() {
         tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
             AttendanceModel model = new AttendanceModel();

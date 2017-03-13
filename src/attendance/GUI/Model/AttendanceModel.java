@@ -14,8 +14,6 @@ import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataManager;
 import attendance.BLL.LoginHandler;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -31,10 +29,6 @@ public class AttendanceModel {
     public ArrayList<Checkin> getCheckins() {
         return checkinHandler.getCheckins();
     }
-    
-    /*public byte checkIfAdmin(String name) {
-        return pt.checkIfAdmin(name);
-    }*/
     
     public List<Student> getStudents()
     {

@@ -41,7 +41,6 @@ public class LoginHandler {
             if(!password.isEmpty() && password != null) { //password empty check
                 for (Student student : dm.getStudents()) { //check for each student first
                     if(student.getUsername().equals(username)) { //check current student username matches
-                        System.out.println(student.getUsername());
                         if(student.getPassword().equals(password)) { //check current student password matches
                             currentStudent.setId(student.getId());
                             currentStudent.setName(student.getName());

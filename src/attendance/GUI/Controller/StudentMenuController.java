@@ -45,6 +45,7 @@ public class StudentMenuController implements Initializable
     private void pressedMenuButton(ActionEvent event) {
         Button pressedButton = (Button) event.getSource();
         System.out.println("pressed button: "+event.getSource());
+        //opens and loads content depending on pressed menu button
         switch(pressedButton.getId()) {
             case "btnCourses":
                 try {
@@ -77,6 +78,10 @@ public class StudentMenuController implements Initializable
         }
     }
     
+    /**
+     * Sets MainViewController in the menu so menu can request content load in MainView.
+     * @param pc 
+     */
     public void setParentController(MainViewController pc) {
             this.parentCon = pc;
     }

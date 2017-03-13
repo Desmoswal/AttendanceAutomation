@@ -11,17 +11,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 
 
@@ -55,16 +49,16 @@ public class MainViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         try
-        {     
+        {     //loading sidebar menu depending on usertype
               if(user.equals(UserType.TEACHER))
               {
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
                   AdminMenuController menuController = menuLoader.getController();
-                  menuController.setParentController(this);
+                  menuController.setParentController(this); //gives MainViewController to menu, so the menu can load content if a button was pressed
                   paneMenu.getChildren().add(menuPane);
                                     
-                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminToday.fxml"));
+                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminToday.fxml")); //default screen
                   AnchorPane itemPane = itemLoader.load();
                   AdminTodayController itemController = itemLoader.getController();
                   paneItem.getChildren().add(itemPane);
@@ -74,11 +68,11 @@ public class MainViewController implements Initializable
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
                   StudentMenuController menuController = menuLoader.getController();
-                  menuController.setParentController(this);
+                  menuController.setParentController(this); //gives MainViewController to menu, so the menu can load content if a button was pressed
                   paneMenu.getChildren().add(menuPane);
                   
                   
-                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/TodaysCourses.fxml"));
+                  FXMLLoader itemLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/TodaysCourses.fxml")); //default screen
                   AnchorPane itemPane = itemLoader.load();
                   TodaysCoursesController itemController = itemLoader.getController();
                   paneItem.getChildren().add(itemPane);
@@ -86,10 +80,16 @@ public class MainViewController implements Initializable
             
         } catch (IOException ex)
         {
-            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);//System.out.println(ex);
+            //we need the logger so we can see the actual error and not just "FXMLLoader error."
+            Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         } 
 
-    }    
+    }
+    /**
+     * Opens and loads fxml in the right side. This is used by menubuttons to load content.
+     * @param url
+     * @throws IOException 
+     */
     public void openItem(String url) throws IOException {
         FXMLLoader itemLoader = new FXMLLoader(getClass().getResource(url));
         AnchorPane itemPane = itemLoader.load();
@@ -98,6 +98,10 @@ public class MainViewController implements Initializable
         paneItem.getChildren().add(itemPane);
     }
     
+    /**
+     * Sets usertype before this controller is loaded.
+     * @param set 
+     */
     public static void setUserType(UserType set) {
         user = set;
     }

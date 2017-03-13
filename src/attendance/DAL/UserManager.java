@@ -8,7 +8,7 @@ package attendance.DAL;
 import java.util.ArrayList;
 
 /**
- *
+ * ================NOT IN USE=================
  * @author Kristof
  */
 public class UserManager {

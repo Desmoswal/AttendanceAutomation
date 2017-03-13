@@ -9,8 +9,6 @@ import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,13 +41,8 @@ public class LogInController implements Initializable
     private Button btnLogin;
 
     private AttendanceModel model = new AttendanceModel();
-    
-    /*private Stage stage;
-    private Stage newStage;
-    private FXMLLoader mainloader;
-    private Parent root;
-    private MainViewController controller;*/
     private Alert alert;
+    
     /**
      * Initializes the controller class.
      */
@@ -69,12 +62,19 @@ public class LogInController implements Initializable
         }
     }
     
+    /**
+     * Checks login credetials and opens new window if ok, or creates error popup.
+     * @param user
+     * @param pass
+     * @throws IOException 
+     */
     private void checkLogin(String user,String pass) throws IOException {
         
         int loginCode = model.checkLogin(user, pass);
         System.out.println("LoginCode: " + loginCode);
         
            if(loginCode == 0) {
+                //login status 0, student login successful
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
                 //tell usertype to controller BEFORE it loads
@@ -87,7 +87,9 @@ public class LogInController implements Initializable
                 newStage.setMaxWidth(650);
                 newStage.show();
                 stage.close();
+                
             } else if(loginCode == 10) {
+                //login status 10, teacher login successful
                 Stage stage = (Stage) btnLogin.getScene().getWindow();
                 FXMLLoader mainloader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/MainView.fxml"));
                 //tell usertype to controler BEFORE it loads
@@ -101,10 +103,15 @@ public class LogInController implements Initializable
                 stage.close();
                 
             } else {
+                //there were no successful logins, give popup based on statuscode.
                 doAlert(loginCode);
             }
     }
     
+    /**
+     * Creates popup window based on login status. You can see more details of statuscodes in LoginHandler class in BLL.
+     * @param status 
+     */
     private void doAlert(int status) {
         switch(status) {
             case 1:
@@ -123,7 +130,7 @@ public class LogInController implements Initializable
                 alert = new Alert(AlertType.ERROR, "Empty password!");
                 alert.show();
                 break;
-            case -3:
+            default: //-3 or anything else
                 alert = new Alert(AlertType.ERROR, "Unknown error!");
                 alert.show();
                 break;

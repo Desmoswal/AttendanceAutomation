@@ -19,6 +19,7 @@ public class Schedule
     String classId;
     String teacher;
     String room;
+    String subject;
     
     public String time;
 
@@ -30,6 +31,7 @@ public class Schedule
         this.classId = classId;
         this.teacher = teacher;
         this.room = room;
+        this.subject = subject;
         
         this.time = startTime.getHours() + ":" + startTime.getMinutes() + " - " + endTime.getHours() + ":" + endTime.getMinutes();
     }
@@ -67,6 +69,10 @@ public class Schedule
     public String getTime()
     {
         return time;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     
