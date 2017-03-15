@@ -10,6 +10,7 @@ import attendance.BE.CurrentStudent;
 import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.BLL.AttendanceDetailsHandler;
 import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataManager;
 import attendance.BLL.LoginHandler;
@@ -25,6 +26,7 @@ public class AttendanceModel {
     private DataManager dataManager = new DataManager();
     private LoginHandler loginHandler = new LoginHandler();
     private CheckinHandler checkinHandler = new CheckinHandler();
+    private AttendanceDetailsHandler attHan = new AttendanceDetailsHandler();
 
     public ArrayList<Checkin> getCheckins() {
         return checkinHandler.getCheckins();
@@ -49,5 +51,9 @@ public class AttendanceModel {
     
     public ArrayList<Integer> getCheckedInSchedules() {
         return checkinHandler.getCheckedInSchedules();
+    }
+    
+    public int getMissedTotal() {
+        return attHan.calculateMissedTotal();
     }
 }

@@ -7,6 +7,7 @@ package attendance.DAL;
 
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.BLL.LoginHandler;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +50,7 @@ public class LoginManager
             {
                 students.add(new Student(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),Integer.parseInt(rs.getString("Class"))));
             }
-            
+            System.out.println();
             con.close();
         }
         catch(SQLException sqle)

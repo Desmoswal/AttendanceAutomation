@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -41,6 +42,10 @@ public class AttendanceDetailsController implements Initializable
     private Label lblMissed;
     @FXML
     private ComboBox<?> cmbClass;
+    @FXML
+    private Label lblMissedTotal;
+    
+    private AttendanceModel model = new AttendanceModel();
 
     /**
      * Initializes the controller class.
@@ -61,6 +66,10 @@ public class AttendanceDetailsController implements Initializable
             }
         }
         });
-    }    
+        
+        if(model.getMissedTotal() != -1) {
+            lblMissedTotal.setText(""+model.getMissedTotal());
+        }
+    }
     
 }

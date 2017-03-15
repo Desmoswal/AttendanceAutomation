@@ -21,6 +21,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -31,8 +33,6 @@ import javafx.stage.Stage;
 public class LogInController implements Initializable
 {
 
-    @FXML
-    private CheckBox chkInvisible;
     @FXML
     private TextField txtUsername;
     @FXML
@@ -49,7 +49,7 @@ public class LogInController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        txtUsername.requestFocus();
     }    
     
     @FXML
@@ -134,6 +134,17 @@ public class LogInController implements Initializable
                 alert = new Alert(AlertType.ERROR, "Unknown error!");
                 alert.show();
                 break;
+        }
+    }
+
+    @FXML
+    private void pressedKey(KeyEvent event) {
+        if(txtPassword.isFocused() && event.getCode().equals(KeyCode.ENTER)) {
+            try {
+                checkLogin(txtUsername.getText(),txtPassword.getText());
+            } catch(IOException e) {
+                System.out.println(e);
+            }
         }
     }
 }

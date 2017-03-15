@@ -8,6 +8,8 @@ package attendance.BLL;
 import attendance.BE.CurrentStudent;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.DAL.LoginManager;
+import java.sql.SQLException;
 
 /**
  *
