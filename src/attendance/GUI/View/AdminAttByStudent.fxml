@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
    <children>
-      <TableView fx:id="tblClasses" layoutX="14.0" layoutY="54.0" prefHeight="369.0" prefWidth="91.0" stylesheets="@../../Attendance.css">
+      <TableView fx:id="tblClasses" layoutX="14.0" layoutY="54.0" onMousePressed="#pressedOnTableClasses" prefHeight="369.0" prefWidth="91.0" stylesheets="@../../Attendance.css">
         <columns>
-          <TableColumn prefWidth="90.0" text="Class" />
+          <TableColumn fx:id="colClass" prefWidth="90.0" text="Class" />
         </columns>
       </TableView>
-      <TableView fx:id="tblStudents" layoutX="123.0" layoutY="54.0" prefHeight="369.0" prefWidth="124.0" stylesheets="@../../Attendance.css">
+      <TableView fx:id="tblStudents" layoutX="123.0" layoutY="54.0" onMousePressed="#pressedOnTableStudents" prefHeight="369.0" prefWidth="124.0" stylesheets="@../../Attendance.css">
         <columns>
-          <TableColumn prefWidth="123.0" text="Student" />
+          <TableColumn fx:id="colStudent" prefWidth="123.0" text="Student" />
         </columns>
       </TableView>
       <Label layoutX="19.0" layoutY="22.0" stylesheets="@../../Attendance.css" text="Select class">

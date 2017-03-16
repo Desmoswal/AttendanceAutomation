@@ -23,7 +23,7 @@ import java.util.HashMap;
  */
 public class CheckinHandler {
     private CheckinManager chkMan = new CheckinManager();
-    private ScheduleManager sm = new ScheduleManager();
+    private ScheduleHandler sm = new ScheduleHandler();
     
     /*public void doCheckin(User user,Schedule sched) throws SQLException {
         Connection con = SQLConnector.getConnection("10.176.111.31","CS2016B_16","CS2016B_16","CS2016B_16_Attendance");

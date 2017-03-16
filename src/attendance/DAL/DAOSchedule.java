@@ -7,6 +7,7 @@ package attendance.DAL;
 
 import attendance.BE.Schedule;
 import attendance.BE.CurrentStudent;
+import attendance.BE.CurrentTeacher;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,6 +30,7 @@ public class DAOSchedule
 {
     SQLConnectionManager conManager;
     CurrentStudent currentStudent = CurrentStudent.getInstance();
+    CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
     public DAOSchedule()
     {
@@ -81,13 +83,7 @@ public class DAOSchedule
         {
             //System.out.println(currentStudent.getClassid());
             String query =  "select Schedule.Id, Subject.Name as 'Subject', Schedule.StartTime, Schedule.EndTime, Class.Name as 'Class', Teacher.Monogram as 'Teacher', Schedule.Room from Class,Schedule,Subject,Teacher where Class.Id = Schedule.Class and Teacher.Id = Schedule.Teacher and Subject.Id = Schedule.Subject and Class.Id = 2";
-                            //"SELECT [Schedule].[Id] FROM Schedule";
-                            //"SELECT [Schedule].[Id], [Subject].[Name] as 'Subject', [Schedule].[StartTime], [Schedule].[EndTime], [Class].[Name] as 'Class', [Teacher].[Monogram] as 'Teacher', Schedule.Room" +
-                            //"from [Class],[Schedule],[Subject],[Teacher]";// +
-                            //"where [Class].[Id] = [Schedule].[Class]" +
-                            //"and [Teacher].[Id] = [Schedule].[Teacher]" +
-                            //"and [Subject].[Id] = [Schedule].[Subject]" +
-                            //"and [Class].[Id] = 2;"; //+ currentStudent.getClassid() +";";
+            
                     
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -96,16 +92,7 @@ public class DAOSchedule
             while(rs.next())
             {
                 schedules.add(new Schedule(Integer.parseInt(rs.getString("Id")), rs.getTime("StartTime"), rs.getTime("EndTime"),rs.getString("Class"), rs.getString("Subject"), rs.getString("Room"), rs.getString("Teacher")));
-                //schedules.add(new Schedule(Integer.parseInt(rs.getString("Id")), rs.getString("StartTime"), rs.getString("EndTime"), rs.getString("Subject"), rs.getString("Class"), rs.getString("Room"), rs.getString("Teacher")));//Integer.parseInt(rs.getString("Id"), Time.parse(rs.getString("StartTime"), Time.parse(rs.getString("EndTime"), Integer.parseInt("Subject"), rs.getString("Room"), Integer.parseInt("Teacher"))))));
-                //String scheduleString = "";
-                //scheduleString += rs.getString("Id") + ", ";
-                //scheduleString +=rs.getString("StartTime") + ", ";
-                //scheduleString +=rs.getString("EndTime") + ", ";
-                //scheduleString +=rs.getString("Subject") + ", ";
-                //scheduleString +=rs.getString("Class") + ", ";
-                //scheduleString +=rs.getString("Room") + ", ";
-                //scheduleString +=rs.getString("Teacher");
-                //schedules.add(scheduleString);
+                
             }
             return schedules;
             
@@ -186,5 +173,32 @@ public class DAOSchedule
             Logger.getLogger(DAOSchedule.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
+    }
+    
+    public ArrayList<Schedule> getTeacherSchedules()
+    {
+        try(Connection con = conManager.getConnection())
+        {
+            //System.out.println(currentStudent.getClassid());
+            String query =  "SELECT Schedule.* FROM Schedule WHERE Schedule.Teacher = "+ currentTeacher.getId();
+            
+                    
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            ArrayList<Schedule> schedules = new ArrayList<>();
+            while(rs.next())
+            {
+                schedules.add(new Schedule(Integer.parseInt(rs.getString("Id")), rs.getTime("StartTime"), rs.getTime("EndTime"),rs.getString("Class"), rs.getString("Subject"), rs.getString("Room"), rs.getString("Teacher")));
+                
+            }
+            return schedules;
+            
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+            return null;
+        }
     }
 }

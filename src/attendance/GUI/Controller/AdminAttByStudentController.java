@@ -5,14 +5,23 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Schedule;
+import attendance.BE.Student;
+import attendance.BE.Class;
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -22,9 +31,13 @@ import javafx.scene.control.TableView;
 public class AdminAttByStudentController implements Initializable {
 
     @FXML
-    private TableView<?> tblClasses;
+    private TableView<Class> tblClasses;
     @FXML
-    private TableView<?> tblStudents;
+    private TableView<Student> tblStudents;
+    @FXML
+    private TableColumn<Class, String> colClass;
+    @FXML
+    private TableColumn<Student, String> colStudent;
     @FXML
     private ComboBox<?> cmbStudClassSelect;
     @FXML
@@ -46,6 +59,9 @@ public class AdminAttByStudentController implements Initializable {
     @FXML
     private Label lblStudMissedSelected;
 
+    
+    private AttendanceModel model = new AttendanceModel();
+    
     /**
      * Initializes the controller class.
      */
@@ -64,6 +80,44 @@ public class AdminAttByStudentController implements Initializable {
             }
         }
         });
+        
+        setTableProperties();
+
+        //Load Classes into tableview
+        tblClasses.setItems(FXCollections.observableArrayList(model.getClasses()));
     }    
+    
+     /**
+     * setting table's properties
+     */
+    private void setTableProperties() {
+        colStudent.setCellValueFactory(new PropertyValueFactory("name"));
+        colClass.setCellValueFactory(new PropertyValueFactory("name"));
+    }
+    
+    @FXML
+    private void pressedOnTableClasses(MouseEvent event) {
+        Class selected = null;
+        
+        if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+            selected = tblClasses.getSelectionModel().getSelectedItem();
+            
+            //Get Students by selected class
+            tblStudents.setItems(FXCollections.observableArrayList(model.getStudentsByClass(selected.getId())));
+            
+            System.out.println("Selected Class: " + selected.getId() + " "+ selected.getName());
+        }
+    }
+    
+    @FXML
+    private void pressedOnTableStudents(MouseEvent event) {
+        Student selected = null;
+        
+        if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+            selected = tblStudents.getSelectionModel().getSelectedItem();
+            System.out.println("Selected Student: " + selected.getName());
+        }
+    }
+
     
 }

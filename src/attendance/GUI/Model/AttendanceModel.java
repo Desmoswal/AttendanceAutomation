@@ -10,11 +10,12 @@ import attendance.BE.CurrentStudent;
 import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.BE.Class;
 import attendance.BLL.AttendanceDetailsHandler;
 import attendance.BLL.CheckinHandler;
-import attendance.BLL.DataManager;
+import attendance.BLL.DataHandler;
 import attendance.BLL.LoginHandler;
-import attendance.BLL.ScheduleManager;
+import attendance.BLL.ScheduleHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +25,12 @@ import java.util.List;
  */
 public class AttendanceModel {
     
-    private DataManager dataManager = new DataManager();
+    private DataHandler dataHandler = new DataHandler();
     private LoginHandler loginHandler = new LoginHandler();
     private CheckinHandler checkinHandler = new CheckinHandler();
+    private ScheduleHandler scheduleHandler = new ScheduleHandler();
     private AttendanceDetailsHandler attHan = new AttendanceDetailsHandler();
-    private ScheduleManager schedMan = new ScheduleManager();
+    
 
     public ArrayList<Checkin> getCheckins() {
         return checkinHandler.getCheckins();
@@ -36,11 +38,11 @@ public class AttendanceModel {
     
     public List<Student> getStudents()
     {
-        return dataManager.getStudents();
+        return dataHandler.getStudents();
     }
     
     public List<Teacher> getTeachers() {
-        return dataManager.getTeachers();
+        return dataHandler.getTeachers();
     }
     
     public int checkLogin(String uname, String pass) {
@@ -60,10 +62,25 @@ public class AttendanceModel {
     }
     
     public ArrayList<Schedule> getTodaysSchedules() {
-        return schedMan.getTodaysSchedules();
+        return scheduleHandler.getTodaysSchedules();
     }
     
     public ArrayList<Schedule> getMissed() {
         return attHan.getMissed();
+    }
+    
+    public ArrayList<Schedule> getTeacherSchedule()
+    {
+        return scheduleHandler.getTeacherSchedule();
+    }
+    
+    public List<Class> getClasses()
+    {
+        return dataHandler.getClasses();
+    }
+    
+    public List<Student> getStudentsByClass(int classId)
+    {
+        return dataHandler.getStudentsByClass(classId);
     }
 }

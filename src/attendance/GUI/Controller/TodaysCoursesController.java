@@ -7,7 +7,7 @@ package attendance.GUI.Controller;
 
 import attendance.BE.CurrentStudent;
 import attendance.BE.Schedule;
-import attendance.BLL.ScheduleManager;
+import attendance.BLL.ScheduleHandler;
 import attendance.DAL.SQLConnectionManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
@@ -36,7 +36,7 @@ public class TodaysCoursesController implements Initializable
 
     SQLConnectionManager conManager;
     
-    ScheduleManager scheduleManager = new ScheduleManager();
+    ScheduleHandler scheduleHandler = new ScheduleHandler();
 
     @FXML
     private TableView<Schedule> tblCourse;
@@ -126,7 +126,7 @@ public class TodaysCoursesController implements Initializable
     
     //just in case....
     private void updateTable() {
-        tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+        tblCourse.setItems(FXCollections.observableArrayList(scheduleHandler.getSchedules()));
         tblCourse.refresh();
     }
     
