@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Desmoswal
  */
-public class ScheduleManager
+public class ScheduleHandler
 {
     private DAOSchedule daoSchedule = new DAOSchedule();
     
@@ -26,5 +26,9 @@ public class ScheduleManager
         return daoSchedule.getSchedules();
     }
     
+    public ArrayList<Schedule> getTeacherSchedule()
+    {
+        return daoSchedule.getTeacherSchedules();
+    }
     
 }

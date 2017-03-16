@@ -6,6 +6,7 @@
 package attendance.BLL;
 
 import attendance.BE.CurrentStudent;
+import attendance.BE.CurrentTeacher;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.DAL.LoginManager;
@@ -17,8 +18,9 @@ import java.sql.SQLException;
  */
 public class LoginHandler {
     
-    private DataManager dm = new DataManager();
+    private DataHandler dm = new DataHandler();
     CurrentStudent currentStudent = CurrentStudent.getInstance();
+    CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
     /**
      * checks login credetials and tells if login is approved or not, and which type of login is it.
@@ -63,6 +65,12 @@ public class LoginHandler {
                 for (Teacher teacher : dm.getTeachers()) { //check for each teacher after students
                     if(teacher.getMonogram().toLowerCase().equals(username) || teacher.getMonogram().equals(username)) { //check current teacher username (monogram)
                         if(teacher.getPassword().equals(password)) { //check current teacher password
+                            currentTeacher.setId(teacher.getId());
+                            currentTeacher.setName(teacher.getName());
+                            currentTeacher.setMonogram(teacher.getMonogram());
+                            currentTeacher.setEmail(teacher.getEmail());
+                            currentTeacher.setPassword(teacher.getPassword());
+                            System.out.println("Current Teacher: " + currentTeacher.getName());
                             return 10; //return ok
                         } else {
                             return 2; //return invalid pass

@@ -7,6 +7,8 @@ package attendance.BLL;
 
 import attendance.BE.Student;
 import attendance.BE.Teacher;
+import attendance.BE.Class;
+import attendance.DAL.DataManager;
 import attendance.DAL.LoginManager;
 import java.util.List;
 
@@ -14,9 +16,10 @@ import java.util.List;
  *
  * @author Desmoswal
  */
-public class DataManager
+public class DataHandler
 {
     private LoginManager loginManager = new LoginManager();
+    private DataManager dataManager = new DataManager();
     
     
     public List<Student> getStudents()
@@ -26,5 +29,15 @@ public class DataManager
     
     public List<Teacher> getTeachers() {
         return loginManager.getTeachers();
+    }
+    
+    public List<Class> getClasses()
+    {
+        return dataManager.getClasses();
+    }
+    
+    public List<Student> getStudentsByClass(int classId)
+    {
+        return dataManager.getStudentsByClass(classId);
     }
 }
