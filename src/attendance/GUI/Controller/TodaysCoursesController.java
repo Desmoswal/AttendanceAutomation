@@ -103,8 +103,10 @@ public class TodaysCoursesController implements Initializable
      */
     private void setTableItems() {
         ArrayList<Schedule> schedule = new ArrayList();
-        System.out.println(scheduleManager.getSchedules());
-        tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+        //System.out.println(scheduleManager.getSchedules());
+        //tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+        System.out.println("Today's scheds: "+model.getTodaysSchedules());
+        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedules()));
     }
     
     @FXML

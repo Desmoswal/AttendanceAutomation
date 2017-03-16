@@ -6,6 +6,7 @@
 package attendance.BE;
 
 import java.sql.Time;
+import java.util.Date;
 
 /**
  *
@@ -14,8 +15,8 @@ import java.sql.Time;
 public class Schedule
 {
     int id;
-    Time startTime;
-    Time endTime;
+    Date startTime;
+    Date endTime;
     String classId;
     String teacher;
     String room;
@@ -23,7 +24,7 @@ public class Schedule
     
     public String time;
 
-    public Schedule(int id, Time startTime, Time endTime, String classId, String subject, String room, String teacher)
+    public Schedule(int id, Date startTime, Date endTime, String classId, String subject, String room, String teacher)
     {
         this.id = id;
         this.startTime = startTime;
@@ -41,12 +42,12 @@ public class Schedule
         return id;
     }
 
-    public Time getStartTime()
+    public Date getStartTime()
     {
         return startTime;
     }
 
-    public Time getEndTime()
+    public Date getEndTime()
     {
         return endTime;
     }

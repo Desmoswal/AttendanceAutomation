@@ -13,7 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -137,5 +143,48 @@ public class DAOSchedule
             System.err.println(sqle);
         }
         
+    }
+    
+    public ArrayList<Schedule> getTodaysSchedules() {
+        String query =
+                "select " //selecting columns. only these columns will be available in the result. select * would give us a mess, as it would display ALL columns from ALL the 4 tables we connected.
+                + "[Schedule].[Id]," //schedule's id
+                + "[Schedule].[StartTime]," //schedule's startime
+                + "[Schedule].[EndTime]," //schedule's endtime
+                + "[Schedule].[Class]," //class id (this is an int!!!)
+                + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
+                + "[Schedule].[Room]," //schedule's classroom
+                + "[Teacher].[Name] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
+                + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
+                
+                + "from [Schedule],[Class],[Student],[Subject],[Teacher] " //needed tables
+                //=====Table connections====
+                + "where [Schedule].[Class] = [Class].[Id] " //connecting classes, so given class id will be in schedules. see last line, where we provide data.
+                + "and [Schedule].[Teacher] = [Teacher].[Id] " //connecting teacher tables on teacher id. This will allow to display teacher's name on schedules
+                + "and [Schedule].[Subject] = [Subject].[Id] " //connectig subject tables on subject id. this will allow us to display subject name on schedules.
+                + "and [Schedule].[Class] = [Class].[Id] " //connecting class tables on class id. this will allow us to show class's name.
+                
+                + "and [Student].[Id] = ? and [Class].[Id] = ?"; //providing student's data, so it will select rows with the actual student's id and his class.
+        try(Connection con = conManager.getConnection()) {
+            PreparedStatement s = con.prepareStatement(query);
+            s.setInt(1, currentStudent.getId());
+            s.setInt(2, currentStudent.getClassid());
+            ResultSet rs = s.executeQuery();
+            ArrayList<Schedule> todaysScheds = new ArrayList<>();
+            Date now = new Date();
+            
+            while(rs.next()) {
+                Timestamp startTime = rs.getTimestamp("StartTime");
+                Timestamp endTime = rs.getTimestamp("EndTime");
+                if(endTime.after(now)) {
+                    todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
+                }
+            }
+            con.close();
+            return todaysScheds;
+        }catch(SQLException e) {
+            Logger.getLogger(DAOSchedule.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
 }

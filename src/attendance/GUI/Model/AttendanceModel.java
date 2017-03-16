@@ -14,6 +14,7 @@ import attendance.BLL.AttendanceDetailsHandler;
 import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataManager;
 import attendance.BLL.LoginHandler;
+import attendance.BLL.ScheduleManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class AttendanceModel {
     private LoginHandler loginHandler = new LoginHandler();
     private CheckinHandler checkinHandler = new CheckinHandler();
     private AttendanceDetailsHandler attHan = new AttendanceDetailsHandler();
+    private ScheduleManager schedMan = new ScheduleManager();
 
     public ArrayList<Checkin> getCheckins() {
         return checkinHandler.getCheckins();
@@ -55,5 +57,13 @@ public class AttendanceModel {
     
     public int getMissedTotal() {
         return attHan.calculateMissedTotal();
+    }
+    
+    public ArrayList<Schedule> getTodaysSchedules() {
+        return schedMan.getTodaysSchedules();
+    }
+    
+    public ArrayList<Schedule> getMissed() {
+        return attHan.getMissed();
     }
 }

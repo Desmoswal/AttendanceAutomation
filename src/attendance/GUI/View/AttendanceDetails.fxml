@@ -41,7 +41,7 @@
               <columns>
                 <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
                 <TableColumn fx:id="colTime" prefWidth="75.0" text="Time" />
-                  <TableColumn fx:id="colClass" prefWidth="75.0" text="Class" />
+                  <TableColumn fx:id="colSubject" prefWidth="75.0" text="Subject" />
                   <TableColumn fx:id="colTeacher" prefWidth="78.0" text="Teacher" />
               </columns>
                <GridPane.margin>

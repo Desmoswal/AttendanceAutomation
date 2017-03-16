@@ -5,7 +5,9 @@
  */
 package attendance.BLL;
 
+import attendance.BE.Schedule;
 import attendance.DAL.AttendanceDetailsManager;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,5 +22,9 @@ public class AttendanceDetailsHandler {
         } else {
             return -1;
         }
+    }
+    
+    public ArrayList<Schedule> getMissed() {
+        return attMan.getMissedSchedules();
     }
 }

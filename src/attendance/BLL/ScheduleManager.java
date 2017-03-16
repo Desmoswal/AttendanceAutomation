@@ -26,5 +26,12 @@ public class ScheduleManager
         return daoSchedule.getSchedules();
     }
     
-    
+    public ArrayList<Schedule> getTodaysSchedules() {
+        if(daoSchedule.getTodaysSchedules() != null) {
+            return daoSchedule.getTodaysSchedules();
+        } else {
+            System.out.println("Today's schedules list is null! Something is wrong with the database!");
+            return null;
+        }
+    }
 }

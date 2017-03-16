@@ -5,9 +5,11 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Schedule;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -15,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -25,15 +28,13 @@ public class AttendanceDetailsController implements Initializable
 {
 
     @FXML
-    private TableView<?> tblMissed;
+    private TableView<Schedule> tblMissed;
     @FXML
-    private TableColumn<?, ?> colDate;
+    private TableColumn<Schedule, String> colDate;
     @FXML
-    private TableColumn<?, ?> colTime;
+    private TableColumn<Schedule, String> colTime;
     @FXML
-    private TableColumn<?, ?> colClass;
-    @FXML
-    private TableColumn<?, ?> colTeacher;
+    private TableColumn<Schedule, String> colTeacher;
     @FXML
     private Label tblTotal;
     @FXML
@@ -46,6 +47,8 @@ public class AttendanceDetailsController implements Initializable
     private Label lblMissedTotal;
     
     private AttendanceModel model = new AttendanceModel();
+    @FXML
+    private TableColumn<Schedule, String> colSubject;
 
     /**
      * Initializes the controller class.
@@ -70,6 +73,18 @@ public class AttendanceDetailsController implements Initializable
         if(model.getMissedTotal() != -1) {
             lblMissedTotal.setText(""+model.getMissedTotal());
         }
+        
+        setTableProperties();
+        setTableItems();
     }
     
+    private void setTableProperties() {
+        colTime.setCellValueFactory(new PropertyValueFactory("time"));
+        colSubject.setCellValueFactory(new PropertyValueFactory("subject"));
+        colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
+    }
+    
+    private void setTableItems() {
+        tblMissed.setItems(FXCollections.observableArrayList(model.getMissed()));
+    }
 }

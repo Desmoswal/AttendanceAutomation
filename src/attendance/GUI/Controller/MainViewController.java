@@ -5,9 +5,12 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.CurrentStudent;
 import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +37,8 @@ public class MainViewController implements Initializable
     @FXML
     private Label lblName;
     @FXML
+    private Label lblDate;
+    @FXML
     private AnchorPane paneItem;
     @FXML
     private AnchorPane anchorpane;
@@ -41,6 +46,9 @@ public class MainViewController implements Initializable
     private AttendanceModel model = new AttendanceModel();
     private static UserType user = null;
     public static enum UserType {STUDENT,TEACHER};
+    private CurrentStudent cur = CurrentStudent.getInstance();
+    private Date date = new Date();
+    private String[] weekdays = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
     
     /**
      * Initializes the controller class.
@@ -52,6 +60,11 @@ public class MainViewController implements Initializable
         {     //loading sidebar menu depending on usertype
               if(user.equals(UserType.TEACHER))
               {
+                  lblName.setText(cur.getName());
+                  int y = date.getYear()+1900;
+                  int m = date.getMonth()+1;
+                  lblDate.setText(weekdays[date.getDay()]+", "+date.getDate()+"-"+m+"-"+y);
+                  
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
                   AdminMenuController menuController = menuLoader.getController();
@@ -65,6 +78,11 @@ public class MainViewController implements Initializable
               }
               else if(user.equals(UserType.STUDENT))
               {
+                  lblName.setText(cur.getName());
+                  int y = date.getYear()+1900;
+                  int m = date.getMonth()+1;
+                  lblDate.setText(weekdays[date.getDay()]+", "+date.getDate()+"-"+m+"-"+y);
+                  
                   FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/StudentMenu.fxml"));
                   AnchorPane menuPane = menuLoader.load();
                   StudentMenuController menuController = menuLoader.getController();
