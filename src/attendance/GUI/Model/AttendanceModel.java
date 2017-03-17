@@ -83,4 +83,8 @@ public class AttendanceModel {
     {
         return dataHandler.getStudentsByClass(classId);
     }
+    public int getAllCheckedIn() 
+    {
+    return attHan.getAllCheckedIn();
+    }
 }

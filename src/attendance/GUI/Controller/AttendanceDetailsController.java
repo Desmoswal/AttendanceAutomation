@@ -56,6 +56,7 @@ public class AttendanceDetailsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        tblTotal.setText(""+model.getAllCheckedIn());
         cmbClass.setButtonCell(new ListCell() {
             @Override
             protected void updateItem(Object item, boolean empty) {
@@ -87,4 +88,9 @@ public class AttendanceDetailsController implements Initializable
     private void setTableItems() {
         tblMissed.setItems(FXCollections.observableArrayList(model.getMissed()));
     }
+    public void getAllCheckedIn()
+    {
+    model.getAllCheckedIn();
+    }
+    
 }

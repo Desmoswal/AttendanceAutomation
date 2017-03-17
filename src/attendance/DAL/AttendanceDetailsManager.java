@@ -144,4 +144,19 @@ public class AttendanceDetailsManager {
         }
         return null;
     }
+    public ArrayList<String> getSubjects() 
+    {
+        try(Connection con = conMan.getConnection())
+        {
+            String query =
+                   "select "
+                   + "[Subject].[Name] as 'SubjectName' "
+                   + "from [Subject], [Schedule] "
+                   + "and [Subject].[Id] = [Schedule].[Subject] ";
+            PreparedStatement s = con.prepareStatement(query);
+        }catch(SQLException e) {
+            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 }

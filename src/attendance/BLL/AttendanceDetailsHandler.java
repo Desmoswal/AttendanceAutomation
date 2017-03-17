@@ -27,4 +27,9 @@ public class AttendanceDetailsHandler {
     public ArrayList<Schedule> getMissed() {
         return attMan.getMissedSchedules();
     }
+    public int getAllCheckedIn() 
+    {
+    return attMan.getAllCheckedin();
+    }
 }
+
