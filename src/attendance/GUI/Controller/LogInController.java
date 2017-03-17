@@ -131,7 +131,7 @@ public class LogInController implements Initializable
                 alert.show();
                 break;
             default: //-3 or anything else
-                alert = new Alert(AlertType.ERROR, "Unknown error!");
+                alert = new Alert(AlertType.ERROR, "Unknown error! Maybe not connected to the database?");
                 alert.show();
                 break;
         }
