@@ -154,8 +154,8 @@ public class DAOSchedule
                 + "and [Student].[Id] = ? and [Class].[Id] = ?"; //providing student's data, so it will select rows with the actual student's id and his class.
         try(Connection con = conManager.getConnection()) {
             PreparedStatement s = con.prepareStatement(query);
-            s.setInt(1, currentStudent.getId());
-            s.setInt(2, currentStudent.getClassid());
+            s.setInt(1, currentStudent.getId()); //giving sutdent id for first questionmark
+            s.setInt(2, currentStudent.getClassid()); //giving class id for second q. mark
             ResultSet rs = s.executeQuery();
             ArrayList<Schedule> todaysScheds = new ArrayList<>();
             Date now = new Date();
@@ -163,7 +163,7 @@ public class DAOSchedule
             while(rs.next()) {
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
-                if(endTime.after(now)) {
+                if(endTime.after(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
                     todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
                 }
             }
