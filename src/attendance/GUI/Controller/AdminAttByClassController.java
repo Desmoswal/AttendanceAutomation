@@ -5,22 +5,31 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Class;
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
  *
  * @author Kristof
  */
-public class AdminAttByClassController implements Initializable {
+public class AdminAttByClassController implements Initializable
+{
 
     @FXML
-    private TableView<?> tblClasses;
+    private TableView<Class> tblClasses;
+    @FXML
+    private TableColumn<Class, String> colClass;
     @FXML
     private Label lblAvgAttofClass;
     @FXML
@@ -36,12 +45,46 @@ public class AdminAttByClassController implements Initializable {
     @FXML
     private Label lblMostAttStudCourse;
 
+    AttendanceModel model = new AttendanceModel();
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         // TODO
-    }    
-    
+
+        setTableProperties();
+
+        //Load Classes into tableview
+        tblClasses.setItems(FXCollections.observableArrayList(model.getClasses()));
+    }
+
+    private void setTableProperties()
+    {
+        colClass.setCellValueFactory(new PropertyValueFactory("name"));
+    }
+
+    @FXML
+    private void pressedOnTableClasses(MouseEvent event)
+    {
+        Class selected = null;
+
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 1)
+        {
+            selected = tblClasses.getSelectionModel().getSelectedItem();
+
+            System.out.println("Selected Class: " + selected.getId() + " " + selected.getName());
+
+            lblAvgAttofClass.setText(selected.getName());
+            lblMostMissedCourse.setText(selected.getName());
+            lblMostAttendCourse.setText(selected.getName());
+            lblMostMissedStud.setText(selected.getName());
+            lblMostMissedStudCourse.setText(selected.getName());
+            lblMostAttStud.setText(selected.getName());
+            lblMostAttStudCourse.setText(selected.getName());
+        }
+    }
+
 }

@@ -28,7 +28,8 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Kristof
  */
-public class AdminAttByStudentController implements Initializable {
+public class AdminAttByStudentController implements Initializable
+{
 
     @FXML
     private TableView<Class> tblClasses;
@@ -59,65 +60,85 @@ public class AdminAttByStudentController implements Initializable {
     @FXML
     private Label lblStudMissedSelected;
 
-    
     private AttendanceModel model = new AttendanceModel();
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        cmbStudClassSelect.setButtonCell(new ListCell() {
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        cmbStudClassSelect.setButtonCell(new ListCell()
+        {
             @Override
-            protected void updateItem(Object item, boolean empty) {
-            super.updateItem(item, empty); 
-            if(empty || item==null){
-                // styled like -fx-prompt-text-fill:
-                setStyle("-fx-text-fill: white;");
-            } else {
-                setStyle("-fx-text-fill: white;");
-                setText(item.toString());
+            protected void updateItem(Object item, boolean empty)
+            {
+                super.updateItem(item, empty);
+                if (empty || item == null)
+                {
+                    // styled like -fx-prompt-text-fill:
+                    setStyle("-fx-text-fill: white;");
+                } else
+                {
+                    setStyle("-fx-text-fill: white;");
+                    setText(item.toString());
+                }
             }
-        }
         });
-        
+
         setTableProperties();
 
         //Load Classes into tableview
         tblClasses.setItems(FXCollections.observableArrayList(model.getClasses()));
-    }    
-    
-     /**
+    }
+
+    /**
      * setting table's properties
      */
-    private void setTableProperties() {
+    private void setTableProperties()
+    {
         colStudent.setCellValueFactory(new PropertyValueFactory("name"));
         colClass.setCellValueFactory(new PropertyValueFactory("name"));
     }
-    
+
     @FXML
-    private void pressedOnTableClasses(MouseEvent event) {
+    private void pressedOnTableClasses(MouseEvent event)
+    {
         Class selected = null;
-        
-        if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
+
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 1)
+        {
             selected = tblClasses.getSelectionModel().getSelectedItem();
-            
+
             //Get Students by selected class
             tblStudents.setItems(FXCollections.observableArrayList(model.getStudentsByClass(selected.getId())));
-            
-            System.out.println("Selected Class: " + selected.getId() + " "+ selected.getName());
-        }
-    }
-    
-    @FXML
-    private void pressedOnTableStudents(MouseEvent event) {
-        Student selected = null;
-        
-        if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
-            selected = tblStudents.getSelectionModel().getSelectedItem();
-            System.out.println("Selected Student: " + selected.getName());
+
+            System.out.println("Selected Class: " + selected.getId() + " " + selected.getName());
         }
     }
 
-    
+    @FXML
+    private void pressedOnTableStudents(MouseEvent event)
+    {
+        Student selected = null;
+
+        if (event.isPrimaryButtonDown() && event.getClickCount() == 1)
+        {
+            selected = tblStudents.getSelectionModel().getSelectedItem();
+            System.out.println("Selected Student: " + selected.getName());
+            System.out.println("Selected Student ID: " + selected.getId());
+        }
+        //--only for test purposes, we just need to change the methods
+        lblStudAvgAtt.setText(selected.getName());
+        lblStudAttCourses.setText(selected.getName());
+        lblStudMissedCourses.setText(selected.getName());
+        lblStudMostMissedCourse.setText(selected.getName());
+        lblStudMostAttCourse.setText(selected.getName());
+        lblStudMostMissedWDay.setText(selected.getName());
+        
+        //--Only after combo box selection
+        //lblStudAttPercentSelected.setText(selected.getName());
+        //lblStudAttSelected.setText(selected.getName());
+        //lblStudMissedSelected.setText(selected.getName());
+    }
 }

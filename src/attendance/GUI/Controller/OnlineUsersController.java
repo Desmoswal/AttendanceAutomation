@@ -5,8 +5,11 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.Student;
+import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -25,13 +29,14 @@ public class OnlineUsersController implements Initializable
 {
 
     @FXML
-    private TableView<?> tblOnline;
+    private TableView<Student> tblOnline;
     @FXML
-    private TableColumn<?, ?> colName;
+    private TableColumn<Student, String> colName;
     @FXML
-    private TableColumn<?, ?> colEmail;
+    private TableColumn<Student, String> colEmail;
 
 
+    AttendanceModel model = new AttendanceModel();
     /**
      * Initializes the controller class.
      */
@@ -39,7 +44,17 @@ public class OnlineUsersController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+        
+        setTableProperties();
+        
+        //Load students into tableview
+        tblOnline.setItems(FXCollections.observableArrayList(model.getStudents()));
     }    
-
+    
+        private void setTableProperties()
+    {
+        colName.setCellValueFactory(new PropertyValueFactory("name"));
+        colEmail.setCellValueFactory(new PropertyValueFactory("email"));
+    }
     
 }
