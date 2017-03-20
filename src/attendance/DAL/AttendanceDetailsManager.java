@@ -155,9 +155,13 @@ public class AttendanceDetailsManager {
         {
             String query =
                    "select "
-                   + "[Subject].[Name] as 'SubjectName' "
-                   + "from [Subject], [Schedule] "
-                   + "and [Subject].[Id] = [Schedule].[Subject] ";
+                   + "[Subject].[Name] "
+                   + "from [Schedule],[Subject],[Class],[Student]  "
+                   + "where [Schedule].[Class] = [Class].[Id]  "
+                   + "and [Student].[Class] = [Class].[Id] "
+                   + "and [Subject].[Id] = [Schedule].[Subject] "
+                   + "and [Student].[Id] = 12 "
+                   + "group by [Subject].[Name] ";
             PreparedStatement s = con.prepareStatement(query);
         }catch(SQLException e) {
             Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);

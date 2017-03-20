@@ -9,6 +9,10 @@
 .button:hover {
     -fx-background-color: linear-gradient(to bottom, #aaa,#ccc);
 }
+.text-field
+{
+    -fx-border-color: white;  
+}
 .button
 {
   -fx-background-color: linear-gradient(to bottom, #888,#aaa);
@@ -41,7 +45,7 @@
 .combo-box
 {
     -fx-background-color: none;
-    -fx-border-color: black;
+    -fx-border-color: white;
     -fx-border-width: 2;
     -fx-font-weight: bold;
 }

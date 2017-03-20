@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
    <children>
       <TableView fx:id="tblClasses" layoutX="14.0" layoutY="54.0" onMousePressed="#pressedOnTableClasses" prefHeight="369.0" prefWidth="91.0" stylesheets="@../../Attendance.css">
         <columns>
@@ -20,35 +18,67 @@
           <TableColumn fx:id="colStudent" prefWidth="123.0" text="Student" />
         </columns>
       </TableView>
-      <Label layoutX="19.0" layoutY="22.0" stylesheets="@../../Attendance.css" text="Select class">
-         <font>
-            <Font name="System Italic" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="135.0" layoutY="22.0" stylesheets="@../../Attendance.css" text="Select student">
-         <font>
-            <Font name="System Italic" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="255.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="Average attendnance in school:" />
-      <Label layoutX="255.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="Attended courses:" />
-      <Label layoutX="255.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="Missed courses:" />
-      <Label layoutX="255.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
-      <Label layoutX="255.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
-      <Label layoutX="255.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="Most missed day of week:" />
-      <Separator layoutX="257.0" layoutY="265.0" prefHeight="8.0" prefWidth="253.0" />
-      <ComboBox fx:id="cmbStudClassSelect" layoutX="255.0" layoutY="290.0" prefWidth="150.0" promptText="Select a course..." styleClass="white-box" stylesheets="@../../Attendance.css" />
-      <Label layoutX="258.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="Attendance of selected:" />
-      <Label layoutX="259.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="Attended of selected:" />
-      <Label layoutX="260.0" layoutY="400.0" stylesheets="@../../Attendance.css" text="Missed of selected:" />
-      <Label fx:id="lblStudAvgAtt" layoutX="513.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudAttCourses" layoutX="513.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMissedCourses" layoutX="513.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMostMissedCourse" layoutX="513.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMostAttCourse" layoutX="513.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMostMissedWDay" layoutX="513.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudAttPercentSelected" layoutX="513.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudAttSelected" layoutX="513.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMissedSelected" layoutX="513.0" layoutY="400.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label layoutX="273.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="Average attendnance in school:" />
+      <Label layoutX="273.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="Attended courses:" />
+      <Label layoutX="273.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="Missed courses:" />
+      <Label layoutX="273.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
+      <Label layoutX="273.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
+      <Label layoutX="273.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="Most missed day of week:" />
+      <Separator layoutX="275.0" layoutY="265.0" prefHeight="8.0" prefWidth="253.0" />
+      <ComboBox fx:id="cmbStudClassSelect" layoutX="273.0" layoutY="290.0" prefWidth="150.0" promptText="Select a course..." styleClass="white-box" stylesheets="@../../Attendance.css" />
+      <Label layoutX="276.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="Attendance of selected:" />
+      <Label layoutX="277.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="Attended of selected:" />
+      <Label layoutX="278.0" layoutY="400.0" stylesheets="@../../Attendance.css" text="Missed of selected:" />
+      <Label fx:id="lblStudAvgAtt" layoutX="559.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudAttCourses" layoutX="559.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudMissedCourses" layoutX="559.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudMostMissedCourse" layoutX="559.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudMostAttCourse" layoutX="559.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudMostMissedWDay" layoutX="559.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudAttPercentSelected" layoutX="559.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudAttSelected" layoutX="559.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <Label fx:id="lblStudMissedSelected" layoutX="559.0" layoutY="400.0" stylesheets="@../../Attendance.css" text="LABEL" />
+      <GridPane layoutX="14.0" layoutY="18.0" prefHeight="37.0" prefWidth="629.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="110.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="117.0" />
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="280.0" minWidth="3.0" prefWidth="103.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="177.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="117.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label layoutX="135.0" layoutY="22.0" prefHeight="21.0" prefWidth="110.0" stylesheets="@../../Attendance.css" text="Select student" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Italic" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="22.0" prefHeight="21.0" prefWidth="195.0" stylesheets="@../../Attendance.css" text="Select class">
+               <font>
+                  <Font name="System Italic" size="16.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="25.0" prefWidth="164.0" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label layoutX="523.0" layoutY="105.0" prefHeight="21.0" prefWidth="57.0" stylesheets="@../../Attendance.css" text="Search:" GridPane.columnIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets right="15.0" />
+               </GridPane.margin>
+            </Label>
+            <ComboBox prefWidth="150.0" promptText="Class" GridPane.columnIndex="4">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </ComboBox>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
