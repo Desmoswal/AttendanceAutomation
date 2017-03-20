@@ -8,6 +8,8 @@ package attendance.GUI.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,7 +54,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/TodaysCourses.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
-                    System.out.println(e);
+                   Logger.getLogger(StudentMenuController.class.getName()).log(Level.SEVERE, null, e);
                 }
                 break;
             case "btnMyAttendance":
@@ -60,7 +62,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/AttendanceDetails.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
-                    System.out.println(e);
+                    Logger.getLogger(StudentMenuController.class.getName()).log(Level.SEVERE, null, e);
                 }
                 break;
             case "btnOnline":
@@ -68,7 +70,7 @@ public class StudentMenuController implements Initializable
                     parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
-                    System.out.println(e);
+                    Logger.getLogger(StudentMenuController.class.getName()).log(Level.SEVERE, null, e);
                 }
                 break;
             case "btnLogOut":

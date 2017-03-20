@@ -126,7 +126,7 @@ public class TodaysCoursesController implements Initializable
     
     //just in case....
     private void updateTable() {
-        tblCourse.setItems(FXCollections.observableArrayList(scheduleHandler.getSchedules()));
+        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedules()));
         tblCourse.refresh();
     }
     

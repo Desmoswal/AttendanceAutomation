@@ -84,7 +84,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="tblTotal" layoutX="10.0" layoutY="201.0" prefHeight="0.0" prefWidth="48.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1">
+                  <Label fx:id="lblTotal" layoutX="10.0" layoutY="201.0" prefHeight="21.0" prefWidth="105.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -92,7 +92,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblAttendance" layoutX="162.0" layoutY="29.0" prefHeight="0.0" prefWidth="48.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="lblAttendance" layoutX="162.0" layoutY="29.0" prefHeight="21.0" prefWidth="116.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -100,7 +100,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblMissed" layoutX="162.0" layoutY="144.0" prefHeight="0.0" prefWidth="48.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="lblMissed" layoutX="162.0" layoutY="144.0" prefHeight="21.0" prefWidth="115.0" stylesheets="@../../Attendance.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>

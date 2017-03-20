@@ -36,7 +36,7 @@ public class AttendanceDetailsController implements Initializable
     @FXML
     private TableColumn<Schedule, String> colTeacher;
     @FXML
-    private Label tblTotal;
+    private Label lblTotal;
     @FXML
     private Label lblAttendance;
     @FXML
@@ -76,6 +76,7 @@ public class AttendanceDetailsController implements Initializable
         
         setTableProperties();
         setTableItems();
+        setStatsData();
     }
     
     private void setTableProperties() {
@@ -86,5 +87,9 @@ public class AttendanceDetailsController implements Initializable
     
     private void setTableItems() {
         tblMissed.setItems(FXCollections.observableArrayList(model.getMissed()));
+    }
+    
+    private void setStatsData() {
+        lblTotal.setText(model.getTotalAttPercent()+"%");
     }
 }

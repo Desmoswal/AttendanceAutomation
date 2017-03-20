@@ -58,7 +58,7 @@ public class AttendanceModel {
     }
     
     public int getMissedTotal() {
-        return attHan.calculateMissedTotal();
+        return attHan.getMissed().size();
     }
     
     public ArrayList<Schedule> getTodaysSchedules() {
@@ -82,5 +82,9 @@ public class AttendanceModel {
     public List<Student> getStudentsByClass(int classId)
     {
         return dataHandler.getStudentsByClass(classId);
+    }
+    
+    public String getTotalAttPercent() {
+        return attHan.getTotalAttPercent();
     }
 }

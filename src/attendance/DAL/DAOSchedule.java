@@ -1,6 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this license , choose License Headers in Project Properties.
+ * To change this template file,header choose Tools | Templates
  * and open the template in the editor.
  */
 package attendance.DAL;
@@ -141,7 +141,7 @@ public class DAOSchedule
                 + "[Schedule].[Class]," //class id (this is an int!!!)
                 + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
                 + "[Schedule].[Room]," //schedule's classroom
-                + "[Teacher].[Name] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
+                + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
                 + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
                 
                 + "from [Schedule],[Class],[Student],[Subject],[Teacher] " //needed tables
@@ -159,12 +159,12 @@ public class DAOSchedule
             ResultSet rs = s.executeQuery();
             ArrayList<Schedule> todaysScheds = new ArrayList<>();
             Date now = new Date();
-            
+
             while(rs.next()) {
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
-                if(endTime.after(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
-                    todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
+                if(endTime.after(now) && startTime.before(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
+                    todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getString("SubjectName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
                 }
             }
             con.close();
