@@ -19,8 +19,8 @@ import java.util.ArrayList;
  *
  * @author Kristof
  */
-public class CheckinManager {
-    private SQLConnectionManager conMan = new SQLConnectionManager();
+public class CheckinManager extends SQLConnectionManager {
+    //private SQLConnectionManager conMan = new SQLConnectionManager();
     
     /**
      * Inserts given student's id and given schedule's in Checked_In table.
@@ -29,7 +29,7 @@ public class CheckinManager {
      */
     public void insertCheckin(CurrentStudent student, Schedule course) {
         String query = "insert into Checked_In(StudentId,SchedId) values ("+student.getId()+","+course.getId()+")";
-        try(Connection con = conMan.getConnection()) {
+        try(Connection con = super.getConnection()) {
             Statement st = con.createStatement();
             st.execute(query);
             
@@ -46,7 +46,7 @@ public class CheckinManager {
     public ArrayList<Checkin> getCheckins() {
         ArrayList<Checkin> checkins = new ArrayList<>();
         String query = "select * from Checked_In";
-        try(Connection con = conMan.getConnection()) {
+        try(Connection con = super.getConnection()) {
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery(query);
             while(r.next()) {

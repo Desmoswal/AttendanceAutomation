@@ -18,9 +18,9 @@ import java.util.ArrayList;
  *
  * @author Desmoswal
  */
-public class LoginManager
+public class LoginManager extends SQLConnectionManager
 {
-    SQLConnectionManager conManager = new SQLConnectionManager();
+    //SQLConnectionManager conManager = new SQLConnectionManager();
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<Teacher> teachers = new ArrayList<>();
     
@@ -40,7 +40,7 @@ public class LoginManager
      */
     private void buildStudents() {
         students = new ArrayList<>();
-        try(Connection con = conManager.getConnection())
+        try(Connection con = super.getConnection())
         {
             String query = "SELECT * FROM [Student]";
             Statement stmt = con.createStatement();
@@ -64,7 +64,7 @@ public class LoginManager
      */
     private void buildTeachers() {
         teachers = new ArrayList<>();
-        try(Connection con = conManager.getConnection())
+        try(Connection con = super.getConnection())
         {
             String query = "SELECT * FROM [Teacher]";
             Statement stmt = con.createStatement();

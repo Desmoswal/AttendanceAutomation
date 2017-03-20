@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.CurrentStudent;
 import attendance.BE.Schedule;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
@@ -45,10 +46,11 @@ public class AttendanceDetailsController implements Initializable
     private ComboBox<?> cmbClass;
     @FXML
     private Label lblMissedTotal;
-    
-    private AttendanceModel model = new AttendanceModel();
     @FXML
     private TableColumn<Schedule, String> colSubject;
+    
+    private AttendanceModel model = new AttendanceModel();
+    private CurrentStudent currentStudent = CurrentStudent.getInstance();
 
     /**
      * Initializes the controller class.
@@ -56,7 +58,7 @@ public class AttendanceDetailsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        lblTotal.setText(""+model.getAllCheckedIn());
+        lblTotal.setText(""+model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid()).size());
         cmbClass.setButtonCell(new ListCell() {
             @Override
             protected void updateItem(Object item, boolean empty) {
@@ -71,8 +73,8 @@ public class AttendanceDetailsController implements Initializable
         }
         });
         
-        if(model.getMissedTotal() != -1) {
-            lblMissedTotal.setText(""+model.getMissedTotal());
+        if(model.getMissedSchedulesForStudent(currentStudent.getId(),currentStudent.getClassid()).size() != -1) {
+            lblMissedTotal.setText(""+model.getMissedSchedulesForStudent(currentStudent.getId(),currentStudent.getClassid()).size());
         }
         
         setTableProperties();
@@ -87,15 +89,15 @@ public class AttendanceDetailsController implements Initializable
     }
     
     private void setTableItems() {
-        tblMissed.setItems(FXCollections.observableArrayList(model.getMissed()));
+        tblMissed.setItems(FXCollections.observableArrayList(model.getMissedSchedulesForStudent(currentStudent.getId(),currentStudent.getClassid())));
     }
     
     private void setStatsData() {
-        lblTotal.setText(model.getTotalAttPercent()+"%");
+        lblTotal.setText(model.getTotalAttPercentForStudent(currentStudent.getId(), currentStudent.getClassid())+"%");
     }
     public void getAllCheckedIn()
     {
-        model.getAllCheckedIn();
+        model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid());
     }
     
 }

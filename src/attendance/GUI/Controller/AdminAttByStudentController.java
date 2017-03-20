@@ -8,6 +8,7 @@ package attendance.GUI.Controller;
 import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Class;
+import attendance.BE.CurrentTeacher;
 import attendance.DAL.AttendanceDetailsManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
@@ -58,6 +59,7 @@ public class AdminAttByStudentController implements Initializable
     private Label lblStudMissedSelected;
 
     private AttendanceModel model = new AttendanceModel();
+    private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
     private AttendanceDetailsManager attdetailsmanager = new AttendanceDetailsManager();
 
@@ -128,20 +130,20 @@ public class AdminAttByStudentController implements Initializable
             System.out.println("Selected Student ID: " + selected.getId());
         }
         //--only for test purposes, we just need to change the methods
-        int missed = attdetailsmanager.getMissedSchedules(selected.getId(), selected.getClassid()).size();
+        int missed = model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size();
         System.out.println("Missed Classes: "+ missed);
         
-        int attended = attdetailsmanager.getAttendedCourses(selected.getId(), selected.getClassid());
+        int attended = model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size();
         System.out.println("Attended Classes: "+ attended);
         
-        int totalClasses = missed + attended;
+        int totalClasses = model.getAllSchedulesForStudent(selected.getId(), selected.getClassid()).size();
         System.out.println("Total classes: " + totalClasses);
         
         float avgAtt = (float)attended / (float)totalClasses * 100 ;
         
-        lblStudAvgAtt.setText(String.valueOf(avgAtt));
-        lblStudAttCourses.setText(String.valueOf(attdetailsmanager.getAttendedCourses(selected.getId(), selected.getClassid())));
-        lblStudMissedCourses.setText(String.valueOf(attdetailsmanager.getMissedSchedules(selected.getId(), selected.getClassid()).size()));
+        lblStudAvgAtt.setText(""+avgAtt);
+        lblStudAttCourses.setText(""+model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size());
+        lblStudMissedCourses.setText(""+model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size());
         lblStudMostMissedWDay.setText(selected.getName());
         
         //--Only after combo box selection

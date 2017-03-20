@@ -5,6 +5,7 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.CurrentTeacher;
 import attendance.BE.Schedule;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
@@ -42,6 +43,7 @@ public class AdminTodayController implements Initializable
     private TableView<Schedule> tblToday;
 
     private AttendanceModel model = new AttendanceModel();
+    private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
     /**
      * Initializes the controller class.
@@ -62,7 +64,7 @@ public class AdminTodayController implements Initializable
     
     private void setTableItems()
     {
-        tblToday.setItems(FXCollections.observableArrayList(model.getTeacherSchedule()));
+        tblToday.setItems(FXCollections.observableArrayList(model.getSchedulesForTeacher(currentTeacher.getId())));
     }
     
      @FXML

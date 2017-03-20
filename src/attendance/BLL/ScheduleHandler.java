@@ -9,6 +9,7 @@ import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.DAL.DAOSchedule;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,23 +21,35 @@ public class ScheduleHandler
 {
     private DAOSchedule daoSchedule = new DAOSchedule();
     
+    public ArrayList<Schedule> getSchedulesForClass(int classid) {
+        return daoSchedule.getSchedulesForClass(classid);
+    }
     
-    public ArrayList<Schedule> getSchedules()
+    public ArrayList<Schedule> getTodaysSchedulesForStudent(int studentid, int classid) {
+        return daoSchedule.getTodaysSchedulesForStudent(studentid,classid);
+    }
+    
+    public ArrayList<Schedule> getSchedulesForTeacher(int teacherid)
     {
-        return daoSchedule.getSchedules();
+        return daoSchedule.getSchedulesForTeacher(teacherid);
     }
     
-    public ArrayList<Schedule> getTodaysSchedules() {
-        if(daoSchedule.getTodaysSchedules() != null) {
-            return daoSchedule.getTodaysSchedules();
-        } else {
-            System.out.println("Today's schedules list is null! Something is wrong with the database!");
-            return null;
-        }
-    }
-    public ArrayList<Schedule> getTeacherSchedule()
-    {
-        return daoSchedule.getTeacherSchedules();
+    public ArrayList<Schedule> getMissedSchedulesForStudent(int studentid,int classid) {
+        return daoSchedule.getMissedSchedulesForStudent(studentid, classid);
     }
     
+    public ArrayList<Schedule> getAllSchedulesForStudent(int studentid, int classid) {
+        return daoSchedule.getAllSchedulesForStudent(studentid, classid);
+    }
+    
+    public ArrayList<Schedule> getAllCheckedinForStudent(int studentid, int classid) {
+        return daoSchedule.getAllCheckedinForStudent(studentid, classid);
+    }
+    
+    public String getTotalAttPercentForStudent(int studentid, int classid) {
+        DecimalFormat numberFormat = new DecimalFormat("#.#");
+        return numberFormat.format(
+                ((float)daoSchedule.getAllCheckedinForStudent(studentid,classid).size() / (float)daoSchedule.getAllSchedulesForStudent(studentid, classid).size()) *100
+        );
+    }
 }

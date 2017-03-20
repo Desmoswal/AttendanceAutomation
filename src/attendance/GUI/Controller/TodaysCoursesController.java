@@ -105,8 +105,8 @@ public class TodaysCoursesController implements Initializable
         ArrayList<Schedule> schedule = new ArrayList();
         //System.out.println(scheduleManager.getSchedules());
         //tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
-        System.out.println("Today's scheds: "+model.getTodaysSchedules());
-        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedules()));
+        System.out.println("Today's scheds: "+model.getTodaysSchedulesForStudent(currentStudent.getId(),currentStudent.getClassid()));
+        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedulesForStudent(currentStudent.getId(), currentStudent.getClassid())));
     }
     
     @FXML
@@ -126,7 +126,7 @@ public class TodaysCoursesController implements Initializable
     
     //just in case....
     private void updateTable() {
-        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedules()));
+        tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedulesForStudent(currentStudent.getId(), currentStudent.getClassid())));
         tblCourse.refresh();
     }
     
@@ -143,7 +143,7 @@ public class TodaysCoursesController implements Initializable
                     setStyle("");
                 }
                 if(item != null) { //avoiding nullpointer exception
-                    if(model.getCheckedInSchedules().contains(item.getId()))
+                    if(model.getAllCheckedinForStudent(currentStudent.getId(),currentStudent.getClassid()).contains(item.getId()))
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
                 }
             }

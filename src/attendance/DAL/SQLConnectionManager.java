@@ -15,7 +15,7 @@ import java.sql.Connection;
  */
 public class SQLConnectionManager
 {
-    private SQLServerDataSource ds =
+    protected SQLServerDataSource ds =
         new SQLServerDataSource();
 
     public SQLConnectionManager()

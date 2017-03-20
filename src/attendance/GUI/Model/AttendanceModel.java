@@ -29,11 +29,14 @@ public class AttendanceModel {
     private LoginHandler loginHandler = new LoginHandler();
     private CheckinHandler checkinHandler = new CheckinHandler();
     private ScheduleHandler scheduleHandler = new ScheduleHandler();
-    private AttendanceDetailsHandler attHan = new AttendanceDetailsHandler();
     
 
     public ArrayList<Checkin> getCheckins() {
         return checkinHandler.getCheckins();
+    }
+    
+    public void doCheckin(CurrentStudent student, Schedule course) {
+        checkinHandler.doCheckin(student,course);
     }
     
     public List<Student> getStudents()
@@ -43,35 +46,6 @@ public class AttendanceModel {
     
     public List<Teacher> getTeachers() {
         return dataHandler.getTeachers();
-    }
-    
-    public int checkLogin(String uname, String pass) {
-        return loginHandler.checkLogin(uname, pass);
-    }
-    
-    public void doCheckin(CurrentStudent student, Schedule course) {
-        checkinHandler.doCheckin(student,course);
-    }
-    
-    public ArrayList<Integer> getCheckedInSchedules() {
-        return checkinHandler.getCheckedInSchedules();
-    }
-    
-    public int getMissedTotal() {
-        return attHan.getMissed().size();
-    }
-    
-    public ArrayList<Schedule> getTodaysSchedules() {
-        return scheduleHandler.getTodaysSchedules();
-    }
-    
-    public ArrayList<Schedule> getMissed() {
-        return attHan.getMissed();
-    }
-    
-    public ArrayList<Schedule> getTeacherSchedule()
-    {
-        return scheduleHandler.getTeacherSchedule();
     }
     
     public List<Class> getClasses()
@@ -84,11 +58,40 @@ public class AttendanceModel {
         return dataHandler.getStudentsByClass(classId);
     }
     
-    public String getTotalAttPercent() {
-        return attHan.getTotalAttPercent();
+    public int checkLogin(String uname, String pass) {
+        return loginHandler.checkLogin(uname, pass);
     }
-    public ArrayList<Schedule> getAllCheckedIn() 
+    
+    public ArrayList<Schedule> getAllCheckedinForStudent(int studentid, int classid) {
+        return scheduleHandler.getAllCheckedinForStudent(studentid, classid);
+    }
+    
+    /*public int getMissedSchedulesNumberForStudent(int studentid, int classid) {
+        return scheduleHandler.getMissedSchedulesForStudent(studentid, classid).size();
+    }*/
+    
+    public ArrayList<Schedule> getTodaysSchedulesForStudent(int studentid,int classid) {
+        return scheduleHandler.getTodaysSchedulesForStudent(studentid,classid);
+    }
+    
+    public ArrayList<Schedule> getMissedSchedulesForStudent(int studentid, int classid) {
+        return scheduleHandler.getMissedSchedulesForStudent(studentid, classid);
+    }
+    
+    public ArrayList<Schedule> getSchedulesForTeacher(int teacherid)
     {
-        return attHan.getAllCheckedIn();
+        return scheduleHandler.getSchedulesForTeacher(teacherid);
+    }
+    
+    public String getTotalAttPercentForStudent(int studentid, int classid) {
+        return scheduleHandler.getTotalAttPercentForStudent(studentid, classid);
+    }
+
+    public ArrayList<Schedule> getSchedulesForClass(int classid) {
+        return scheduleHandler.getSchedulesForClass(classid);
+    }
+    
+    public ArrayList<Schedule> getAllSchedulesForStudent(int studentid, int classid) {
+        return scheduleHandler.getAllSchedulesForStudent(studentid, classid);
     }
 }

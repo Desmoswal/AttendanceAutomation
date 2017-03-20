@@ -17,10 +17,10 @@ import java.util.ArrayList;
  *
  * @author Desmoswal
  */
-public class DataManager
+public class DataManager extends SQLConnectionManager
 {
     
-    private SQLConnectionManager conMan = new SQLConnectionManager();
+    //private SQLConnectionManager conMan = new SQLConnectionManager();
     private ArrayList<Student> students = new ArrayList();
     
     /**
@@ -30,7 +30,7 @@ public class DataManager
     public ArrayList<Class> getClasses() {
         ArrayList<Class> classes = new ArrayList<>();
         String query = "select * from [Class]";
-        try(Connection con = conMan.getConnection()) {
+        try(Connection con = super.getConnection()) {
             Statement s = con.createStatement();
             ResultSet r = s.executeQuery(query);
             while(r.next()) {
@@ -54,7 +54,7 @@ public class DataManager
      */
     private void buildStudent(int classId) {
         students = new ArrayList<>();
-        try(Connection con = conMan.getConnection())
+        try(Connection con = super.getConnection())
         {
             String query = "SELECT Student.* FROM Student where Student.Class = "+ classId;
             Statement stmt = con.createStatement();
