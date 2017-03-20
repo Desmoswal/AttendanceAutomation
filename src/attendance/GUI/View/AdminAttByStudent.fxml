@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByStudentController">
    <children>
       <TableView fx:id="tblClasses" layoutX="14.0" layoutY="54.0" onMousePressed="#pressedOnTableClasses" prefHeight="369.0" prefWidth="91.0" stylesheets="@../../Attendance.css">
         <columns>
@@ -21,8 +28,6 @@
       <Label layoutX="273.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="Average attendnance in school:" />
       <Label layoutX="273.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="Attended courses:" />
       <Label layoutX="273.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="Missed courses:" />
-      <Label layoutX="273.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
-      <Label layoutX="273.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
       <Label layoutX="273.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="Most missed day of week:" />
       <Separator layoutX="275.0" layoutY="265.0" prefHeight="8.0" prefWidth="253.0" />
       <ComboBox fx:id="cmbStudClassSelect" layoutX="273.0" layoutY="290.0" prefWidth="150.0" promptText="Select a course..." styleClass="white-box" stylesheets="@../../Attendance.css" />
@@ -32,8 +37,6 @@
       <Label fx:id="lblStudAvgAtt" layoutX="559.0" layoutY="56.0" stylesheets="@../../Attendance.css" text="LABEL" />
       <Label fx:id="lblStudAttCourses" layoutX="559.0" layoutY="95.0" stylesheets="@../../Attendance.css" text="LABEL" />
       <Label fx:id="lblStudMissedCourses" layoutX="559.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMostMissedCourse" layoutX="559.0" layoutY="165.0" stylesheets="@../../Attendance.css" text="LABEL" />
-      <Label fx:id="lblStudMostAttCourse" layoutX="559.0" layoutY="200.0" stylesheets="@../../Attendance.css" text="LABEL" />
       <Label fx:id="lblStudMostMissedWDay" layoutX="559.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="LABEL" />
       <Label fx:id="lblStudAttPercentSelected" layoutX="559.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="LABEL" />
       <Label fx:id="lblStudAttSelected" layoutX="559.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="LABEL" />

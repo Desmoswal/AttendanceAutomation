@@ -10,12 +10,18 @@ import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -26,40 +32,51 @@ public class AdminCheckinController implements Initializable
 {
 
     @FXML
-    private ListView<?> listStudents;
-    @FXML
-    private CheckBox chkStudent;
-    @FXML
     private Button btnClose;
     @FXML
     private Label lblClass;
     @FXML
     private Label lblCourse;
-
+    @FXML
+    private TableView<Student> tblAttending;
+    @FXML
+    private TableColumn<Student, String> colName;
+    
+    
     private AttendanceModel model = new AttendanceModel();
     private LinkedList<Student> checkinList;
     private LinkedList<CheckBox> checkinboxes = new LinkedList<>();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
-    {
-        /*checkinList = model.getCheckinList();
-        if(!checkinList.isEmpty()) {
-            for (Student student : checkinList) {
-                CheckBox cb = new CheckBox(student.getName());
-                if(student.isCheckedIn()) {
-                    cb.selectedProperty().set(true);
-                } else {
-                    cb.selectedProperty().set(false);
-                }
-                checkinboxes.add(cb);
-            }
-            listStudents.getChildrenUnmodifiable().addAll(checkinboxes);
-        }*/
-        
-        
+    {    
+        setTableProperties();
     }    
+
+    private void setTableProperties()
+    {
+        colName.setCellValueFactory(new PropertyValueFactory("name"));
+    }
+    
+    public void setTableItems(int classId)
+    {
+        tblAttending.setItems(FXCollections.observableArrayList(model.getStudentsByClass(classId)));
+    }
+    
+    @FXML
+    private void pressedOnTable(MouseEvent event)
+    {
+        
+    }
+    
+    @FXML
+    private void closeButtonPressed()
+    {
+        Stage curStage = (Stage) btnClose.getScene().getWindow();
+        curStage.close();
+    }
     
 }

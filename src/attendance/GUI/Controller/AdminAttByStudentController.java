@@ -8,6 +8,7 @@ package attendance.GUI.Controller;
 import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Class;
+import attendance.DAL.AttendanceDetailsManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,10 +49,6 @@ public class AdminAttByStudentController implements Initializable
     @FXML
     private Label lblStudMissedCourses;
     @FXML
-    private Label lblStudMostMissedCourse;
-    @FXML
-    private Label lblStudMostAttCourse;
-    @FXML
     private Label lblStudMostMissedWDay;
     @FXML
     private Label lblStudAttPercentSelected;
@@ -61,6 +58,8 @@ public class AdminAttByStudentController implements Initializable
     private Label lblStudMissedSelected;
 
     private AttendanceModel model = new AttendanceModel();
+    
+    private AttendanceDetailsManager attdetailsmanager = new AttendanceDetailsManager();
 
     /**
      * Initializes the controller class.
@@ -129,11 +128,20 @@ public class AdminAttByStudentController implements Initializable
             System.out.println("Selected Student ID: " + selected.getId());
         }
         //--only for test purposes, we just need to change the methods
-        lblStudAvgAtt.setText(selected.getName());
-        lblStudAttCourses.setText(selected.getName());
-        lblStudMissedCourses.setText(selected.getName());
-        lblStudMostMissedCourse.setText(selected.getName());
-        lblStudMostAttCourse.setText(selected.getName());
+        int missed = attdetailsmanager.getMissedSchedules(selected.getId(), selected.getClassid()).size();
+        System.out.println("Missed Classes: "+ missed);
+        
+        int attended = attdetailsmanager.getAttendedCourses(selected.getId(), selected.getClassid());
+        System.out.println("Attended Classes: "+ attended);
+        
+        int totalClasses = missed + attended;
+        System.out.println("Total classes: " + totalClasses);
+        
+        float avgAtt = (float)attended / (float)totalClasses * 100 ;
+        
+        lblStudAvgAtt.setText(String.valueOf(avgAtt));
+        lblStudAttCourses.setText(String.valueOf(attdetailsmanager.getAttendedCourses(selected.getId(), selected.getClassid())));
+        lblStudMissedCourses.setText(String.valueOf(attdetailsmanager.getMissedSchedules(selected.getId(), selected.getClassid()).size()));
         lblStudMostMissedWDay.setText(selected.getName());
         
         //--Only after combo box selection

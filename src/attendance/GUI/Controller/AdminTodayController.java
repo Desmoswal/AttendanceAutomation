@@ -11,11 +11,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -68,6 +73,35 @@ public class AdminTodayController implements Initializable
             selected = tblToday.getSelectionModel().getSelectedItem();
             
             System.out.println("Selected Schedule: " + selected.getId());
+        }
+        
+        if(event.isPrimaryButtonDown() && event.getClickCount() == 2)
+        {
+            try
+            {
+                Stage primStage = (Stage) tblToday.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminCheckin.fxml"));
+                Parent root = loader.load();
+
+                // Fetches controller from view
+                AdminCheckinController controller = loader.getController();
+                //controller.setTableItems(selected.getId());
+
+                // Sets new stage as modal window
+                Stage stageView = new Stage();
+                stageView.setScene(new Scene(root));
+
+                stageView.initModality(Modality.WINDOW_MODAL);
+                stageView.initOwner(primStage);
+
+                stageView.show();
+            } 
+            
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+
         }
     }
     
