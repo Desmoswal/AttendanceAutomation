@@ -7,11 +7,14 @@ package attendance.DAL;
 
 import attendance.BE.Class;
 import attendance.BE.Student;
+import attendance.BE.Subject;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,6 +50,32 @@ public class DataManager extends SQLConnectionManager
     {
         buildStudent(classId);
         return students;
+    }
+    
+    public ArrayList<Subject> getSubjectsForStudent(int studentid) {
+        String query =
+                "select [Subject].* "
+                + "from [Schedule],[Subject],[Class],[Student] "
+                + "where [Schedule].[Class] = [Class].[Id] "
+                + "and [Student].[Class] = [Class].[Id] "
+                + "and [Subject].[Id] = [Schedule].[Subject] "
+                + "and [Student].[Id] = "+studentid+" "
+                + "group by [Subject].[Name],[Subject].[Id]";
+        try(Connection con = super.getConnection()) {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(query);
+            
+            ArrayList<Subject> subjects = new ArrayList<>();
+            while(rs.next()) {
+                subjects.add(new Subject(rs.getInt("Id"),rs.getString("Name")));
+            }
+            
+            con.close();
+            return subjects;
+        }catch(SQLException e) {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
     }
     
     /**

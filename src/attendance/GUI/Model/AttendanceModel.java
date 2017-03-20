@@ -11,6 +11,7 @@ import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.BE.Class;
+import attendance.BE.Subject;
 import attendance.BLL.AttendanceDetailsHandler;
 import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataHandler;
@@ -56,6 +57,10 @@ public class AttendanceModel {
     public List<Student> getStudentsByClass(int classId)
     {
         return dataHandler.getStudentsByClass(classId);
+    }
+    
+    public List<Subject> getSubjectsForStudent(int studentid) {
+        return dataHandler.getSubjectsForStudent(studentid);
     }
     
     public int checkLogin(String uname, String pass) {

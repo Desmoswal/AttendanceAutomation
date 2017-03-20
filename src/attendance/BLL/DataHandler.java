@@ -8,6 +8,7 @@ package attendance.BLL;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.BE.Class;
+import attendance.BE.Subject;
 import attendance.DAL.DataManager;
 import attendance.DAL.LoginManager;
 import java.util.List;
@@ -39,5 +40,9 @@ public class DataHandler
     public List<Student> getStudentsByClass(int classId)
     {
         return dataManager.getStudentsByClass(classId);
+    }
+    
+    public List<Subject> getSubjectsForStudent(int studentid) {
+        return dataManager.getSubjectsForStudent(studentid);
     }
 }
