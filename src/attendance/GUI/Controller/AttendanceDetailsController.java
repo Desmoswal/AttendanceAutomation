@@ -56,6 +56,7 @@ public class AttendanceDetailsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        lblTotal.setText(""+model.getAllCheckedIn());
         cmbClass.setButtonCell(new ListCell() {
             @Override
             protected void updateItem(Object item, boolean empty) {
@@ -92,4 +93,9 @@ public class AttendanceDetailsController implements Initializable
     private void setStatsData() {
         lblTotal.setText(model.getTotalAttPercent()+"%");
     }
+    public void getAllCheckedIn()
+    {
+        model.getAllCheckedIn();
+    }
+    
 }

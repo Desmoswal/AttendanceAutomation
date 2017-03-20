@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.OnlineUsersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.OnlineUsersController">
    <children>
-      <TableView fx:id="tblOnline" prefHeight="489.0" prefWidth="304.0" stylesheets="@../../Attendance.css">
+      <TableView fx:id="tblOnline" prefHeight="489.0" prefWidth="400.0" stylesheets="@../../Attendance.css">
         <columns>
-          <TableColumn fx:id="colName" prefWidth="152.0" text="Name" />
-          <TableColumn fx:id="colEmail" prefWidth="152.0" text="Email" />
+          <TableColumn fx:id="colName" maxWidth="200.0" prefWidth="200.0" text="Name" />
+          <TableColumn fx:id="colEmail" maxWidth="200.0" prefWidth="200.0" text="Email" />
         </columns>
       </TableView>
+      <GridPane layoutX="424.0" layoutY="173.0" prefHeight="144.0" prefWidth="198.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField GridPane.rowIndex="1" />
+            <Label text="Search:" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <RadioButton mnemonicParsing="false" text="Name" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Email" textFill="WHITE" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

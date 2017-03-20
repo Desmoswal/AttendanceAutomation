@@ -87,4 +87,8 @@ public class AttendanceModel {
     public String getTotalAttPercent() {
         return attHan.getTotalAttPercent();
     }
+    public ArrayList<Schedule> getAllCheckedIn() 
+    {
+        return attHan.getAllCheckedIn();
+    }
 }

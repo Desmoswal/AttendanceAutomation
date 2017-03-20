@@ -251,4 +251,23 @@ public class AttendanceDetailsManager {
         }
         return null;
     }
+    public ArrayList<String> getSubjects() 
+    {
+        try(Connection con = conMan.getConnection())
+        {
+            String query =
+                   "select "
+                   + "[Subject].[Name] "
+                   + "from [Schedule],[Subject],[Class],[Student]  "
+                   + "where [Schedule].[Class] = [Class].[Id]  "
+                   + "and [Student].[Class] = [Class].[Id] "
+                   + "and [Subject].[Id] = [Schedule].[Subject] "
+                   + "and [Student].[Id] = 12 "
+                   + "group by [Subject].[Name] ";
+            PreparedStatement s = con.prepareStatement(query);
+        }catch(SQLException e) {
+            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 }

@@ -36,4 +36,10 @@ public class AttendanceDetailsHandler {
         DecimalFormat numberFormat = new DecimalFormat("#.#");
         return numberFormat.format(((float)attMan.getAllCheckedin().size() / (float)attMan.getAllSchedules().size())*100);
     }
+    
+    public ArrayList<Schedule> getAllCheckedIn() 
+    {
+        return attMan.getAllCheckedin();
+    }
 }
+
