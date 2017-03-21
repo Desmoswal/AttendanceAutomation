@@ -48,8 +48,9 @@ public class ScheduleHandler
     
     public String getTotalAttPercentForStudent(int studentid, int classid) {
         DecimalFormat numberFormat = new DecimalFormat("#.#");
+        int total =  this.getMissedSchedulesForStudent(studentid, classid).size() + this.getAllCheckedinForStudent(studentid, classid).size();
         return numberFormat.format(
-                ((float)daoSchedule.getAllCheckedinForStudent(studentid,classid).size() / (float)daoSchedule.getAllSchedulesForStudent(studentid, classid).size()) *100
+                ((float)this.getAllCheckedinForStudent(studentid,classid).size() / (float)total) *100
         );
     }
 }

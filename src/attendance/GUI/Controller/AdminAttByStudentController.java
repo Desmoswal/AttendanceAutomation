@@ -130,18 +130,18 @@ public class AdminAttByStudentController implements Initializable
             System.out.println("Selected Student ID: " + selected.getId());
         }
         //--only for test purposes, we just need to change the methods
-        int missed = model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size();
+        /*int missed = model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size();
         System.out.println("Missed Classes: "+ missed);
         
         int attended = model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size();
         System.out.println("Attended Classes: "+ attended);
         
-        int totalClasses = model.getAllSchedulesForStudent(selected.getId(), selected.getClassid()).size();
+        int totalClasses = missed + attended;
         System.out.println("Total classes: " + totalClasses);
         
-        float avgAtt = (float)attended / (float)totalClasses * 100 ;
+        float avgAtt = (float)attended / (float)totalClasses * 100 ;*/
         
-        lblStudAvgAtt.setText(""+avgAtt);
+        lblStudAvgAtt.setText(model.getTotalAttPercentForStudent(selected.getId(), selected.getClassid())+"%");
         lblStudAttCourses.setText(""+model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size());
         lblStudMissedCourses.setText(""+model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size());
         lblStudMostMissedWDay.setText(selected.getName());

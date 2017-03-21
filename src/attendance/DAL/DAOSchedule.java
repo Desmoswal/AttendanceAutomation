@@ -245,15 +245,16 @@ public class DAOSchedule extends SQLConnectionManager
                     + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
                     + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
                     
-                    + "from [Schedule],[Class],[Student],[Subject],[Teacher] " //needed tables
+                    + "from [Schedule],[Class],[Subject],[Teacher] " //needed tables
                     
                     //=====Table connections====
                     + "where [Schedule].[Class] = [Class].[Id] " //connecting classes, so given class id will be in schedules. see last line, where we provide data.
                     + "and [Schedule].[Teacher] = [Teacher].[Id] " //connecting teacher tables on teacher id. This will allow to display teacher's name on schedules
                     + "and [Schedule].[Subject] = [Subject].[Id] " //connectig subject tables on subject id. this will allow us to display subject name on schedules.
-                    + "and [Schedule].[Class] = [Class].[Id] " //connecting class tables on class id. this will allow us to show class's name.
-                    + "and [Teacher].[Id] = "+teacherid;
                     
+                    + "and [Teacher].[Id] = "+teacherid; //providing data
+                    
+            System.out.println(query);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             

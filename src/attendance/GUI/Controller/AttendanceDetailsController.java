@@ -146,11 +146,11 @@ public class AttendanceDetailsController implements Initializable
         model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid());
     }
 
-    /*@FXML
+    @FXML
     private void comboPickedCourse(ActionEvent event) {
         Subject selected = cmbCourse.getSelectionModel().getSelectedItem();
         System.out.println(selected);
         cmbCourse.getSelectionModel().select(selected);
-    }*/
+    }
     
 }
