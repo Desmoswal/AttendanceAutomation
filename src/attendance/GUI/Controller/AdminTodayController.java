@@ -77,17 +77,24 @@ public class AdminTodayController implements Initializable
             System.out.println("Selected Schedule: " + selected.getId());
         }
         
-        if(event.isPrimaryButtonDown() && event.getClickCount() == 2)
+        else if(event.isPrimaryButtonDown() && event.getClickCount() == 2)
         {
             try
             {
+                
+                selected = tblToday.getSelectionModel().getSelectedItem();
                 Stage primStage = (Stage) tblToday.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminCheckin.fxml"));
+                
+                AdminCheckinController.setThisSchedule(selected);
+                
                 Parent root = loader.load();
 
                 // Fetches controller from view
                 AdminCheckinController controller = loader.getController();
-                //controller.setTableItems(selected.getId());
+                System.out.println("selected for the controller: " + " classId: " + selected.getClassId() + ", Id: " + selected.getId());
+                controller.setTableItems(selected.getClassId());
+                controller.setLabels(selected.getClassId());
 
                 // Sets new stage as modal window
                 Stage stageView = new Stage();
