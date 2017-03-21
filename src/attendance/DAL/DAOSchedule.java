@@ -199,7 +199,7 @@ public class DAOSchedule extends SQLConnectionManager
                 + "where [Schedule].[Class] = [Class].[Id] " //connecting classes, so given class id will be in schedules. see last line, where we provide data.
                 + "and [Schedule].[Teacher] = [Teacher].[Id] " //connecting teacher tables on teacher id. This will allow to display teacher's name on schedules
                 + "and [Schedule].[Subject] = [Subject].[Id] " //connectig subject tables on subject id. this will allow us to display subject name on schedules.
-                + "and [Schedule].[Class] = [Class].[Id] " //connecting class tables on class id. this will allow us to show class's name.
+                + "and [Student].[Class] = [Class].[Id] " //connecting class tables on class id. this will allow us to show class's name.
                 
                 + "and [Student].[Id] = "+studentid+" and [Class].[Id] = "+classid; //providing student's data, so it will select rows with the actual student's id and his class.
         try(Connection con = super.getConnection()) {
@@ -212,7 +212,7 @@ public class DAOSchedule extends SQLConnectionManager
             while(rs.next()) {
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
-                if(endTime.after(now) && startTime.before(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
+                if(endTime.after(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
                     todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getInt("ClassId"),rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
                 }
             }
@@ -254,7 +254,6 @@ public class DAOSchedule extends SQLConnectionManager
                     
                     + "and [Teacher].[Id] = "+teacherid; //providing data
                     
-            System.out.println(query);
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -325,7 +324,6 @@ public class DAOSchedule extends SQLConnectionManager
                         }
                     }
                     con.close(); //finished!
-                    System.out.println(missed);
                     return missed; //returning the list with only schedules that are already ended and not checked in.
         }catch(SQLException e) {
             Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
@@ -456,7 +454,6 @@ public class DAOSchedule extends SQLConnectionManager
             Statement s = con.createStatement();
             
             ResultSet rs = s.executeQuery(query);
-            
             
             while(rs.next()) {
                 Timestamp startTime = rs.getTimestamp("StartTime");

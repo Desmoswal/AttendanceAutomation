@@ -97,33 +97,17 @@ public class AttendanceDetailsController implements Initializable
         colSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
         
-        /*cmbCourse.setCellFactory((ListView<Subject> subject) -> new ListCell<Subject>(){
+        cmbCourse.setCellFactory((ListView<Subject> list) -> new ListCell<Subject>(){
+            
             @Override
             protected void updateItem(Subject item, boolean empty) {
                 if (item == null || empty) {
-                    System.out.println("ÚRISTEN!!!");
+                    setGraphic(null);
                 } else {
                     setText(item.getName());
                 }
             }
         });
-        
-        cmbCourse.setConverter(new StringConverter<Subject>() {
-            @Override
-            public String toString(Subject subject) {
-                if(subject == null) {
-                    return null;
-                } else {
-                    return subject.getName();
-                }
-            }
-
-            @Override
-            public Subject fromString(String subjectName) {
-                return null;
-            }
-            
-        });*/
     }
     
     private void setTableItems() {
@@ -140,6 +124,7 @@ public class AttendanceDetailsController implements Initializable
             subjectnames.add(subject.getName());
         }*/
         cmbCourse.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(currentStudent.getId())));
+        System.out.println("cmb: "+FXCollections.observableArrayList(model.getSubjectsForStudent(currentStudent.getId())));
     }
     public void getAllCheckedIn()
     {

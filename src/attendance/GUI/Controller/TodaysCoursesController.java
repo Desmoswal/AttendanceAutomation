@@ -12,6 +12,7 @@ import attendance.DAL.SQLConnectionManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -134,6 +135,10 @@ public class TodaysCoursesController implements Initializable
      * Changes courses row color which are already checked in.
      */
     private void changeCheckedIn() {
+        List<Integer> checkedins = new ArrayList<>();
+        for (Schedule schedule : model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid())) {
+            checkedins.add(schedule.getId());
+        }
         tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
             AttendanceModel model = new AttendanceModel();
             @Override
@@ -143,7 +148,7 @@ public class TodaysCoursesController implements Initializable
                     setStyle("");
                 }
                 if(item != null) { //avoiding nullpointer exception
-                    if(model.getAllCheckedinForStudent(currentStudent.getId(),currentStudent.getClassid()).contains(item.getId()))
+                    if(checkedins.contains(item.getId()))
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
                 }
             }
