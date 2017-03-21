@@ -15,8 +15,11 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -148,26 +151,8 @@ public class AdminAttByStudentController implements Initializable
         lblStudAvgAtt.setText(model.getTotalAttPercentForStudent(selected.getId(), selected.getClassid())+"%");
         lblStudAttCourses.setText(""+model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size());
         lblStudMissedCourses.setText(""+model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size());
-        lblStudMostMissedWDay.setText(selected.getName());
+        lblStudMostMissedWDay.setText(model.getMostMissedDayOfWeekForStudent(selected.getId(), selected.getClassid()));
         
-        HashMap<Integer,Integer> hm = new HashMap<>();
-        for (Schedule schedule : model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid())) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(schedule.getStartTime());
-            int key = cal.get(Calendar.DAY_OF_WEEK);
-            if(hm.containsKey(key)) {
-                int value = hm.get(key);
-                hm.put(key,value+1);
-            } else {
-                hm.put(key, 1);
-            }
-        }
-        int max = 0;
-        for(int value : hm.values()) {
-            if(value > max) {
-                max = value;
-            }
-        }
         
         //--Only after combo box selection
         //lblStudAttPercentSelected.setText(selected.getName());

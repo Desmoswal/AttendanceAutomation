@@ -63,6 +63,25 @@ public class AttendanceModel {
         return dataHandler.getSubjectsForStudent(studentid);
     }
     
+    public String getMostMissedDayOfWeekForStudent(int studentid, int classid) {
+        return dataHandler.calculateMostMissedDayOfWeekForStudent(studentid, classid);
+    }
+    
+    public String getAvgAttForClass(int classid) {
+        return dataHandler.calculateAvgAttForClass(classid);
+    }
+    
+    public String getMostMissedCourseForClass(int classid) {
+        return dataHandler.calculateMostMissedCourseForClass(classid);
+    }
+    
+    public String getMostAttCourseForClass(int classid) {
+        return dataHandler.calculateMostAttCourseForClass(classid);
+    }
+    
+    public Student getMostMissedStudentForClass(int classid) {
+        return dataHandler.calculateMostMissedStudentForClass(classid);
+    }
     public int checkLogin(String uname, String pass) {
         return loginHandler.checkLogin(uname, pass);
     }
@@ -99,4 +118,5 @@ public class AttendanceModel {
     public ArrayList<Schedule> getAllSchedulesForStudent(int studentid, int classid) {
         return scheduleHandler.getAllSchedulesForStudent(studentid, classid);
     }
+    
 }

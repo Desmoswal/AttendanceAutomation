@@ -101,4 +101,27 @@ public class DataManager extends SQLConnectionManager
             System.err.println(sqle);
         }
     }
+    
+    public Student getStudent(int studentid) {
+        String query = "select Student.* From Student where Student.Id = "+studentid;
+        
+        try(Connection con = super.getConnection()) {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(query);
+            ArrayList<Student> student = new ArrayList<>();
+            //Student stud = null;
+            while(rs.next()) {
+                student.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
+                //stud = new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class"));
+            }
+            if(student.size() == 1) {
+                return student.get(0);
+            } /*else {
+                return stud;
+            }*/
+        }catch(SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }

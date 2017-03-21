@@ -77,10 +77,10 @@ public class AdminAttByClassController implements Initializable
 
             System.out.println("Selected Class: " + selected.getId() + " " + selected.getName());
 
-            lblAvgAttofClass.setText(selected.getName());
-            lblMostMissedCourse.setText(selected.getName());
-            lblMostAttendCourse.setText(selected.getName());
-            lblMostMissedStud.setText(selected.getName());
+            lblAvgAttofClass.setText(model.getAvgAttForClass(selected.getId())+"%");
+            lblMostMissedCourse.setText(model.getMostMissedCourseForClass(selected.getId()));
+            lblMostAttendCourse.setText(model.getMostAttCourseForClass(selected.getId()));
+            lblMostMissedStud.setText(model.getMostMissedStudentForClass(selected.getId()).getName());
             lblMostMissedStudCourse.setText(selected.getName());
             lblMostAttStud.setText(selected.getName());
             lblMostAttStudCourse.setText(selected.getName());
