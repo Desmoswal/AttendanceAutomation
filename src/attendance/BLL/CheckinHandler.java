@@ -44,4 +44,13 @@ public class CheckinHandler {
         chkMan.insertCheckin(student, course);
     }
     
+    public void deleteCheckin(Student student, Schedule schedule)
+    {
+        chkMan.deleteCheckin(student, schedule);
+    }
+    
+    public void adminCheckin(Student student, Schedule schedule)
+    {
+        chkMan.adminCheckin(student, schedule);
+    }
 }

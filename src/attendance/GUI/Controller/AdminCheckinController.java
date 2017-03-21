@@ -14,19 +14,32 @@ import java.util.List;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Stack;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 
 /**
  * FXML Controller class
@@ -77,10 +90,50 @@ public class AdminCheckinController implements Initializable
     @FXML
     private void pressedOnTable(MouseEvent event)
     {
-
+        Student selected = tblAttending.getSelectionModel().getSelectedItem();
+        
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem checkinItem = new MenuItem("Check-in");
+        contextMenu.getItems().add(checkinItem);
+        MenuItem deleteCheckinItem = new MenuItem("Delete Check-in");
+        contextMenu.getItems().add(deleteCheckinItem);
+        
+        tblAttending.setContextMenu(contextMenu);
+        
+        EventHandler checkinEvent = new EventHandler()
+        {
+            @Override
+            public void handle(Event event)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You checked in: " + selected.getName(), ButtonType.OK);
+                alert.setTitle("Title");
+                alert.setHeaderText("Header Text");
+                alert.show();
+                model.adminCheckin(selected, thisSchedule);
+                changeCheckedIn();
+                System.out.println("Check-in");
+            }
+        };
+        checkinItem.setOnAction(checkinEvent);
+        
+        EventHandler deleteCheckinEvent = new EventHandler()
+        {
+            @Override
+            public void handle(Event event)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Delete Checkin for: "+ selected.getName(), ButtonType.OK);
+                alert.setTitle("Title");
+                alert.setHeaderText("Header Text");
+                alert.show();
+                model.deleteCheckin(selected, thisSchedule);
+                changeCheckedIn();
+                System.out.println("Delete checkin");
+            }
+        };
+        
+        deleteCheckinItem.setOnAction(deleteCheckinEvent);
     }
 
-    @FXML
     public void setLabels(int classId)
     {
         lblClass.setText(model.getClasses().get(classId - 1).getName());
@@ -133,5 +186,8 @@ public class AdminCheckinController implements Initializable
         thisSchedule = schedule;
     }
     
-    
+   @FXML
+    private void editCheckin()
+    {
+    }
 }
