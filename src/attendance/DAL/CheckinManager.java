@@ -27,13 +27,13 @@ public class CheckinManager extends SQLConnectionManager {
      * @param student
      * @param course 
      */
-    public void insertCheckin(CurrentStudent student, Schedule course) {
-        String query = "insert into Checked_In(StudentId,SchedId) values ("+student.getId()+","+course.getId()+")";
+    public void insertCheckin(CurrentStudent student, Schedule schedule) {
+        String query = "insert into Checked_In(StudentId,SchedId) values ("+student.getId()+","+schedule.getId()+")";
         try(Connection con = super.getConnection()) {
             Statement st = con.createStatement();
             st.execute(query);
             
-            System.out.println("Check-in done for "+ student.getName() +" to "+ course.getSubject());
+            System.out.println("Check-in done for "+ student.getName() +" to "+ schedule.getSubject());
         } catch(SQLException e) {
             System.out.println(e);
         }
@@ -57,5 +57,31 @@ public class CheckinManager extends SQLConnectionManager {
         }
         
         return checkins;
+    }
+    
+    public void deleteCheckin(Student student, Schedule schedule) {
+        String query = "DELETE FROM Checked_In WHERE StudentId = "+student.getId()+" and SchedId = " + schedule.getId();
+        try(Connection con = super.getConnection()) {
+            Statement st = con.createStatement();
+            st.execute(query);
+            
+            System.out.println("Delete Check-in done for "+ student.getName() +" to "+ schedule.getSubject());
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+    }
+    /*
+    same as insert checkin, but this one uses Student instead of CurrentStudent, could be merged later
+    */
+    public void adminCheckin(Student student, Schedule schedule) {
+        String query = "insert into Checked_In(StudentId,SchedId) values ("+student.getId()+","+schedule.getId()+")";
+        try(Connection con = super.getConnection()) {
+            Statement st = con.createStatement();
+            st.execute(query);
+            
+            System.out.println("Check-in done for "+ student.getName() +" to "+ schedule.getSubject());
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
     }
 }

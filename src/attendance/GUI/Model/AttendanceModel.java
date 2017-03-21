@@ -99,4 +99,14 @@ public class AttendanceModel {
     public ArrayList<Schedule> getAllSchedulesForStudent(int studentid, int classid) {
         return scheduleHandler.getAllSchedulesForStudent(studentid, classid);
     }
+    
+    public void deleteCheckin(Student student, Schedule schedule)
+    {
+        checkinHandler.deleteCheckin(student, schedule);
+    }
+    
+    public void adminCheckin(Student student, Schedule schedule)
+    {
+        checkinHandler.adminCheckin(student, schedule);
+    }
 }

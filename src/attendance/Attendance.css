@@ -74,3 +74,16 @@
     -fx-background-color: transparent;
     -fx-text-fill: white;
 }
+
+.context-menu {
+  -fx-background-color: #aaa;
+  -fx-text-fill: white;
+}
+
+.menu-item .label {
+  -fx-text-fill: white;
+}
+
+.menu-item:focused .label {
+  -fx-text-fill: white;
+}
