@@ -82,18 +82,21 @@ public class DataManager extends SQLConnectionManager
      * Gets specific student from database, fills the local list. You can build and get this list by getStudentsByClass().
      */
     private void buildStudent(int classId) {
+        String query = "SELECT Student.* FROM Student where Student.Class = "+ classId;
         students = new ArrayList<>();
+        
         try(Connection con = super.getConnection())
         {
-            String query = "SELECT Student.* FROM Student where Student.Class = "+ classId;
+            
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
             while(rs.next())
             {
-                students.add(new Student(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),Integer.parseInt(rs.getString("Class"))));
+                students.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
             }
-            System.out.println();
+            
+            System.out.println("buildstudent runs");
             con.close();
         }
         catch(SQLException sqle)

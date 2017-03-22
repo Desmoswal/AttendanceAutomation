@@ -19,14 +19,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -90,6 +85,7 @@ public class AttendanceDetailsController implements Initializable
         setTableItems();
         setStatsData();
         setComboboxItems();
+        //setLabels(1002,2,2);
     }
     
     private void setTableProperties() {
@@ -97,10 +93,11 @@ public class AttendanceDetailsController implements Initializable
         colSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
         
-        cmbCourse.setCellFactory((ListView<Subject> list) -> new ListCell<Subject>(){
+        /*cmbCourse.setCellFactory((ListView<Subject> list) -> new ListCell<Subject>(){
             
             @Override
             protected void updateItem(Subject item, boolean empty) {
+                super.updateItem(item, empty);
                 if (item == null || empty) {
                     setGraphic(null);
                 } else {
@@ -108,6 +105,13 @@ public class AttendanceDetailsController implements Initializable
                 }
             }
         });
+        cmbCourse.valueProperty().addListener(new ChangeListener<Subject>(){
+
+            @Override
+            public void changed(ObservableValue<? extends Subject> observable, Subject oldValue, Subject newValue) {
+                System.out.println("WEEEE'" + newValue.getName());
+            }
+        });*/
     }
     
     private void setTableItems() {
@@ -134,8 +138,15 @@ public class AttendanceDetailsController implements Initializable
     @FXML
     private void comboPickedCourse(ActionEvent event) {
         Subject selected = cmbCourse.getSelectionModel().getSelectedItem();
-        System.out.println(selected);
-        cmbCourse.getSelectionModel().select(selected);
+        setLabels(currentStudent.getId(),currentStudent.getClassid(),selected.getId());
+        
     }
     
+    private void setLabels(int studentid, int classid, int subjectid) {
+        int attended = model.getSubjectCheckinForStudent(studentid, classid, subjectid).size();
+        int missed = model.getSubjectMissedForStudent(studentid, classid, subjectid).size();
+        
+        lblAttendance.setText(""+attended);
+        lblMissed.setText(""+missed);
+    }
 }

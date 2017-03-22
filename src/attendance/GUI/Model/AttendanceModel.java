@@ -119,6 +119,14 @@ public class AttendanceModel {
         return scheduleHandler.getAllSchedulesForStudent(studentid, classid);
     }
     
+    public ArrayList<Schedule> getSubjectCheckinForStudent(int studentid, int classid, int subjectid) {
+        return scheduleHandler.getSubjectCheckinForStudent(studentid, classid, subjectid);
+    }
+    
+    public ArrayList<Schedule> getSubjectMissedForStudent(int studentid, int classid, int subject) {
+        return scheduleHandler.getSubjectMissedForStudent(studentid, classid, subject);
+    }
+    
     public void deleteCheckin(Student student, Schedule schedule)
     {
         checkinHandler.deleteCheckin(student, schedule);

@@ -53,4 +53,12 @@ public class ScheduleHandler
                 ((float)this.getAllCheckedinForStudent(studentid,classid).size() / (float)total) *100
         );
     }
+    
+    public ArrayList<Schedule> getSubjectCheckinForStudent(int studentid, int classid, int subjectid) {
+        return daoSchedule.getSubjectCheckinForStudent(studentid, classid, subjectid);
+    }
+    
+    public ArrayList<Schedule> getSubjectMissedForStudent(int studentid, int classid, int subjectid) {
+        return daoSchedule.getSubjectMissedForStudent(studentid, classid, subjectid);
+    }
 }

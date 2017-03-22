@@ -469,4 +469,87 @@ public class DAOSchedule extends SQLConnectionManager
         }
         return null;
     }
+    
+    public ArrayList<Schedule> getSubjectCheckinForStudent(int studentid, int classid, int subjectid) {
+        String query = "select " //we want to have all data for the Schedule() constructor
+                    + "[Schedule].[Id],"
+                    + "[Schedule].[StartTime],"
+                    + "[Schedule].[EndTime],"
+                    + "[Class].[Id] as 'ClassId',"
+                    + "[Class].[Name] as 'ClassName'," //class name as string (see connections to know how we get this
+                    + "[Subject].[Name] as 'SubjectName'," //subject name as string, also connections for more info
+                    + "[Schedule].[Room],"
+                    + "[Teacher].[Monogram] as 'TeacherName' " //teacher name as string. see connections
+
+                    + "from [Schedule],[Class],[Subject],[Teacher],[Student],[Checked_In] " //needed tables...
+                    
+                    /*=======Connections======*/
+                    + "where [Class].[Id] = [Schedule].[Class] " //connecting Class table and Schedule table on class id. so you will have all classnames assigned by ids correctly.
+                    + "and [Subject].[Id] = [Schedule].[Subject] " //connecting Subject and Schedule table on subject id. so we can get subject name too
+                    + "and [Teacher].[Id] = [Schedule].[Teacher] " //connecting Teacher table to Schdule table. same thing as above.
+                    + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
+                    + "and [Checked_In].[StudentId] = [Student].[Id] "
+                    + "and [Checked_In].[SchedId] = [Schedule].[Id] "
+                    
+                    + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid+" and [Schedule].[Subject] = "+subjectid; //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
+        try(Connection con = super.getConnection()) {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(query);
+            
+            ArrayList<Schedule> list = new ArrayList<>();
+            while(rs.next()) {
+                Timestamp startTime = rs.getTimestamp("StartTime");
+                Timestamp endTime = rs.getTimestamp("EndTime");
+                list.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getInt("ClassId"),rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
+            }
+            con.close();
+            return list;
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public ArrayList<Schedule> getSubjectMissedForStudent(int studentid, int classid, int subjectid) {
+        String query = "select " //we want to have all data for the Schedule() constructor
+                    + "[Schedule].[Id],"
+                    + "[Schedule].[StartTime],"
+                    + "[Schedule].[EndTime],"
+                    + "[Class].[Id] as 'ClassId',"
+                    + "[Class].[Name] as 'ClassName'," //class name as string (see connections to know how we get this
+                    + "[Subject].[Name] as 'SubjectName'," //subject name as string, also connections for more info
+                    + "[Schedule].[Room],"
+                    + "[Teacher].[Name] as 'TeacherName' " //teacher name as string. see connections
+
+                    + "from [Schedule],[Class],[Subject],[Teacher],[Student] " //needed tables...
+                    
+                    /*=======Connections======*/
+                    + "where [Class].[Id] = [Schedule].[Class] " //connecting Class table and Schedule table on class id. so you will have all classnames assigned by ids correctly.
+                    + "and [Subject].[Id] = [Schedule].[Subject] " //connecting Subject and Schedule table on subject id. so we can get subject name too
+                    + "and [Teacher].[Id] = [Schedule].[Teacher] " //connecting Teacher table to Schdule table. same thing as above.
+                    + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
+                    
+                    + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid+" and [Schedule].[Subject] = "+subjectid+" " //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
+                    + "and [Schedule].[Id] not in " //here we filter the missed classes. we want to show the schedules only that are NOT IN the checked in table! so, we have to select all checkins but ONLY FOR the given student
+                        + "(select [Checked_In].[SchedId] " //we need only schedule ids as we are checking it above
+                        + "from [Checked_In] " //we need only Checked_In table for that.
+                        + "where [Checked_In].[StudentId] = "+studentid+")"; //we want checkins for only the given student.
+        try(Connection con = super.getConnection()) {
+            Statement s = con.createStatement();
+            
+            ResultSet rs = s.executeQuery(query);
+            
+            ArrayList<Schedule> list = new ArrayList<>();
+            while(rs.next()) {
+                Timestamp startTime = rs.getTimestamp("StartTime");
+                Timestamp endTime = rs.getTimestamp("EndTime");
+                list.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getInt("ClassId"),rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
+            }
+            con.close();
+            return list;
+        }catch(SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
