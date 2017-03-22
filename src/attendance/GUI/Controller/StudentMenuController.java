@@ -5,6 +5,8 @@
  */
 package attendance.GUI.Controller;
 
+import attendance.BE.CurrentStudent;
+import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,6 +35,10 @@ public class StudentMenuController implements Initializable
     private Button btnLogOut;
     
     private MainViewController parentCon;
+    
+    AttendanceModel model = new AttendanceModel();
+    
+    CurrentStudent currentStudent = CurrentStudent.getInstance();
 
     /**
      * Initializes the controller class.
@@ -75,6 +81,8 @@ public class StudentMenuController implements Initializable
                 break;
             case "btnLogOut":
                 //do logout
+                model.setOnline(currentStudent, 0);
+                System.out.println(currentStudent.getName() + " is now offline.");
                 System.exit(0);
                 break;
         }

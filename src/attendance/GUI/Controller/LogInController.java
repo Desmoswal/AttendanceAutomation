@@ -6,10 +6,12 @@
 package attendance.GUI.Controller;
 
 import attendance.GUI.Model.AttendanceModel;
+import attendance.BE.CurrentStudent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -41,6 +44,7 @@ public class LogInController implements Initializable
     private Button btnLogin;
 
     private AttendanceModel model = new AttendanceModel();
+    private CurrentStudent currentStudent = CurrentStudent.getInstance();
     private Alert alert;
     
     /**
@@ -87,6 +91,16 @@ public class LogInController implements Initializable
                 newStage.setMaxWidth(650);
                 newStage.show();
                 stage.close();
+                
+                newStage.setOnCloseRequest(new EventHandler<WindowEvent>()
+               {
+                   public void handle(WindowEvent we)
+                   {
+                       System.out.println("Stage is closing, setting user offline.");
+                       model.setOnline(currentStudent, 0);
+                       System.out.println(currentStudent.getName() + " is now offline.");
+                   }
+               });
                 
             } else if(loginCode == 10) {
                 //login status 10, teacher login successful

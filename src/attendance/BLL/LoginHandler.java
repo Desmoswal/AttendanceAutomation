@@ -11,6 +11,7 @@ import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.DAL.LoginManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 public class LoginHandler {
     
     private DataHandler dm = new DataHandler();
+    private LoginManager loginManager = new LoginManager();
     CurrentStudent currentStudent = CurrentStudent.getInstance();
     CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
@@ -52,7 +54,9 @@ public class LoginHandler {
                             currentStudent.setPassword(student.getPassword());
                             currentStudent.setEmail(student.getEmail());
                             currentStudent.setClassid(student.getClassid());
+                            loginManager.setOnline(currentStudent, 1);
                             System.out.println("Current Student Name: " + currentStudent.getName());
+                            System.out.println(currentStudent.getName() + " is now online.");
                             return 0; //return ok
                         } else {
                             return 2; //return invalid pass
@@ -87,5 +91,15 @@ public class LoginHandler {
         }
         
         return status; //return unknown error
+    }
+    
+    public void setOnline(CurrentStudent student, int state)
+    {
+        loginManager.setOnline(student, state);
+    }
+    
+    public ArrayList<Student> getOnlineStudents()
+    {
+        return loginManager.getOnlineStudents();
     }
 }

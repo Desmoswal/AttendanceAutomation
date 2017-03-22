@@ -48,7 +48,7 @@ public class OnlineUsersController implements Initializable
         setTableProperties();
         
         //Load students into tableview
-        tblOnline.setItems(FXCollections.observableArrayList(model.getStudents()));
+        tblOnline.setItems(FXCollections.observableArrayList(model.getOnlineStudents()));
     }    
     
         private void setTableProperties()

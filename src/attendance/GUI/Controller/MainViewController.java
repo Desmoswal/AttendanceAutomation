@@ -10,7 +10,6 @@ import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -101,7 +100,7 @@ public class MainViewController implements Initializable
             //we need the logger so we can see the actual error and not just "FXMLLoader error."
             Logger.getLogger(MainViewController.class.getName()).log(Level.SEVERE, null, ex);
         } 
-
+        
     }
     /**
      * Opens and loads fxml in the right side. This is used by menubuttons to load content.

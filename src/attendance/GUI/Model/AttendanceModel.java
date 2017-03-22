@@ -128,4 +128,14 @@ public class AttendanceModel {
     {
         checkinHandler.adminCheckin(student, schedule);
     }
+    
+    public void setOnline(CurrentStudent student, int state)
+    {
+        loginHandler.setOnline(student, state);
+    }
+    
+    public ArrayList<Student> getOnlineStudents()
+    {
+        return loginHandler.getOnlineStudents();
+    }
 }

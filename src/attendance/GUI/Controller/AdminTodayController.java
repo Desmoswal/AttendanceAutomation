@@ -57,8 +57,8 @@ public class AdminTodayController implements Initializable
     
     private void setTableProperties() {
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
-        colCourseName.setCellValueFactory(new PropertyValueFactory("name"));
-        colClass.setCellValueFactory(new PropertyValueFactory("classId"));
+        colCourseName.setCellValueFactory(new PropertyValueFactory("className"));
+        colClass.setCellValueFactory(new PropertyValueFactory("subject"));
         colRoom.setCellValueFactory(new PropertyValueFactory("room"));
     }
     
