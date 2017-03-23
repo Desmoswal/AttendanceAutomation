@@ -146,4 +146,9 @@ public class AttendanceModel {
     {
         return loginHandler.getOnlineStudents();
     }
+    
+    public String getTotalAttPercentForSubject(int studentid, int classid, int subjectid)
+    {
+        return scheduleHandler.getTotalAttPercentForSubject(studentid, classid, subjectid);
+    }
 }

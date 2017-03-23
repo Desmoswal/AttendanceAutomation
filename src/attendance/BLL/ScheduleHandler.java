@@ -61,4 +61,12 @@ public class ScheduleHandler
     public ArrayList<Schedule> getSubjectMissedForStudent(int studentid, int classid, int subjectid) {
         return daoSchedule.getSubjectMissedForStudent(studentid, classid, subjectid);
     }
+    
+    public String getTotalAttPercentForSubject(int studentid, int classid, int subjectid) {
+        DecimalFormat numberFormat = new DecimalFormat("#.#");
+        int total =  this.getSubjectMissedForStudent(studentid, classid, subjectid).size() + this.getSubjectCheckinForStudent(studentid, classid, subjectid).size();
+        return numberFormat.format(
+                ((float)this.getSubjectCheckinForStudent(studentid, classid, subjectid).size() / (float)total) *100
+        );
+    }
 }

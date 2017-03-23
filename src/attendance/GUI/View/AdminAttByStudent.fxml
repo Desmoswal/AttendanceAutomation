@@ -30,7 +30,7 @@
       <Label layoutX="273.0" layoutY="130.0" stylesheets="@../../Attendance.css" text="Missed courses:" />
       <Label layoutX="273.0" layoutY="235.0" stylesheets="@../../Attendance.css" text="Most missed day of week:" />
       <Separator layoutX="275.0" layoutY="265.0" prefHeight="8.0" prefWidth="253.0" />
-      <ComboBox fx:id="cmbStudClassSelect" layoutX="273.0" layoutY="290.0" prefWidth="150.0" promptText="Select a course..." styleClass="white-box" stylesheets="@../../Attendance.css" />
+      <ComboBox fx:id="cmbStudClassSelect" layoutX="273.0" layoutY="290.0" onAction="#comboPickedCourse" prefWidth="150.0" promptText="Select a course..." styleClass="white-box" stylesheets="@../../Attendance.css" />
       <Label layoutX="276.0" layoutY="330.0" stylesheets="@../../Attendance.css" text="Attendance of selected:" />
       <Label layoutX="277.0" layoutY="365.0" stylesheets="@../../Attendance.css" text="Attended of selected:" />
       <Label layoutX="278.0" layoutY="400.0" stylesheets="@../../Attendance.css" text="Missed of selected:" />

@@ -9,6 +9,7 @@ import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Class;
 import attendance.BE.CurrentTeacher;
+import attendance.BE.Subject;
 import attendance.DAL.AttendanceDetailsManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
@@ -22,6 +23,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -49,7 +51,7 @@ public class AdminAttByStudentController implements Initializable
     @FXML
     private TableColumn<Student, String> colStudent;
     @FXML
-    private ComboBox<?> cmbStudClassSelect;
+    private ComboBox<Subject> cmbStudClassSelect;
     @FXML
     private Label lblStudAvgAtt;
     @FXML
@@ -158,5 +160,24 @@ public class AdminAttByStudentController implements Initializable
         //lblStudAttPercentSelected.setText(selected.getName());
         //lblStudAttSelected.setText(selected.getName());
         //lblStudMissedSelected.setText(selected.getName());
+        cmbStudClassSelect.setItems(null);
+        cmbStudClassSelect.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(selected.getId())));
+    }
+    
+    @FXML
+    private void comboPickedCourse(ActionEvent event)
+    {
+        Subject selected = cmbStudClassSelect.getSelectionModel().getSelectedItem();
+        setLabels(tblStudents.getSelectionModel().getSelectedItem().getId(), tblClasses.getSelectionModel().getSelectedItem().getId(), selected.getId());
+    }
+    
+    private void setLabels(int studentid, int classid, int subjectid)
+    {
+        int attended = model.getSubjectCheckinForStudent(studentid, classid, subjectid).size();
+        int missed = model.getSubjectMissedForStudent(studentid, classid, subjectid).size();
+        
+        lblStudAttPercentSelected.setText(model.getTotalAttPercentForSubject(studentid, classid, subjectid) + "%");
+        lblStudAttSelected.setText(String.valueOf(attended));
+        lblStudMissedSelected.setText(String.valueOf(missed));
     }
 }

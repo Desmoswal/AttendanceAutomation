@@ -6,6 +6,7 @@
 package attendance.GUI.Controller;
 
 import attendance.BE.CurrentStudent;
+import attendance.BE.CurrentTeacher;
 import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;
@@ -45,7 +46,8 @@ public class MainViewController implements Initializable
     private AttendanceModel model = new AttendanceModel();
     private static UserType user = null;
     public static enum UserType {STUDENT,TEACHER};
-    private CurrentStudent cur = CurrentStudent.getInstance();
+    private CurrentStudent currentStudent = CurrentStudent.getInstance();
+    private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     private Date date = new Date();
     private String[] weekdays = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
     
@@ -59,7 +61,7 @@ public class MainViewController implements Initializable
         {     //loading sidebar menu depending on usertype
               if(user.equals(UserType.TEACHER))
               {
-                  lblName.setText(cur.getName());
+                  lblName.setText(currentTeacher.getName());
                   int y = date.getYear()+1900;
                   int m = date.getMonth()+1;
                   lblDate.setText(weekdays[date.getDay()]+", "+date.getDate()+"-"+m+"-"+y);
@@ -77,7 +79,7 @@ public class MainViewController implements Initializable
               }
               else if(user.equals(UserType.STUDENT))
               {
-                  lblName.setText(cur.getName());
+                  lblName.setText(currentStudent.getName());
                   int y = date.getYear()+1900;
                   int m = date.getMonth()+1;
                   lblDate.setText(weekdays[date.getDay()]+", "+date.getDate()+"-"+m+"-"+y);
