@@ -40,7 +40,7 @@ public class DataManager extends SQLConnectionManager
                 classes.add(new Class(r.getInt("Id"), r.getString("Name")));
             }
         } catch(SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, e);
         }
         
         return classes;
@@ -48,7 +48,27 @@ public class DataManager extends SQLConnectionManager
     
     public ArrayList<Student> getStudentsByClass(int classId)
     {
-        buildStudent(classId);
+        String query = "SELECT Student.* FROM Student where Student.Class = "+ classId;
+        students = new ArrayList<>();
+        
+        try(Connection con = super.getConnection())
+        {
+            
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next())
+            {
+                students.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
+            }
+            
+            System.out.println("buildstudent runs");
+            con.close();
+        }
+        catch(SQLException sqle)
+        {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, sqle);
+        }
         return students;
     }
     
@@ -76,33 +96,6 @@ public class DataManager extends SQLConnectionManager
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
-    }
-    
-    /**
-     * Gets specific student from database, fills the local list. You can build and get this list by getStudentsByClass().
-     */
-    private void buildStudent(int classId) {
-        String query = "SELECT Student.* FROM Student where Student.Class = "+ classId;
-        students = new ArrayList<>();
-        
-        try(Connection con = super.getConnection())
-        {
-            
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            
-            while(rs.next())
-            {
-                students.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
-            }
-            
-            System.out.println("buildstudent runs");
-            con.close();
-        }
-        catch(SQLException sqle)
-        {
-            System.err.println(sqle);
-        }
     }
     
     public Student getStudent(int studentid) {

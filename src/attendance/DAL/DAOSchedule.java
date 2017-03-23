@@ -256,15 +256,17 @@ public class DAOSchedule extends SQLConnectionManager
                     
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
+            Date now = new Date();
             ArrayList<Schedule> schedules = new ArrayList<>();
             while(rs.next())
             {
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
-                schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
-                
+                if(now.before(endTime)) {
+                    schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
+                }
             }
+            con.close();
             return schedules;
             
         }

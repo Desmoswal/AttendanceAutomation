@@ -82,6 +82,19 @@ public class AttendanceModel {
     public Student getMostMissedStudentForClass(int classid) {
         return dataHandler.calculateMostMissedStudentForClass(classid);
     }
+    
+    public String getMostMissedStudentsMostMissedCourse(int classid) {
+        return dataHandler.calculateMostMissedStudentsMostMissedCourse(classid);
+    }
+    
+    public Student getMostAttStudentForClass(int classid) {
+        return dataHandler.calculateMostAttStudentForClass(classid);
+    }
+    
+    public String getMostAttStudentMostAttCourse(int classid) {
+        return dataHandler.calculateMostAttStudentsMostAttCourse(classid);
+    }
+    
     public int checkLogin(String uname, String pass) {
         return loginHandler.checkLogin(uname, pass);
     }

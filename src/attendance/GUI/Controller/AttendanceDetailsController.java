@@ -92,26 +92,6 @@ public class AttendanceDetailsController implements Initializable
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
         colSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
-        
-        /*cmbCourse.setCellFactory((ListView<Subject> list) -> new ListCell<Subject>(){
-            
-            @Override
-            protected void updateItem(Subject item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setGraphic(null);
-                } else {
-                    setText(item.getName());
-                }
-            }
-        });
-        cmbCourse.valueProperty().addListener(new ChangeListener<Subject>(){
-
-            @Override
-            public void changed(ObservableValue<? extends Subject> observable, Subject oldValue, Subject newValue) {
-                System.out.println("WEEEE'" + newValue.getName());
-            }
-        });*/
     }
     
     private void setTableItems() {

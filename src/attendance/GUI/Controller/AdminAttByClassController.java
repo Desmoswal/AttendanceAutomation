@@ -6,6 +6,7 @@
 package attendance.GUI.Controller;
 
 import attendance.BE.Class;
+import attendance.BE.Student;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -81,9 +82,15 @@ public class AdminAttByClassController implements Initializable
             lblMostMissedCourse.setText(model.getMostMissedCourseForClass(selected.getId()));
             lblMostAttendCourse.setText(model.getMostAttCourseForClass(selected.getId()));
             lblMostMissedStud.setText(model.getMostMissedStudentForClass(selected.getId()).getName());
-            lblMostMissedStudCourse.setText(selected.getName());
-            lblMostAttStud.setText(selected.getName());
-            lblMostAttStudCourse.setText(selected.getName());
+            lblMostMissedStudCourse.setText(model.getMostMissedStudentsMostMissedCourse(selected.getId()));
+            Student student = model.getMostAttStudentForClass(selected.getId());
+            if(student != null) {
+                lblMostAttStud.setText(student.getName());
+            } else {
+                lblMostAttStud.setText("No attendance data for class.");
+            }
+            
+            lblMostAttStudCourse.setText(model.getMostAttStudentMostAttCourse(selected.getId()));
         }
     }
 
