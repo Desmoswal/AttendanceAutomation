@@ -157,10 +157,11 @@ public class AdminAttByStudentController implements Initializable
         
         
         //--Only after combo box selection
-        //lblStudAttPercentSelected.setText(selected.getName());
-        //lblStudAttSelected.setText(selected.getName());
-        //lblStudMissedSelected.setText(selected.getName());
-        cmbStudClassSelect.setItems(null);
+        lblStudAttPercentSelected.setText("");
+        lblStudAttSelected.setText("");
+        lblStudMissedSelected.setText("");
+        
+        cmbStudClassSelect.getSelectionModel().clearSelection();
         cmbStudClassSelect.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(selected.getId())));
     }
     
@@ -168,7 +169,11 @@ public class AdminAttByStudentController implements Initializable
     private void comboPickedCourse(ActionEvent event)
     {
         Subject selected = cmbStudClassSelect.getSelectionModel().getSelectedItem();
-        setLabels(tblStudents.getSelectionModel().getSelectedItem().getId(), tblClasses.getSelectionModel().getSelectedItem().getId(), selected.getId());
+        if(selected != null)
+        {
+            setLabels(tblStudents.getSelectionModel().getSelectedItem().getId(), tblClasses.getSelectionModel().getSelectedItem().getId(), selected.getId());
+        }
+        
     }
     
     private void setLabels(int studentid, int classid, int subjectid)
