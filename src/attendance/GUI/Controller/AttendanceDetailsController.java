@@ -10,8 +10,12 @@ import attendance.BE.Schedule;
 import attendance.BE.Subject;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,6 +96,7 @@ public class AttendanceDetailsController implements Initializable
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
         colSubject.setCellValueFactory(new PropertyValueFactory("subject"));
         colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
+        colDate.setCellValueFactory(new PropertyValueFactory("date"));
     }
     
     private void setTableItems() {

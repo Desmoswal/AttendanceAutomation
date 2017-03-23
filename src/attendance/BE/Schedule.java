@@ -25,6 +25,7 @@ public class Schedule
     String subject;
     
     public String time;
+    String date;
 
     public Schedule(int id, Date startTime, Date endTime, int classId, String className, String subject, String room, String teacher)
     {
@@ -38,6 +39,9 @@ public class Schedule
         this.classId = classId;
         
         this.time = startTime.getHours() + ":" + startTime.getMinutes() + " - " + endTime.getHours() + ":" + endTime.getMinutes();
+        int mon = startTime.getMonth()+1;
+        int year = startTime.getYear()+1900;
+        this.date = startTime.getDate()+"-"+mon+"-"+year;
        
     }
 
@@ -83,4 +87,9 @@ public class Schedule
     public int getClassId() {
         return classId;
     }
+
+    public String getDate() {
+        return date;
+    }
+    
 }

@@ -50,8 +50,6 @@ public class TodaysCoursesController implements Initializable
     @FXML
     private TableColumn<Schedule, String> colRoom;
     @FXML
-    private ComboBox<?> cmbCourse;
-    @FXML
     private Button btnCheckIn;
     
     private Schedule selected = null;
@@ -66,7 +64,7 @@ public class TodaysCoursesController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         //sets combobox's color
-        cmbCourse.setButtonCell(new ListCell()
+        /*cmbCourse.setButtonCell(new ListCell()
         {
             @Override
             protected void updateItem(Object item, boolean empty)
@@ -82,7 +80,7 @@ public class TodaysCoursesController implements Initializable
                     setText(item.toString());
                 }
             }
-        });
+        });*/
         
         setTableProperties();
         setTableItems();
@@ -94,7 +92,7 @@ public class TodaysCoursesController implements Initializable
      */
     private void setTableProperties() {
         colTime.setCellValueFactory(new PropertyValueFactory("time"));
-        colClass.setCellValueFactory(new PropertyValueFactory("classId"));
+        colClass.setCellValueFactory(new PropertyValueFactory("className"));
         colTeacher.setCellValueFactory(new PropertyValueFactory("teacher"));
         colRoom.setCellValueFactory(new PropertyValueFactory("room"));
     }
