@@ -94,7 +94,7 @@ public class AdminTodayController implements Initializable
                 AdminCheckinController controller = loader.getController();
                 System.out.println("selected for the controller: " + " classId: " + selected.getClassId() + ", Id: " + selected.getId());
                 controller.setTableItems(selected.getClassId());
-                controller.setLabels(selected.getClassId());
+                controller.setLabels(selected.getClassId(), selected.getSubject());
 
                 // Sets new stage as modal window
                 Stage stageView = new Stage();

@@ -134,10 +134,10 @@ public class AdminCheckinController implements Initializable
         deleteCheckinItem.setOnAction(deleteCheckinEvent);
     }
 
-    public void setLabels(int classId)
+    public void setLabels(int classId, String subject)
     {
         lblClass.setText(model.getClasses().get(classId - 1).getName());
-        lblCourse.setText("");
+        lblCourse.setText(subject);
     }
 
     @FXML
