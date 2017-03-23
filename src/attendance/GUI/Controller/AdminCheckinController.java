@@ -105,9 +105,9 @@ public class AdminCheckinController implements Initializable
             @Override
             public void handle(Event event)
             {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "You checked in: " + selected.getName(), ButtonType.OK);
-                alert.setTitle("Title");
-                alert.setHeaderText("Header Text");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Modifying Checkin Successful", ButtonType.OK);
+                alert.setTitle("Modified checkin");
+                alert.setHeaderText("Checked in: " + selected.getName() + " for " + thisSchedule.getSubject());
                 alert.show();
                 model.adminCheckin(selected, thisSchedule);
                 changeCheckedIn();
@@ -121,9 +121,9 @@ public class AdminCheckinController implements Initializable
             @Override
             public void handle(Event event)
             {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Delete Checkin for: "+ selected.getName(), ButtonType.OK);
-                alert.setTitle("Title");
-                alert.setHeaderText("Header Text");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Modifying Checkin Successful", ButtonType.OK);
+                alert.setTitle("Modified checkin");
+                alert.setHeaderText("Deleted checkin for: " + selected.getName());
                 alert.show();
                 model.deleteCheckin(selected, thisSchedule);
                 changeCheckedIn();
