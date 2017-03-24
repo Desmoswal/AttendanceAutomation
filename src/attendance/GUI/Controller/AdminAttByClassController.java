@@ -87,7 +87,7 @@ public class AdminAttByClassController implements Initializable
             if(student != null) {
                 lblMostAttStud.setText(student.getName());
             } else {
-                lblMostAttStud.setText("No attendance data for class.");
+                lblMostAttStud.setText("No attendance data.");
             }
             
             lblMostAttStudCourse.setText(model.getMostAttStudentMostAttCourse(selected.getId()));

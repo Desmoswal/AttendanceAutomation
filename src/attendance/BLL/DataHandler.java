@@ -245,7 +245,7 @@ public class DataHandler {
             }
             return currentSubject;
         } else {
-            return "No attendance data for class.";
+            return "No attendance data.";
         }
 
     }

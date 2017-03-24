@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByClassController">
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminAttByClassController">
    <children>
       <TableView fx:id="tblClasses" layoutX="14.0" layoutY="47.0" onMousePressed="#pressedOnTableClasses" prefHeight="361.0" prefWidth="105.0" stylesheets="@../../Attendance.css">
         <columns>
@@ -21,7 +21,7 @@
       </TableView>
       <Label layoutX="141.0" layoutY="51.0" stylesheets="@../../Attendance.css" text="Average attendance of whole class:" />
       <Separator layoutX="141.0" layoutY="84.0" prefHeight="17.0" prefWidth="345.0" />
-      <Label fx:id="lblAvgAttofClass" layoutX="539.0" layoutY="51.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblAvgAttofClass" layoutX="539.0" layoutY="51.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
       <Label layoutX="142.0" layoutY="110.0" stylesheets="@../../Attendance.css" text="Most missed course:" />
       <Label layoutX="142.0" layoutY="145.0" stylesheets="@../../Attendance.css" text="Most attended course:" />
       <Separator layoutX="141.0" layoutY="181.0" prefHeight="17.0" prefWidth="345.0" />
@@ -30,12 +30,12 @@
       <Separator layoutX="141.0" layoutY="305.0" prefHeight="17.0" prefWidth="345.0" />
       <Label layoutX="138.0" layoutY="350.0" stylesheets="@../../Attendance.css" text="Most attended student:" />
       <Label layoutX="139.0" layoutY="385.0" stylesheets="@../../Attendance.css" text="Most attended student's most attended course:" />
-      <Label fx:id="lblMostMissedCourse" layoutX="539.0" layoutY="110.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
-      <Label fx:id="lblMostAttendCourse" layoutX="539.0" layoutY="145.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
-      <Label fx:id="lblMostMissedStud" layoutX="539.0" layoutY="220.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
-      <Label fx:id="lblMostMissedStudCourse" layoutX="539.0" layoutY="255.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
-      <Label fx:id="lblMostAttStud" layoutX="539.0" layoutY="350.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
-      <Label fx:id="lblMostAttStudCourse" layoutX="539.0" layoutY="385.0" prefHeight="21.0" prefWidth="87.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostMissedCourse" layoutX="539.0" layoutY="110.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostAttendCourse" layoutX="539.0" layoutY="145.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostMissedStud" layoutX="539.0" layoutY="220.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostMissedStudCourse" layoutX="539.0" layoutY="255.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostAttStud" layoutX="539.0" layoutY="350.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
+      <Label fx:id="lblMostAttStudCourse" layoutX="539.0" layoutY="385.0" prefHeight="21.0" prefWidth="177.0" stylesheets="@../../Attendance.css" />
       <GridPane layoutX="12.0" prefHeight="44.0" prefWidth="613.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="199.0" />
