@@ -137,6 +137,18 @@ public class AdminAttByStudentController implements Initializable
             selected = tblStudents.getSelectionModel().getSelectedItem();
             System.out.println("Selected Student: " + selected.getName());
             System.out.println("Selected Student ID: " + selected.getId());
+            lblStudAvgAtt.setText(model.getTotalAttPercentForStudent(selected.getId(), selected.getClassid())+"%");
+            lblStudAttCourses.setText(""+model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size());
+            lblStudMissedCourses.setText(""+model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size());
+            lblStudMostMissedWDay.setText(model.getMostMissedDayOfWeekForStudent(selected.getId(), selected.getClassid()));
+            
+            //--Only after combo box selection
+            lblStudAttPercentSelected.setText("");
+            lblStudAttSelected.setText("");
+            lblStudMissedSelected.setText("");
+        
+            cmbStudClassSelect.getSelectionModel().clearSelection();
+            cmbStudClassSelect.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(selected.getId())));
         }
         //--only for test purposes, we just need to change the methods
         /*int missed = model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size();
@@ -150,19 +162,6 @@ public class AdminAttByStudentController implements Initializable
         
         float avgAtt = (float)attended / (float)totalClasses * 100 ;*/
         
-        lblStudAvgAtt.setText(model.getTotalAttPercentForStudent(selected.getId(), selected.getClassid())+"%");
-        lblStudAttCourses.setText(""+model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size());
-        lblStudMissedCourses.setText(""+model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size());
-        lblStudMostMissedWDay.setText(model.getMostMissedDayOfWeekForStudent(selected.getId(), selected.getClassid()));
-        
-        
-        //--Only after combo box selection
-        lblStudAttPercentSelected.setText("");
-        lblStudAttSelected.setText("");
-        lblStudMissedSelected.setText("");
-        
-        cmbStudClassSelect.getSelectionModel().clearSelection();
-        cmbStudClassSelect.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(selected.getId())));
     }
     
     @FXML
