@@ -29,8 +29,13 @@ public class AdminMenuController implements Initializable
     private Button btnStatsStudent;
     @FXML
     private Button btnStatsClass;
+    @FXML
+    private Button btnLogOut;
+    @FXML
+    private Button btnEditSchedule;
     
     private MainViewController parentCon;
+
 
     /**
      * Initializes the controller class.
@@ -54,6 +59,17 @@ public class AdminMenuController implements Initializable
                 try {
                     parentCon.openItem("/attendance/GUI/View/AdminToday.fxml");
                 } catch(IOException e) {
+                    System.out.println("FXML probably not found");
+                    System.out.println(e);
+                }
+                break;
+                
+            case "btnEditSchedule":
+                try
+                {
+                    parentCon.openItem("/attendance/GUI/View/AdminEditSchedule.fxml");
+                } catch(IOException e)
+                {
                     System.out.println("FXML probably not found");
                     System.out.println(e);
                 }

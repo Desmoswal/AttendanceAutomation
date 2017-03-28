@@ -20,6 +20,7 @@
    </columnConstraints>
    <rowConstraints>
             <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="50.0" />
+            <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="50.0" />
       <RowConstraints percentHeight="17.0" prefHeight="50.0" />
       <RowConstraints />
       <RowConstraints percentHeight="17.0" prefHeight="0.0" />
@@ -28,7 +29,7 @@
             <RowConstraints maxHeight="200.0" minHeight="10.0" percentHeight="32.0" prefHeight="188.0" />
    </rowConstraints>
    <children>
-      <AnchorPane prefHeight="50.0" prefWidth="195.0" GridPane.rowIndex="1">
+      <AnchorPane prefHeight="50.0" prefWidth="195.0" GridPane.rowIndex="2">
                <children>
             <Button fx:id="btnStatsClass" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Statistics by class">
                      <font>
@@ -40,7 +41,7 @@
                      </styleClass></Button>
                </children>
       </AnchorPane>
-      <AnchorPane prefHeight="211.0" prefWidth="195.0" GridPane.rowIndex="5">
+      <AnchorPane prefHeight="211.0" prefWidth="195.0" GridPane.rowIndex="6">
                <children>
                   <Button fx:id="btnLogOut" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Log out">
                      <font>
@@ -53,7 +54,7 @@
                   </Button>
                </children>
       </AnchorPane>
-      <AnchorPane prefHeight="69.0" prefWidth="195.0" GridPane.rowIndex="4">
+      <AnchorPane prefHeight="69.0" prefWidth="195.0" GridPane.rowIndex="5">
                <children>
             <Button fx:id="btnOnline" layoutX="13.0" layoutY="16.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Online users">
                      <font>
@@ -65,7 +66,7 @@
                      </styleClass></Button>
                </children>
       </AnchorPane>
-      <AnchorPane prefHeight="50.0" prefWidth="195.0" GridPane.rowIndex="3">
+      <AnchorPane prefHeight="50.0" prefWidth="195.0" GridPane.rowIndex="4">
                <children>
             <Button fx:id="btnStatsStudent" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="180.0" stylesheets="@../../Attendance.css" text="Statistics by student">
                      <font>
@@ -77,12 +78,21 @@
                      </styleClass></Button>
                </children>
       </AnchorPane>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="7">
                <image>
                   <Image url="@../../EASV.png" />
                </image>
             </ImageView>
-      <Button fx:id="btnTodays" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Today's courses">
+      <Button fx:id="btnEditSchedule" layoutX="13.0" layoutY="15.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Edit schedule" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="menubutton" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnTodays" layoutX="23.0" layoutY="84.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Today's courses">
                <font>
                   <Font size="16.0" />
                </font>

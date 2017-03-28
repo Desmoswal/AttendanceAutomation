@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="300.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="attendance.GUI.Controller.AdminEditSchedulePopupController">
+    <stylesheets>
+        <URL value="@/attendance/Attendance.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="114.0" layoutY="26.0" stylesheets="@../../Attendance.css" text="Edit Schedule" />
+      <TextField layoutX="112.0" layoutY="83.0" stylesheets="@../../Attendance.css" />
+      <TextField layoutX="112.0" layoutY="138.0" stylesheets="@../../Attendance.css" />
+      <TextField layoutX="112.0" layoutY="193.0" stylesheets="@../../Attendance.css" />
+      <Label layoutX="54.0" layoutY="87.0" stylesheets="@../../Attendance.css" text="Time:" />
+      <Label layoutX="54.0" layoutY="142.0" stylesheets="@../../Attendance.css" text="Course:" />
+      <Label layoutX="54.0" layoutY="197.0" stylesheets="@../../Attendance.css" text="Room:" />
+      <RadioButton layoutX="6.0" layoutY="241.0" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Cancelled course" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </RadioButton>
+      <Button layoutX="161.0" layoutY="237.0" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Ok" />
+   </children>
+</AnchorPane>

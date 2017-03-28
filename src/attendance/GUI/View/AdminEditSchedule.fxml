@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="450.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminEditScheduleController">
+    <stylesheets>
+        <URL value="@/attendance/Attendance.css" />
+    </stylesheets>
+   <children>
+      <TableView fx:id="tblEdit" layoutX="99.0" layoutY="40.0" onMousePressed="#pressedOnTable" prefHeight="332.0" prefWidth="300.0" stylesheets="@../../Attendance.css" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0">
+        <columns>
+          <TableColumn fx:id="colTime" prefWidth="100.0" text="Time" />
+            <TableColumn fx:id="colCourse" prefWidth="100.0" text="Course" />
+            <TableColumn fx:id="colRoom" prefWidth="100.0" text="Room" />
+        </columns>
+      </TableView>
+      <Label layoutX="164.0" layoutY="14.0" prefHeight="21.0" prefWidth="122.0" stylesheets="@../../Attendance.css" text="Current Schedule" />
+      <Label layoutX="107.0" layoutY="384.0" stylesheets="@../../Attendance.css" text="Double click on a course to edit it" />
+   </children>
+</AnchorPane>

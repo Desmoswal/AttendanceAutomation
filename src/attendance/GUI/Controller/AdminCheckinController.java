@@ -63,8 +63,14 @@ public class AdminCheckinController implements Initializable
     private AttendanceModel model = new AttendanceModel();
     private LinkedList<Student> checkinList;
     private LinkedList<CheckBox> checkinboxes = new LinkedList<>();
+    
+    Student selected = null;
 
     private static Schedule thisSchedule;
+    @FXML
+    private Button btnCheckIn;
+    @FXML
+    private Button btnDelete;
 
     /**
      * Initializes the controller class.
@@ -90,7 +96,7 @@ public class AdminCheckinController implements Initializable
     @FXML
     private void pressedOnTable(MouseEvent event)
     {
-        Student selected = tblAttending.getSelectionModel().getSelectedItem();
+        selected = tblAttending.getSelectionModel().getSelectedItem();
         
         ContextMenu contextMenu = new ContextMenu();
         MenuItem checkinItem = new MenuItem("Check-in");
@@ -105,10 +111,6 @@ public class AdminCheckinController implements Initializable
             @Override
             public void handle(Event event)
             {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Modifying Checkin Successful", ButtonType.OK);
-                alert.setTitle("Modified checkin");
-                alert.setHeaderText("Checked in: " + selected.getName() + " for " + thisSchedule.getSubject());
-                alert.show();
                 model.adminCheckin(selected, thisSchedule);
                 changeCheckedIn();
                 System.out.println("Check-in");
@@ -120,11 +122,7 @@ public class AdminCheckinController implements Initializable
         {
             @Override
             public void handle(Event event)
-            {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Modifying Checkin Successful", ButtonType.OK);
-                alert.setTitle("Modified checkin");
-                alert.setHeaderText("Deleted checkin for: " + selected.getName());
-                alert.show();
+            {   
                 model.deleteCheckin(selected, thisSchedule);
                 changeCheckedIn();
                 System.out.println("Delete checkin");
@@ -187,7 +185,18 @@ public class AdminCheckinController implements Initializable
     }
     
    @FXML
-    private void editCheckin()
+    private void checkinButtonPressed(ActionEvent event)
     {
+        model.adminCheckin(selected, thisSchedule);
+        changeCheckedIn();
+        System.out.println("Admin checkin for: " + selected.getName());
+    } 
+
+    @FXML
+    private void deleteButtonPressed(ActionEvent event)
+    {
+        model.deleteCheckin(selected, thisSchedule);
+        changeCheckedIn();
+        System.out.println("Admin delete for: " + selected.getName());
     }
 }
