@@ -67,7 +67,7 @@ public class AdminTodayController implements Initializable
         tblToday.setItems(FXCollections.observableArrayList(model.getSchedulesForTeacher(currentTeacher.getId())));
     }
     
-     @FXML
+    @FXML
     private void pressedOnTable(MouseEvent event) {
         Schedule selected = null;
         

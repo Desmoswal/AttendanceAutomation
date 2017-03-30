@@ -34,6 +34,11 @@ public class ScheduleHandler
         return daoSchedule.getSchedulesForTeacher(teacherid);
     }
     
+    public ArrayList<Schedule> getAllSchedulesForTeacher(int teacherid)
+    {
+        return daoSchedule.getAllSchedulesForTeacher(teacherid);
+    }
+    
     public ArrayList<Schedule> getMissedSchedulesForStudent(int studentid,int classid) {
         return daoSchedule.getMissedSchedulesForStudent(studentid, classid);
     }

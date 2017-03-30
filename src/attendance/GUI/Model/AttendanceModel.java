@@ -120,6 +120,11 @@ public class AttendanceModel {
         return scheduleHandler.getSchedulesForTeacher(teacherid);
     }
     
+    public ArrayList<Schedule> getAllSchedulesForTeacher(int teacherid)
+    {
+        return scheduleHandler.getAllSchedulesForTeacher(teacherid);
+    }
+    
     public String getTotalAttPercentForStudent(int studentid, int classid) {
         return scheduleHandler.getTotalAttPercentForStudent(studentid, classid);
     }

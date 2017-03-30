@@ -91,5 +91,51 @@ public class Schedule
     public String getDate() {
         return date;
     }
+
+    public void setClassId(int classId)
+    {
+        this.classId = classId;
+    }
+
+    public void setStartTime(Date startTime)
+    {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime)
+    {
+        this.endTime = endTime;
+    }
+
+    public void setClassName(String className)
+    {
+        this.className = className;
+    }
+
+    public void setTeacher(String teacher)
+    {
+        this.teacher = teacher;
+    }
+
+    public void setRoom(String room)
+    {
+        this.room = room;
+    }
+
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
+    }
+
+    public void setTime(String time)
+    {
+        this.time = time;
+    }
+
+    public void setDate(String date)
+    {
+        this.date = date;
+    }
+    
     
 }
