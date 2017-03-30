@@ -23,6 +23,7 @@ public class Schedule
     String teacher;
     String room;
     String subject;
+    boolean canceled = false;
     
     public String time;
     String date;
@@ -38,7 +39,23 @@ public class Schedule
         this.subject = subject;
         this.classId = classId;
         
-        this.time = startTime.getHours() + ":" + startTime.getMinutes() + " - " + endTime.getHours() + ":" + endTime.getMinutes();
+        String startHours = "" + startTime.getHours();
+        String startMinutes = "" + startTime.getMinutes();
+        String endHours = "" +endTime.getHours();
+        String endMinutes = "" +endTime.getMinutes();
+        if(startHours.length() == 1) {
+            startHours = "0" + startHours;
+        }
+        if(startMinutes.length() == 1) {
+            startMinutes = "0" + startMinutes;
+        }
+        if(endHours.length() == 1) {
+            endHours = "0" +endHours;
+        }
+        if(endMinutes.length() == 1) {
+            endMinutes = "0" + endMinutes;
+        }
+        this.time = startHours + ":" + startMinutes + " - " + endHours + ":" + endMinutes;
         int mon = startTime.getMonth()+1;
         int year = startTime.getYear()+1900;
         this.date = startTime.getDate()+"-"+mon+"-"+year;
@@ -137,5 +154,12 @@ public class Schedule
         this.date = date;
     }
     
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
     
 }

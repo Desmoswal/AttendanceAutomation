@@ -9,17 +9,8 @@ package attendance.BE;
  *
  * @author Desmoswal
  */
-public class User
-{
-    private boolean admin;
+public abstract class User {
     
-    public User(boolean admin)
-    {
-        this.admin = admin;
-    }
-    
-    public boolean isAdmin()
-    {
-        return admin;
-    }
+    protected abstract void setTeacher(int id, String name, String monogram, String email, String password);
+    protected abstract void setStudent(int id, String name, String username, String password, String email, int classid);
 }

@@ -50,7 +50,7 @@ public class DAOSchedule extends SQLConnectionManager
         try(Connection con = super.getConnection())
         {
             String sqlCommand =
-            "INSERT INTO Schedule(Id, StartTime, EndTime, Subject, Class, Room, Teacher) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO Schedule(Id, StartTime, EndTime, Subject, Class, Room, Teacher) VALUES(?, ?, ?, ?, ?, ?, ?, 0)";
             PreparedStatement pstat = con.prepareStatement(sqlCommand);
             pstat.setInt(1, id);
             pstat.setString(2, startTime);
@@ -101,12 +101,12 @@ public class DAOSchedule extends SQLConnectionManager
      * @param teacher 
      */
     public void updateSchedule(
-            int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher)
+            int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
     {
         try(Connection con = super.getConnection())
         {
             String sqlQuery =
-            "UPDATE Schedule SET Id=?, StartTime=?, EndTime=?, Subject=?, Class=?, Room=?, Teacher=? WHERE id=?";
+            "UPDATE Schedule SET Id=?, StartTime=?, EndTime=?, Subject=?, Class=?, Room=?, Teacher=?, Canceled=? WHERE id=?";
             PreparedStatement pstmt =
                con.prepareStatement(sqlQuery);
             
@@ -117,6 +117,7 @@ public class DAOSchedule extends SQLConnectionManager
             pstmt.setInt(5, classId);
             pstmt.setString(6, room);
             pstmt.setInt(7, teacher);
+            pstmt.setInt(8, canceled);
             
             pstmt.execute();
             
@@ -152,6 +153,7 @@ public class DAOSchedule extends SQLConnectionManager
                     
                     + "where Class.Id = Schedule.Class "
                     + "and Teacher.Id = Schedule.Teacher "
+                    + "and Schedule.Canceled = 0 "
                     + "and Subject.Id = Schedule.Subject and Class.Id = "+classid;
             
                     
@@ -192,7 +194,8 @@ public class DAOSchedule extends SQLConnectionManager
                 + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
                 + "[Schedule].[Room]," //schedule's classroom
                 + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
-                + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
+                + "[Class].[Name] as 'ClassName'," //class name (like CS2016B) (string! not int! see in connections!)
+                + "[Schedule].[Canceled] "
                 
                 + "from [Schedule],[Class],[Student],[Subject],[Teacher] " //needed tables
                 //=====Table connections====
@@ -213,7 +216,9 @@ public class DAOSchedule extends SQLConnectionManager
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
                 if(endTime.after(now)) { //comparing time. see details in AttendanceDetailsManager.getMissedSchedules()
-                    todaysScheds.add(new Schedule(rs.getInt("Id"),startTime,endTime,rs.getInt("ClassId"),rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName")));
+                    Schedule sc = new Schedule(rs.getInt("Id"),startTime,endTime,rs.getInt("ClassId"),rs.getString("ClassName"),rs.getString("SubjectName"),rs.getString("Room"),rs.getString("TeacherName"));
+                    sc.setCanceled(rs.getBoolean("Canceled"));
+                    todaysScheds.add(sc);
                 }
             }
             con.close();
@@ -243,7 +248,8 @@ public class DAOSchedule extends SQLConnectionManager
                     + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
                     + "[Schedule].[Room]," //schedule's classroom
                     + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
-                    + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
+                    + "[Class].[Name] as 'ClassName'," //class name (like CS2016B) (string! not int! see in connections!)
+                    + "[Schedule].[Canceled] "
                     
                     + "from [Schedule],[Class],[Subject],[Teacher] " //needed tables
                     
@@ -263,7 +269,9 @@ public class DAOSchedule extends SQLConnectionManager
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
                 if(now.before(endTime)) {
-                    schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
+                    Schedule sc = new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName"));
+                    sc.setCanceled(rs.getBoolean("Canceled"));
+                    schedules.add(sc);
                 }
             }
             con.close();
@@ -303,6 +311,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "and [Subject].[Id] = [Schedule].[Subject] " //connecting Subject and Schedule table on subject id. so we can get subject name too
                     + "and [Teacher].[Id] = [Schedule].[Teacher] " //connecting Teacher table to Schdule table. same thing as above.
                     + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Class].[Id] = ? and [Student].[Id] = ? " //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
                     + "and [Schedule].[Id] not in " //here we filter the missed classes. we want to show the schedules only that are NOT IN the checked in table! so, we have to select all checkins but ONLY FOR the given student
@@ -349,6 +358,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "where [Checked_In].[StudentId] = [Student].[Id] "
                     + "and [Schedule].[Class] = [Class].[Id] "
                     + "and [Checked_In].[SchedId] = [Schedule].[Id] " //make connections with tables
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Student].[Id] = ? "; //give student data
             PreparedStatement s = con.prepareStatement(getCheckInSchedulesForStudent);
@@ -401,6 +411,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "and [Subject].[Id] = [Schedule].[Subject] " //connecting Subject and Schedule table on subject id. so we can get subject name too
                     + "and [Teacher].[Id] = [Schedule].[Teacher] " //connecting Teacher table to Schdule table. same thing as above.
                     + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid; //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
             
@@ -451,6 +462,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
                     + "and [Checked_In].[StudentId] = [Student].[Id] "
                     + "and [Checked_In].[SchedId] = [Schedule].[Id] "
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid; //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
             Statement s = con.createStatement();
@@ -492,6 +504,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
                     + "and [Checked_In].[StudentId] = [Student].[Id] "
                     + "and [Checked_In].[SchedId] = [Schedule].[Id] "
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid+" and [Schedule].[Subject] = "+subjectid; //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
         try(Connection con = super.getConnection()) {
@@ -530,6 +543,7 @@ public class DAOSchedule extends SQLConnectionManager
                     + "and [Subject].[Id] = [Schedule].[Subject] " //connecting Subject and Schedule table on subject id. so we can get subject name too
                     + "and [Teacher].[Id] = [Schedule].[Teacher] " //connecting Teacher table to Schdule table. same thing as above.
                     + "and [Student].[Class] = [Schedule].[Class] " //connecting Schedule and Student table on CLASS ID. therefore we get all schedules assigned to a student's class. in other words, we get the lessons only for the given student's class.
+                    + "and [Schedule].[Canceled] = 0 "
                     
                     + "and [Class].[Id] = "+classid+" and [Student].[Id] = "+studentid+" and [Schedule].[Subject] = "+subjectid+" " //provide info. we give the student id here so the query will 'filter' results for only the given student id. giving class id is not necessary as we connected Student->Class->Schedule tables, but it's for safety reasons...
                     + "and [Schedule].[Id] not in " //here we filter the missed classes. we want to show the schedules only that are NOT IN the checked in table! so, we have to select all checkins but ONLY FOR the given student
@@ -553,5 +567,56 @@ public class DAOSchedule extends SQLConnectionManager
             System.out.println(e);
         }
         return null;
+    }
+    
+    /**
+     * Gets ALL schedules for a specified teacher
+     * @param teacherid
+     * @return 
+     */
+    public ArrayList<Schedule> getAllSchedulesForTeacher(int teacherid)
+    {
+        try(Connection con = super.getConnection())
+        {
+            //System.out.println(currentStudent.getClassid());
+            String query = 
+                    "select " //selecting columns. only these columns will be available in the result. select * would give us a mess, as it would display ALL columns from ALL the 4 tables we connected.
+                    + "[Schedule].[Id]," //schedule's id
+                    + "[Schedule].[StartTime]," //schedule's startime
+                    + "[Schedule].[EndTime]," //schedule's endtime
+                    + "[Schedule].[Class] as 'ClassId'," //class id (this is an int!!!)
+                    + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
+                    + "[Schedule].[Room]," //schedule's classroom
+                    + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
+                    + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
+                    
+                    + "from [Schedule],[Class],[Subject],[Teacher] " //needed tables
+                    
+                    //=====Table connections====
+                    + "where [Schedule].[Class] = [Class].[Id] " //connecting classes, so given class id will be in schedules. see last line, where we provide data.
+                    + "and [Schedule].[Teacher] = [Teacher].[Id] " //connecting teacher tables on teacher id. This will allow to display teacher's name on schedules
+                    + "and [Schedule].[Subject] = [Subject].[Id] " //connectig subject tables on subject id. this will allow us to display subject name on schedules.
+                    
+                    + "and [Teacher].[Id] = "+teacherid; //providing data
+                    
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
+            ArrayList<Schedule> schedules = new ArrayList<>();
+            while(rs.next())
+            {
+                Timestamp startTime = rs.getTimestamp("StartTime");
+                Timestamp endTime = rs.getTimestamp("EndTime");
+                    schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
+            }
+            con.close();
+            return schedules;
+            
+        }
+        catch(SQLException sqle)
+        {
+            System.err.println(sqle);
+            return null;
+        }
     }
 }
