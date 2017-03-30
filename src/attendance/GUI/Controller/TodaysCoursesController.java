@@ -56,6 +56,7 @@ public class TodaysCoursesController implements Initializable
     private CurrentStudent currentStudent = CurrentStudent.getInstance();
     private AttendanceModel model = new AttendanceModel();
     private boolean checkedin = false;
+    List<Integer> checkedinIds = new ArrayList<>();
 
     /**
      * Initializes the controller class.
@@ -82,6 +83,7 @@ public class TodaysCoursesController implements Initializable
             }
         });*/
         
+        updateCheckedInIds();
         setTableProperties();
         setTableItems();
         changeCheckedIn();
@@ -112,6 +114,7 @@ public class TodaysCoursesController implements Initializable
     private void pressedOnTable(MouseEvent event) {
         if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
             selected = tblCourse.getSelectionModel().getSelectedItem();
+            changeCheckinButton(selected);
         }
     }
     
@@ -119,8 +122,11 @@ public class TodaysCoursesController implements Initializable
     private void pressedCheckin(ActionEvent event) {
         if(selected != null) {
             model.doCheckin(currentStudent,selected);
+            changeCheckinButton(selected);
         }
+        updateCheckedInIds();
         changeCheckedIn();
+        
     }
     
     //just in case....
@@ -142,16 +148,30 @@ public class TodaysCoursesController implements Initializable
                     setStyle("");
                 }
                 if(item != null) { //avoiding nullpointer exception
-                    List<Integer> checkedins = new ArrayList<>();
-                    for (Schedule schedule : model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid())) {
-                            checkedins.add(schedule.getId());
-                    }
-                    if(checkedins.contains(item.getId()))
+                    if(checkedinIds.contains(item.getId()))
                     {
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
                     }
+                    if(item.isCanceled()) {
+                        setStyle("-fx-background-color:rgba(255, 0, 0, 0.5);");
+                    }
+                    
                 }
             }
         });
+    }
+    
+    private void updateCheckedInIds() {
+        for (Schedule schedule : model.getAllCheckedinForStudent(currentStudent.getId(), currentStudent.getClassid())) {
+                checkedinIds.add(schedule.getId());
+        }
+    }
+    
+    private void changeCheckinButton(Schedule selected) {
+        if(selected.isCanceled() || checkedinIds.contains(selected.getId())) {
+            btnCheckIn.setDisable(true);
+        } else {
+            btnCheckIn.setDisable(false);
+        }
     }
 }
