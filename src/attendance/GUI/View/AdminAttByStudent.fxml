@@ -46,29 +46,24 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="110.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="117.0" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="280.0" minWidth="3.0" prefWidth="103.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="177.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="117.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="133.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="163.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label layoutX="135.0" layoutY="22.0" prefHeight="21.0" prefWidth="110.0" stylesheets="@../../Attendance.css" text="Select student" GridPane.columnIndex="1">
-               <font>
-                  <Font name="System Italic" size="16.0" />
-               </font>
-            </Label>
             <Label layoutX="19.0" layoutY="22.0" prefHeight="21.0" prefWidth="195.0" stylesheets="@../../Attendance.css" text="Select class">
                <font>
                   <Font name="System Italic" size="16.0" />
                </font>
             </Label>
-            <TextField prefHeight="25.0" prefWidth="164.0" GridPane.columnIndex="3">
-               <GridPane.margin>
-                  <Insets left="5.0" right="5.0" />
-               </GridPane.margin>
-            </TextField>
-            <Label layoutX="523.0" layoutY="105.0" prefHeight="21.0" prefWidth="57.0" stylesheets="@../../Attendance.css" text="Search:" GridPane.columnIndex="2">
+            <Label layoutX="135.0" layoutY="22.0" prefHeight="21.0" prefWidth="110.0" stylesheets="@../../Attendance.css" text="Select student" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Italic" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="523.0" layoutY="105.0" prefHeight="21.0" prefWidth="57.0" stylesheets="@../../Attendance.css" text="Search" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -76,7 +71,12 @@
                   <Insets right="15.0" />
                </GridPane.margin>
             </Label>
-            <ComboBox prefWidth="150.0" promptText="Class" GridPane.columnIndex="4">
+            <TextField fx:id="txtSearch" onKeyReleased="#search" prefHeight="25.0" prefWidth="164.0" promptText="Start typing the name" GridPane.columnIndex="4">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </TextField>
+            <ComboBox fx:id="cmbSearchBox" onAction="#setSearchType" prefHeight="25.0" prefWidth="138.0" promptText="...for what..." GridPane.columnIndex="3">
                <GridPane.margin>
                   <Insets left="5.0" right="5.0" />
                </GridPane.margin>

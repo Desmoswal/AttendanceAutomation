@@ -17,6 +17,8 @@ import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataHandler;
 import attendance.BLL.LoginHandler;
 import attendance.BLL.ScheduleHandler;
+import attendance.BLL.SearchHandler;
+import attendance.BLL.SearchHandler.SearchType;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +31,10 @@ public class AttendanceModel {
     
     private DataHandler dataHandler = new DataHandler();
     private LoginHandler loginHandler = new LoginHandler();
+    private SearchHandler searchHandler = new SearchHandler();
     private CheckinHandler checkinHandler = new CheckinHandler();
     private ScheduleHandler scheduleHandler = new ScheduleHandler();
+    
     
 
     public ArrayList<Checkin> getCheckins() {
@@ -184,5 +188,13 @@ public class AttendanceModel {
     public void deleteSchedule(int scheduleId)
     {
         scheduleHandler.deleteSchedule(scheduleId);
+    }
+    
+    public ArrayList<Student> searchStudent(String word, List<Student> inWhat, SearchType type) {
+        return (ArrayList)searchHandler.searchStudent(word, inWhat, type);
+    }
+    
+    public ArrayList<Class> searchClass(String word, List<Class> inWhat, SearchType type) {
+        return (ArrayList)searchHandler.searchClass(word, inWhat, type);
     }
 }
