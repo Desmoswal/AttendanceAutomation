@@ -9,6 +9,7 @@ import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.DAL.DAOSchedule;
+import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,20 @@ public class ScheduleHandler
         return numberFormat.format(
                 ((float)this.getSubjectCheckinForStudent(studentid, classid, subjectid).size() / (float)total) *100
         );
+    }
+    
+    public void addSchedule(String startTime, String endTime, int subject, int classId, String room, int teacher)
+    {
+        daoSchedule.addSchedule(startTime, endTime, subject, classId, room, teacher);
+    }
+    
+    public void updateSchedule(int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
+    {
+        daoSchedule.updateSchedule(id, startTime, endTime, subject, classId, room, teacher, canceled);
+    }
+    
+    public void deleteSchedule(int scheduleId)
+    {
+        daoSchedule.deleteSchedule(scheduleId);
     }
 }

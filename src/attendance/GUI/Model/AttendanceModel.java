@@ -17,6 +17,7 @@ import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataHandler;
 import attendance.BLL.LoginHandler;
 import attendance.BLL.ScheduleHandler;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,5 +169,20 @@ public class AttendanceModel {
     public String getTotalAttPercentForSubject(int studentid, int classid, int subjectid)
     {
         return scheduleHandler.getTotalAttPercentForSubject(studentid, classid, subjectid);
+    }
+    
+    public void addSchedule(String startTime, String endTime, int subject, int classId, String room, int teacher)
+    {
+        scheduleHandler.addSchedule(startTime, endTime, subject, classId, room, teacher);
+    }
+    
+    public void updateSchedule(int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
+    {
+        scheduleHandler.updateSchedule(id, startTime, endTime, subject, classId, room, teacher, canceled);
+    }
+    
+    public void deleteSchedule(int scheduleId)
+    {
+        scheduleHandler.deleteSchedule(scheduleId);
     }
 }

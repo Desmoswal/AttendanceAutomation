@@ -45,20 +45,19 @@ public class DAOSchedule extends SQLConnectionManager
      * @param room
      * @param teacher 
      */
-    public void addSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher)
+    public void addSchedule(String startTime, String endTime, int subject, int classId, String room, int teacher)
     {
         try(Connection con = super.getConnection())
         {
             String sqlCommand =
-            "INSERT INTO Schedule(Id, StartTime, EndTime, Subject, Class, Room, Teacher) VALUES(?, ?, ?, ?, ?, ?, ?, 0)";
+            "INSERT into Schedule(StartTime,EndTime,Subject,Class,Room,Teacher,Canceled) values (?, ?, ?, ?, ?, ?, 0)";
             PreparedStatement pstat = con.prepareStatement(sqlCommand);
-            pstat.setInt(1, id);
-            pstat.setString(2, startTime);
-            pstat.setString(3, endTime);
-            pstat.setInt(4, subject);
-            pstat.setInt(5, classId);
-            pstat.setString(6, room);
-            pstat.setInt(7, teacher);
+            pstat.setString(1, startTime);
+            pstat.setString(2, endTime);
+            pstat.setInt(3, subject);
+            pstat.setInt(4, classId);
+            pstat.setString(5, room);
+            pstat.setInt(6, teacher);
             pstat.executeUpdate();
         }
         catch (SQLException sqle)
@@ -91,7 +90,7 @@ public class DAOSchedule extends SQLConnectionManager
     }
     
     /**
-     * Modified a schedule in the database.
+     * Modify a schedule in the database.
      * @param id
      * @param startTime
      * @param endTime
@@ -128,7 +127,7 @@ public class DAOSchedule extends SQLConnectionManager
         }
         
     }
-    
+       
     /**
      * Gets all schedules for a specified class.
      * @param classid
@@ -601,7 +600,6 @@ public class DAOSchedule extends SQLConnectionManager
                     
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            
             ArrayList<Schedule> schedules = new ArrayList<>();
             while(rs.next())
             {
