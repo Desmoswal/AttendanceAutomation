@@ -39,6 +39,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
@@ -226,7 +227,7 @@ public class AdminAttByStudentController implements Initializable
     @FXML
     private void search(KeyEvent event)
     {
-        if(searchtype != null) {
+        if(searchtype != null && (event.getCode().isLetterKey() || event.getCode().isDigitKey() || (!txtSearch.getText().isEmpty() && event.getCode() == KeyCode.BACK_SPACE))) {
             if(searchtype == SearchType.CLASS) {
                 //System.out.println(model.searchClass(txtSearch.getText(),searchtype));
                 tblClasses.setItems(FXCollections.observableArrayList(model.searchClass(txtSearch.getText(), model.getClasses(), searchtype)));
