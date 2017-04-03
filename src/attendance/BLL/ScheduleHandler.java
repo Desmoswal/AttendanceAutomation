@@ -81,7 +81,7 @@ public class ScheduleHandler
         daoSchedule.addSchedule(startTime, endTime, subject, classId, room, teacher);
     }
     
-    public void updateSchedule(int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
+    public void updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled)
     {
         daoSchedule.updateSchedule(id, startTime, endTime, subject, classId, room, teacher, canceled);
     }

@@ -30,4 +30,9 @@ public class Class
     {
         return name;
     }
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

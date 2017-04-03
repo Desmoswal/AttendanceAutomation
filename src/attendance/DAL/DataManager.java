@@ -120,4 +120,25 @@ public class DataManager extends SQLConnectionManager
         }
         return null;
     }
+    
+    public ArrayList<Subject> getAllSubjects()
+    {
+        String query =
+                "select * from Subject";
+        try(Connection con = super.getConnection()) {
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery(query);
+            
+            ArrayList<Subject> subjects = new ArrayList<>();
+            while(rs.next()) {
+                subjects.add(new Subject(rs.getInt("Id"),rs.getString("Name")));
+            }
+            
+            con.close();
+            return subjects;
+        }catch(SQLException e) {
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 }

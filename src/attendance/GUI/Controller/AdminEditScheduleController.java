@@ -76,8 +76,6 @@ public class AdminEditScheduleController implements Initializable
             int month = value.getValue().getStartTime().getMonth()+1;
             int year = value.getValue().getStartTime().getYear()+1900;
             date.set(year+" - " + month+ " - "+ value.getValue().getStartTime().getDate()+"");
-            System.out.println(value.getValue().getStartTime()+" ----------- 1a564d86qw65d4a8s9d");
-            System.out.println(date);
             return  date;
             
         });
@@ -87,7 +85,7 @@ public class AdminEditScheduleController implements Initializable
         colRoom.setCellValueFactory(new PropertyValueFactory("room"));
     }
     
-    private void setTableItems()
+    public void setTableItems()
     {
         tblEdit.setItems(FXCollections.observableArrayList(model.getAllSchedulesForTeacher(currentTeacher.getId())));
     } 
@@ -121,7 +119,7 @@ public class AdminEditScheduleController implements Initializable
                 System.out.println("selected for the controller: " + " classId: " + selected.getClassId() + ", Id: " + selected.getId());
                 //controller.setTableItems(selected.getClassId());
                 //controller.setLabels(selected.getClassId(), selected.getSubject());
-                controller.setText();
+                //controller.setDateText();
                 controller.setCurrentTeacher(currentTeacher);
                 // Sets new stage as modal window
                 Stage stageView = new Stage();
@@ -140,22 +138,20 @@ public class AdminEditScheduleController implements Initializable
 
         }
     }
-    
-    public void refreshTable()
-    {
-        tblEdit.refresh();
-    }
 
     @FXML
     private void onAddButtonPressed(ActionEvent event)
     {
+        selected = null;
+        
         try
             {
                 
                 Stage primStage = (Stage) tblEdit.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminEditSchedulePopup.fxml"));
                 
-                
+                AdminEditSchedulePopupController.setThisSchedule(selected);
+                AdminEditSchedulePopupController.setIsNew(true);
                 Parent root = loader.load();
 
                 // Fetches controller from view
@@ -164,7 +160,7 @@ public class AdminEditScheduleController implements Initializable
                 //System.out.println("selected for the controller: " + " classId: " + selected.getClassId() + ", Id: " + selected.getId());
                 //controller.setTableItems(selected.getClassId());
                 //controller.setLabels(selected.getClassId(), selected.getSubject());
-                //controller.setText();
+                //controller.setDateText();
                 controller.setCurrentTeacher(currentTeacher);
                 // Sets new stage as modal window
                 Stage stageView = new Stage();
@@ -198,6 +194,7 @@ public class AdminEditScheduleController implements Initializable
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/attendance/GUI/View/AdminEditSchedulePopup.fxml"));
                 
                 AdminEditSchedulePopupController.setThisSchedule(selected);
+                AdminEditSchedulePopupController.setIsNew(false);
                 
                 Parent root = loader.load();
 
@@ -207,7 +204,7 @@ public class AdminEditScheduleController implements Initializable
                 System.out.println("selected for the controller: " + " classId: " + selected.getClassId() + ", Id: " + selected.getId());
                 //controller.setTableItems(selected.getClassId());
                 //controller.setLabels(selected.getClassId(), selected.getSubject());
-                controller.setText();
+                //controller.setDateText();
                 controller.setCurrentTeacher(currentTeacher);
                 // Sets new stage as modal window
                 Stage stageView = new Stage();
@@ -232,6 +229,8 @@ public class AdminEditScheduleController implements Initializable
         selected = tblEdit.getSelectionModel().getSelectedItem();
         
         model.deleteSchedule(selected.getId());
+        
+        setTableItems();
         
         System.out.println("Deleted schedule: " + selected.getId());
     }
