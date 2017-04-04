@@ -51,7 +51,7 @@ public class LoginManager extends SQLConnectionManager
             {
                 students.add(new Student(Integer.parseInt(rs.getString("Id")),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),Integer.parseInt(rs.getString("Class"))));
             }
-            System.out.println();
+            System.out.println("buildstudent54946149846154978");
             con.close();
         }
         catch(SQLException sqle)

@@ -10,6 +10,7 @@ import attendance.BE.CurrentTeacher;
 import attendance.BE.Schedule;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,7 +21,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -226,11 +230,28 @@ public class AdminEditScheduleController implements Initializable
     @FXML
     private void onDeleteButtonPressed(ActionEvent event)
     {
-        selected = tblEdit.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(AlertType.CONFIRMATION);
         
-        model.deleteSchedule(selected.getId());
+        alert.setTitle("Confirm your action");
+        alert.setHeaderText("You are going to delete this schedule: \n"+selected.getSubject()+", on " + selected.getDate() + ", for " + selected.getClassName());
+        alert.setContentText("Do you really want to delete this schedule?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            selected = tblEdit.getSelectionModel().getSelectedItem();
+
+             model.deleteSchedule(selected.getId());
+
+            setTableItems();  
+        } 
         
-        setTableItems();
+        else 
+        {
+            setTableItems();
+        }
+        
+        
         
         System.out.println("Deleted schedule: " + selected.getId());
     }

@@ -37,7 +37,7 @@ public class CheckinHandler {
     }
     
     public void unCheck(User user) {
-        
+        System.out.println("buildstudent runs");
     }
     
     public void doCheckin(CurrentStudent student,Schedule course) {

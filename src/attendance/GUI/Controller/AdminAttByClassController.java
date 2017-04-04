@@ -78,12 +78,12 @@ public class AdminAttByClassController implements Initializable
 
             System.out.println("Selected Class: " + selected.getId() + " " + selected.getName());
 
-            lblAvgAttofClass.setText(model.getAvgAttForClass(selected.getId())+"%");
-            lblMostMissedCourse.setText(model.getMostMissedCourseForClass(selected.getId()));
-            lblMostAttendCourse.setText(model.getMostAttCourseForClass(selected.getId()));
-            lblMostMissedStud.setText(model.getMostMissedStudentForClass(selected.getId()).getName());
-            lblMostMissedStudCourse.setText(model.getMostMissedStudentsMostMissedCourse(selected.getId()));
-            Student student = model.getMostAttStudentForClass(selected.getId());
+            lblAvgAttofClass.setText(model.getAvgAttForClass(selected.getId())+"%");//3,48 sec
+            lblMostMissedCourse.setText(model.getMostMissedCourseForClass(selected.getId()));//1,93 sec
+            lblMostAttendCourse.setText(model.getMostAttCourseForClass(selected.getId()));//1,98 sec
+            lblMostMissedStud.setText(model.getMostMissedStudentForClass(selected.getId()).getName());//2,02 sec
+            lblMostMissedStudCourse.setText(model.getMostMissedStudentsMostMissedCourse(selected.getId()));//2 sec
+            Student student = model.getMostAttStudentForClass(selected.getId());//2 sec
             if(student != null) {
                 lblMostAttStud.setText(student.getName());
             } else {

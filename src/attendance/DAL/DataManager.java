@@ -61,8 +61,6 @@ public class DataManager extends SQLConnectionManager
             {
                 students.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
             }
-            
-            System.out.println("buildstudent runs");
             con.close();
         }
         catch(SQLException sqle)

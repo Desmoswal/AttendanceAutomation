@@ -157,7 +157,16 @@ public class AdminEditSchedulePopupController implements Initializable
         txtRoom.setText(thisSchedule.getRoom());
         
         cmbCourse.getSelectionModel().select(thisSchedule.getClassId()-1);
-        //cmbSubject.getSelectionModel().select(thisSchedule.getSubject());
+        
+        for(int i = 0; i < cmbSubject.getItems().size(); i++)
+        {
+            Subject subject = cmbSubject.getItems().get(i);
+            if(thisSchedule.getSubject().equals(subject.getName()))
+            {
+                cmbSubject.getSelectionModel().select(subject);
+                System.out.println("Subject match, "+ subject.getName()+ " selected in comboBox");
+            }
+        }
     }
     
     public void getText()
