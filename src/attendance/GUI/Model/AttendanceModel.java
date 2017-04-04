@@ -180,7 +180,7 @@ public class AttendanceModel {
         scheduleHandler.addSchedule(startTime, endTime, subject, classId, room, teacher);
     }
     
-    public void updateSchedule(int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
+    public void updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled)
     {
         scheduleHandler.updateSchedule(id, startTime, endTime, subject, classId, room, teacher, canceled);
     }
@@ -190,13 +190,10 @@ public class AttendanceModel {
         scheduleHandler.deleteSchedule(scheduleId);
     }
     
-    /*public ArrayList<Student> searchStudent(String word, List<Student> inWhat, SearchType type) {
-        return (ArrayList)searchHandler.searchStudent(word, inWhat, type);
+    public ArrayList<Subject> getAllSubjects()
+    {
+        return dataHandler.getAllSubjects();
     }
-    
-    public ArrayList<Class> searchClass(String word, List<Class> inWhat, SearchType type) {
-        return (ArrayList)searchHandler.searchClass(word, inWhat, type);
-    }*/
     
     public <T> List<T> doSearch(String word, List<T> inWhat, SearchType type) {
         return searchHandler.search(word, inWhat, type);

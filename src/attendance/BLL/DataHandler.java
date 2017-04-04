@@ -249,4 +249,9 @@ public class DataHandler {
         }
 
     }
+    
+    public ArrayList<Subject> getAllSubjects()
+    {
+        return dataManager.getAllSubjects();
+    }
 }

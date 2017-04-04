@@ -100,24 +100,23 @@ public class DAOSchedule extends SQLConnectionManager
      * @param teacher 
      */
     public void updateSchedule(
-            int id, Time startTime, Time endTime, int subject, int classId, String room, int teacher, int canceled)
+            int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled)
     {
         try(Connection con = super.getConnection())
         {
             String sqlQuery =
-            "UPDATE Schedule SET Id=?, StartTime=?, EndTime=?, Subject=?, Class=?, Room=?, Teacher=?, Canceled=? WHERE id=?";
+            "UPDATE Schedule SET StartTime=?, EndTime=?, Subject=?, Class=?, Room=?, Teacher=?, Canceled=? WHERE id=?";
             PreparedStatement pstmt =
                con.prepareStatement(sqlQuery);
-            
-            pstmt.setInt(1, id);
-            pstmt.setTime(2, startTime);
-            pstmt.setTime(3, endTime);
-            pstmt.setInt(4, subject);
-            pstmt.setInt(5, classId);
-            pstmt.setString(6, room);
-            pstmt.setInt(7, teacher);
-            pstmt.setInt(8, canceled);
-            
+
+            pstmt.setString(1, startTime);
+            pstmt.setString(2, endTime);
+            pstmt.setInt(3, subject);
+            pstmt.setInt(4, classId);
+            pstmt.setString(5, room);
+            pstmt.setInt(6, teacher);
+            pstmt.setInt(7, canceled);
+            pstmt.setInt(8, id);
             pstmt.execute();
             
         }
@@ -587,7 +586,8 @@ public class DAOSchedule extends SQLConnectionManager
                     + "[Subject].[Name] as 'SubjectName'," //subject name (this is a string, not an int! see in connections!)
                     + "[Schedule].[Room]," //schedule's classroom
                     + "[Teacher].[Monogram] as 'TeacherName'," //teacher name (this is a string, not an int! see in connections!)
-                    + "[Class].[Name] as 'ClassName' " //class name (like CS2016B) (string! not int! see in connections!)
+                    + "[Class].[Name] as 'ClassName', " //class name (like CS2016B) (string! not int! see in connections!)
+                    + "[Schedule].[Canceled] as 'Canceled'"
                     
                     + "from [Schedule],[Class],[Subject],[Teacher] " //needed tables
                     
@@ -605,7 +605,10 @@ public class DAOSchedule extends SQLConnectionManager
             {
                 Timestamp startTime = rs.getTimestamp("StartTime");
                 Timestamp endTime = rs.getTimestamp("EndTime");
-                    schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
+                
+                schedules.add(new Schedule(rs.getInt("Id"), startTime, endTime,rs.getInt("ClassId"),rs.getString("ClassName"), rs.getString("SubjectName"), rs.getString("Room"), rs.getString("TeacherName")));
+                Schedule last = schedules.get(schedules.size()-1);
+                last.setCanceled(rs.getBoolean("Canceled"));
             }
             con.close();
             return schedules;

@@ -23,7 +23,7 @@ public class Schedule
     String teacher;
     String room;
     String subject;
-    boolean canceled = false;
+    boolean canceled;// = false;
     
     public String time;
     String date;
@@ -59,7 +59,7 @@ public class Schedule
         int mon = startTime.getMonth()+1;
         int year = startTime.getYear()+1900;
         this.date = startTime.getDate()+"-"+mon+"-"+year;
-       
+
     }
 
     public int getId()

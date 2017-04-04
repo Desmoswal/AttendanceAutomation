@@ -7,6 +7,8 @@ package attendance.GUI.Controller;
 
 import attendance.BE.CurrentTeacher;
 import attendance.BE.Schedule;
+import attendance.BE.Subject;
+import attendance.BE.Class;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.sql.Date;
@@ -15,12 +17,15 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -58,27 +63,44 @@ public class AdminEditSchedulePopupController implements Initializable
     @FXML
     private RadioButton rbCancelled;
     @FXML
-    private ComboBox<?> cmbCourse;
+    private ComboBox<Class> cmbCourse;
     @FXML
-    private ComboBox<?> cmbSubject;
+    private ComboBox<Subject> cmbSubject;
     @FXML
     private Button btnAccept;
     @FXML
     private Button btnCancel;
         
     private static Schedule thisSchedule;
+    private static boolean isNew;
     AdminEditScheduleController editSchedController; 
     AttendanceModel model = new AttendanceModel();
     CurrentTeacher currentTeacher;
     
-      
+    private int isCancelled;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        cmbCourse.setItems(FXCollections.observableArrayList(model.getClasses()));
+        cmbSubject.setItems(FXCollections.observableArrayList(model.getAllSubjects()));   
+        
+        if(thisSchedule != null && thisSchedule.isCanceled())
+        {
+            rbCancelled.setSelected(true);
+            isCancelled = 1;
+        }
+        
+        if(thisSchedule != null)
+        {
+            setDateText();
+        }
+        
+        if(isNew)
+            rbCancelled.setDisable(true);
     }    
     
     public static void setThisSchedule(Schedule schedule)
@@ -86,8 +108,12 @@ public class AdminEditSchedulePopupController implements Initializable
         thisSchedule = schedule;
     }
     
+    public static void setIsNew(boolean state)
+    {
+        isNew = state;
+    }
     
-    public void setText()
+    private void setDateText()
     {
         //Start Time
         char[] tempStartYear = new char[4];
@@ -106,6 +132,7 @@ public class AdminEditSchedulePopupController implements Initializable
         txtStartDay.setText(String.valueOf(tempStartDay));
         txtStartHour.setText(String.valueOf(tempStartHour));
         txtStartMinute.setText(String.valueOf(tempStartMinute));
+        
         System.out.println("Start time: " + thisSchedule.getStartTime());
         
         //End Time
@@ -126,10 +153,11 @@ public class AdminEditSchedulePopupController implements Initializable
         txtEndHour.setText(String.valueOf(tempEndHour));
         txtEndMinute.setText(String.valueOf(tempEndMinute));
         System.out.println("End time: " + thisSchedule.getEndTime());
-        
-        //txtCourse.setText(thisSchedule.getClassName());
+             
         txtRoom.setText(thisSchedule.getRoom());
-        //txtSubject.setText(thisSchedule.getSubject());
+        
+        cmbCourse.getSelectionModel().select(thisSchedule.getClassId()-1);
+        //cmbSubject.getSelectionModel().select(thisSchedule.getSubject());
     }
     
     public void getText()
@@ -148,17 +176,37 @@ public class AdminEditSchedulePopupController implements Initializable
         {
             thisSchedule.setStartTime(startTimestamp);
             thisSchedule.setEndTime(endTimestamp);
-            //thisSchedule.setClassName(txtCourse.getText());
+            thisSchedule.setClassName(cmbCourse.getSelectionModel().getSelectedItem().getName());
             thisSchedule.setRoom(txtRoom.getText());
-            //thisSchedule.setSubject(txtSubject.getText());
-            //UPDATEMETHOD
-            //model.addSchedule(startTime, endTime, 2, 2, txtRoom.getText(), currentTeacher.getId());
+            thisSchedule.setSubject(cmbSubject.getSelectionModel().getSelectedItem().getName()); 
+            
+            if(rbCancelled.isSelected())
+            {
+                isCancelled = 1;
+                thisSchedule.setCanceled(true);
+            }
+                
+            else
+                isCancelled = 0;
+            
+            System.out.println("iscancelled" + isCancelled);
+            
+            //model.updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled);
+            model.updateSchedule(thisSchedule.getId(), startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId(), isCancelled);
         }
         else
         {
-            model.addSchedule(startTime, endTime, 2, 2, txtRoom.getText(), currentTeacher.getId());
+            if(rbCancelled.isSelected())
+            {
+                isCancelled = 1;
+            }
+            else
+            {
+                isCancelled = 0;
+            }
+            
+            model.addSchedule(startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId());
         }
-        
         
         System.out.println("Teacher info: " + currentTeacher.getName());
         System.out.println(currentTeacher.getId());
@@ -183,7 +231,7 @@ public class AdminEditSchedulePopupController implements Initializable
         getText();
         //addSchedule();
         Stage curStage = (Stage) btnAccept.getScene().getWindow();
-        editSchedController.refreshTable();
+        editSchedController.setTableItems();
         System.out.println("SetTableItems done");
         curStage.close();
     }
