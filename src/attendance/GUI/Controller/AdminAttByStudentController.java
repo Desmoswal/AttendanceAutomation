@@ -227,11 +227,7 @@ public class AdminAttByStudentController implements Initializable
     @FXML
     private void search(KeyEvent event)
     {
-        if(searchtype != null && (event.getCode().isLetterKey() || event.getCode().isDigitKey() || (!txtSearch.getText().isEmpty() && event.getCode() == KeyCode.BACK_SPACE))) {
-            if(searchtype == SearchType.CLASS) {
-                //System.out.println(model.searchClass(txtSearch.getText(),searchtype));
-                tblClasses.setItems(FXCollections.observableArrayList(model.searchClass(txtSearch.getText(), model.getClasses(), searchtype)));
-            }
+        if(searchtype != null && (event.getCode().isLetterKey() || event.getCode().isDigitKey() || event.getCode() == KeyCode.BACK_SPACE)) {
             if(searchtype == SearchType.STUDENT) {
                 List<Student> students;
                 if(tblClasses.getSelectionModel().isEmpty()) {
@@ -239,7 +235,9 @@ public class AdminAttByStudentController implements Initializable
                 } else {
                     students = model.getStudentsByClass(tblClasses.getSelectionModel().getSelectedItem().getId());
                 }
-                tblStudents.setItems(FXCollections.observableArrayList(model.searchStudent(txtSearch.getText(),students, searchtype)));
+                tblStudents.setItems(FXCollections.observableArrayList(model.doSearch(txtSearch.getText(),students, searchtype)));
+            } else if(searchtype == SearchType.CLASS) {
+                tblClasses.setItems(FXCollections.observableArrayList(model.doSearch(txtSearch.getText(), model.getClasses(), searchtype)));
             }
         }
     }

@@ -190,11 +190,15 @@ public class AttendanceModel {
         scheduleHandler.deleteSchedule(scheduleId);
     }
     
-    public ArrayList<Student> searchStudent(String word, List<Student> inWhat, SearchType type) {
+    /*public ArrayList<Student> searchStudent(String word, List<Student> inWhat, SearchType type) {
         return (ArrayList)searchHandler.searchStudent(word, inWhat, type);
     }
     
     public ArrayList<Class> searchClass(String word, List<Class> inWhat, SearchType type) {
         return (ArrayList)searchHandler.searchClass(word, inWhat, type);
+    }*/
+    
+    public <T> List<T> doSearch(String word, List<T> inWhat, SearchType type) {
+        return searchHandler.search(word, inWhat, type);
     }
 }
