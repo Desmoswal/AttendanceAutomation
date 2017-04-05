@@ -10,7 +10,6 @@ import attendance.BE.CurrentTeacher;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.DAL.LoginManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**

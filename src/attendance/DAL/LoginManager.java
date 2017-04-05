@@ -8,7 +8,6 @@ package attendance.DAL;
 import attendance.BE.CurrentStudent;
 import attendance.BE.Student;
 import attendance.BE.Teacher;
-import attendance.BLL.LoginHandler;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
  */
 public class LoginManager extends SQLConnectionManager
 {
-    //SQLConnectionManager conManager = new SQLConnectionManager();
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<Teacher> teachers = new ArrayList<>();
     

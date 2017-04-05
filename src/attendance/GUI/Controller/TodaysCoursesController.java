@@ -19,8 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -64,24 +62,6 @@ public class TodaysCoursesController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //sets combobox's color
-        /*cmbCourse.setButtonCell(new ListCell()
-        {
-            @Override
-            protected void updateItem(Object item, boolean empty)
-            {
-                super.updateItem(item, empty);
-                if (empty || item == null)
-                {
-                    // styled like -fx-prompt-text-fill:
-                    setStyle("-fx-text-fill: white;");
-                } else
-                {
-                    setStyle("-fx-text-fill: white;");
-                    setText(item.toString());
-                }
-            }
-        });*/
         
         updateCheckedInIds();
         setTableProperties();
@@ -104,8 +84,7 @@ public class TodaysCoursesController implements Initializable
      */
     private void setTableItems() {
         ArrayList<Schedule> schedule = new ArrayList();
-        //System.out.println(scheduleManager.getSchedules());
-        //tblCourse.setItems(FXCollections.observableArrayList(scheduleManager.getSchedules()));
+
         System.out.println("Today's scheds: "+model.getTodaysSchedulesForStudent(currentStudent.getId(),currentStudent.getClassid()));
         tblCourse.setItems(FXCollections.observableArrayList(model.getTodaysSchedulesForStudent(currentStudent.getId(), currentStudent.getClassid())));
     }

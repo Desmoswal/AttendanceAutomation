@@ -20,7 +20,6 @@ import java.util.ArrayList;
  * @author Kristof
  */
 public class CheckinManager extends SQLConnectionManager {
-    //private SQLConnectionManager conMan = new SQLConnectionManager();
     
     /**
      * Inserts given student's id and given schedule's in Checked_In table.

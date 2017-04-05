@@ -10,12 +10,8 @@ import attendance.BE.Schedule;
 import attendance.BE.Subject;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -89,7 +85,6 @@ public class AttendanceDetailsController implements Initializable
         setTableItems();
         setStatsData();
         setComboboxItems();
-        //setLabels(1002,2,2);
     }
     
     private void setTableProperties() {
@@ -109,9 +104,7 @@ public class AttendanceDetailsController implements Initializable
     
     private void setComboboxItems() {
         ArrayList<String> subjectnames = new ArrayList<>();
-        /*for (Subject subject : ) {
-            subjectnames.add(subject.getName());
-        }*/
+
         cmbCourse.setItems(FXCollections.observableArrayList(model.getSubjectsForStudent(currentStudent.getId())));
         System.out.println("cmb: "+FXCollections.observableArrayList(model.getSubjectsForStudent(currentStudent.getId())));
     }

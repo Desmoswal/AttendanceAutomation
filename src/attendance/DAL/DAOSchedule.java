@@ -335,7 +335,7 @@ public class DAOSchedule extends SQLConnectionManager
                     con.close(); //finished!
                     return missed; //returning the list with only schedules that are already ended and not checked in.
         }catch(SQLException e) {
-            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("DAO SCHEDULE-> getMissedSchedulesForStudent(): "+e);
         }
         return null;
     }
@@ -379,7 +379,7 @@ public class DAOSchedule extends SQLConnectionManager
             return rows;
 
         }catch(SQLException e) {
-            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("DAO SCHEDULE-> getAttendedCourses(): "+e);
         }
         return -10;
     }
@@ -426,7 +426,7 @@ public class DAOSchedule extends SQLConnectionManager
             
             return allscheds;
         }catch(SQLException e) {
-            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("DAO SCHEDULE-> getAllSchedulesForStudent(): "+e);
         }
         return null;
     }
@@ -477,7 +477,7 @@ public class DAOSchedule extends SQLConnectionManager
             return checkedins;
 
         }catch(SQLException e) {
-            Logger.getLogger(AttendanceDetailsManager.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("DAO SCHEDULE-> getAllCheckedinForStudent(): "+e);
         }
         return null;
     }

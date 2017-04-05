@@ -24,8 +24,6 @@ public class AdminMenuController implements Initializable
     @FXML
     private Button btnTodays;
     @FXML
-    private Button btnOnline;
-    @FXML
     private Button btnStatsStudent;
     @FXML
     private Button btnStatsClass;
@@ -85,14 +83,6 @@ public class AdminMenuController implements Initializable
             case "btnStatsClass":
                 try {
                     parentCon.openItem("/attendance/GUI/View/AdminAttByClass.fxml");
-                } catch(IOException e) {
-                    System.out.println("FXML probably not found");
-                    System.out.println(e);
-                }
-                break;
-            case "btnOnline":
-                try {
-                    parentCon.openItem("/attendance/GUI/View/OnlineUsers.fxml");
                 } catch(IOException e) {
                     System.out.println("FXML probably not found");
                     System.out.println(e);

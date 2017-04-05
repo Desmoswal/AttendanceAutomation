@@ -11,21 +11,14 @@ import attendance.BE.Subject;
 import attendance.BE.Class;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -200,7 +193,7 @@ public class AdminEditSchedulePopupController implements Initializable
             
             System.out.println("iscancelled" + isCancelled);
             
-            //model.updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled);
+            //GUIDELINE: model.updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled);
             model.updateSchedule(thisSchedule.getId(), startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId(), isCancelled);
         }
         else
@@ -238,7 +231,6 @@ public class AdminEditSchedulePopupController implements Initializable
     private void onAcceptButtonPressed(ActionEvent event)
     {
         getText();
-        //addSchedule();
         Stage curStage = (Stage) btnAccept.getScene().getWindow();
         editSchedController.setTableItems();
         System.out.println("SetTableItems done");

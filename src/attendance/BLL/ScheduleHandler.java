@@ -6,13 +6,9 @@
 package attendance.BLL;
 
 import attendance.BE.Schedule;
-import attendance.BE.Student;
-import attendance.BE.Teacher;
 import attendance.DAL.DAOSchedule;
-import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *

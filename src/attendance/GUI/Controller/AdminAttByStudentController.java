@@ -5,28 +5,17 @@
  */
 package attendance.GUI.Controller;
 
-import attendance.BE.Schedule;
 import attendance.BE.Student;
 import attendance.BE.Class;
 import attendance.BE.CurrentTeacher;
 import attendance.BE.Subject;
-import attendance.BLL.SearchHandler;
 import attendance.BLL.SearchHandler.SearchType;
-import attendance.DAL.AttendanceDetailsManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,7 +68,6 @@ public class AdminAttByStudentController implements Initializable
     private AttendanceModel model = new AttendanceModel();
     private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
-    private AttendanceDetailsManager attdetailsmanager = new AttendanceDetailsManager();
     @FXML
     private ComboBox<String> cmbSearchBox;
     
@@ -169,25 +157,7 @@ public class AdminAttByStudentController implements Initializable
             if(tblClasses.getItems().isEmpty()) {
                 tblClasses.setItems(FXCollections.observableArrayList(model.getClasses()));
             }
-            /*for (Class classe : model.getClasses()) {
-                if(classe.getId() == selected.getClassid()) {
-                    tblClasses.getSelectionModel().select(classe);
-                    break;
-                }
-            }*/
-        }
-        //--only for test purposes, we just need to change the methods
-        /*int missed = model.getMissedSchedulesForStudent(selected.getId(), selected.getClassid()).size();
-        System.out.println("Missed Classes: "+ missed);
-        
-        int attended = model.getAllCheckedinForStudent(selected.getId(), selected.getClassid()).size();
-        System.out.println("Attended Classes: "+ attended);
-        
-        int totalClasses = missed + attended;
-        System.out.println("Total classes: " + totalClasses);
-        
-        float avgAtt = (float)attended / (float)totalClasses * 100 ;*/
-        
+        }      
     }
     
     @FXML
@@ -215,7 +185,6 @@ public class AdminAttByStudentController implements Initializable
     {try{
         ObservableList<String> comboItems = FXCollections.observableArrayList("Classes","Students");
         cmbSearchBox.setItems(comboItems);
-        //cmbSearchBox.getSelectionModel().selectFirst();
     
     } catch (Exception ex)
         {

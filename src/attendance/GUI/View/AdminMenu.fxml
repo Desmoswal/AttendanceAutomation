@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="200.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminMenuController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="200.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="attendance.GUI.Controller.AdminMenuController">
 <children>
 <GridPane id="GridPane" prefHeight="500.0" prefWidth="200.0">
     <stylesheets>
@@ -54,18 +58,7 @@
                   </Button>
                </children>
       </AnchorPane>
-      <AnchorPane prefHeight="69.0" prefWidth="195.0" GridPane.rowIndex="5">
-               <children>
-            <Button fx:id="btnOnline" layoutX="13.0" layoutY="16.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="170.0" stylesheets="@../../Attendance.css" text="Online users">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="button" />
-                        <String fx:value="menubutton" />
-                     </styleClass></Button>
-               </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="69.0" prefWidth="195.0" GridPane.rowIndex="5" />
       <AnchorPane prefHeight="50.0" prefWidth="195.0" GridPane.rowIndex="4">
                <children>
             <Button fx:id="btnStatsStudent" layoutX="8.0" layoutY="16.0" mnemonicParsing="false" onAction="#pressedMenuButton" prefHeight="42.0" prefWidth="180.0" stylesheets="@../../Attendance.css" text="Statistics by student">

@@ -7,19 +7,12 @@ package attendance;
 
 import attendance.BE.CurrentStudent;
 import attendance.DAL.SQLConnectionManager;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  *
@@ -43,8 +36,6 @@ public class Attendance extends Application
         stage.getIcons().add(new Image("attendance/EASV.png"));
         stage.show();
                
-        //getStudents();
-        //getUsernames();
     }
 
     /**

@@ -5,7 +5,6 @@
  */
 package attendance.GUI.Controller;
 
-import attendance.BE.Schedule;
 import attendance.BE.CurrentTeacher;
 import attendance.BE.Schedule;
 import attendance.GUI.Model.AttendanceModel;

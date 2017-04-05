@@ -12,14 +12,12 @@ import attendance.BE.Student;
 import attendance.BE.Teacher;
 import attendance.BE.Class;
 import attendance.BE.Subject;
-import attendance.BLL.AttendanceDetailsHandler;
 import attendance.BLL.CheckinHandler;
 import attendance.BLL.DataHandler;
 import attendance.BLL.LoginHandler;
 import attendance.BLL.ScheduleHandler;
 import attendance.BLL.SearchHandler;
 import attendance.BLL.SearchHandler.SearchType;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,10 +105,6 @@ public class AttendanceModel {
     public ArrayList<Schedule> getAllCheckedinForStudent(int studentid, int classid) {
         return scheduleHandler.getAllCheckedinForStudent(studentid, classid);
     }
-    
-    /*public int getMissedSchedulesNumberForStudent(int studentid, int classid) {
-        return scheduleHandler.getMissedSchedulesForStudent(studentid, classid).size();
-    }*/
     
     public ArrayList<Schedule> getTodaysSchedulesForStudent(int studentid,int classid) {
         return scheduleHandler.getTodaysSchedulesForStudent(studentid,classid);

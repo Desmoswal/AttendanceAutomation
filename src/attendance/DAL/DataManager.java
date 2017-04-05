@@ -22,8 +22,7 @@ import java.util.logging.Logger;
  */
 public class DataManager extends SQLConnectionManager
 {
-    
-    //private SQLConnectionManager conMan = new SQLConnectionManager();
+
     private ArrayList<Student> students = new ArrayList();
     
     /**
@@ -106,7 +105,6 @@ public class DataManager extends SQLConnectionManager
             //Student stud = null;
             while(rs.next()) {
                 student.add(new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class")));
-                //stud = new Student(rs.getInt("Id"),rs.getString("Name"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getInt("Class"));
             }
             if(student.size() == 1) {
                 return student.get(0);

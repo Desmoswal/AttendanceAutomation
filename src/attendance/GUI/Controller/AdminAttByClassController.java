@@ -7,6 +7,8 @@ package attendance.GUI.Controller;
 
 import attendance.BE.Class;
 import attendance.BE.Student;
+import attendance.BLL.SearchHandler;
+import attendance.BLL.SearchHandler.SearchType;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +18,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -45,8 +50,13 @@ public class AdminAttByClassController implements Initializable
     private Label lblMostAttStud;
     @FXML
     private Label lblMostAttStudCourse;
-
+    @FXML
+    private TextField txtSearch;
+    
     AttendanceModel model = new AttendanceModel();
+    
+    private SearchHandler.SearchType searchtype = SearchType.CLASS;
+    
 
     /**
      * Initializes the controller class.
@@ -91,6 +101,14 @@ public class AdminAttByClassController implements Initializable
             }
             
             lblMostAttStudCourse.setText(model.getMostAttStudentMostAttCourse(selected.getId()));
+        }
+    }
+
+    @FXML
+    private void search(KeyEvent event)
+    {
+        if(searchtype != null && (event.getCode().isLetterKey() || event.getCode().isDigitKey() || event.getCode() == KeyCode.BACK_SPACE)) {           
+            tblClasses.setItems(FXCollections.observableArrayList(model.doSearch(txtSearch.getText(), model.getClasses(), searchtype)));
         }
     }
 
