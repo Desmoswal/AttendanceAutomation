@@ -64,16 +64,16 @@ public class AdminAttByStudentController implements Initializable
     private Label lblStudAttSelected;
     @FXML
     private Label lblStudMissedSelected;
-
+    @FXML
+    private ComboBox<String> cmbSearchBox;
+    @FXML
+    private TextField txtSearch;
+    
     private AttendanceModel model = new AttendanceModel();
     private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     
-    @FXML
-    private ComboBox<String> cmbSearchBox;
-    
     private SearchType searchtype;
-    @FXML
-    private TextField txtSearch;
+    
 
     /**
      * Initializes the controller class.

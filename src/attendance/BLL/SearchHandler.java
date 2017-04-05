@@ -5,7 +5,6 @@
  */
 package attendance.BLL;
 
-import attendance.GUI.Controller.MainViewController;
 import java.util.List;
 import attendance.BE.Class;
 import attendance.BE.Student;

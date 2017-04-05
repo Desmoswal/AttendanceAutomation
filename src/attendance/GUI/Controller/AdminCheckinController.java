@@ -50,7 +50,11 @@ public class AdminCheckinController implements Initializable
     private TableView<Student> tblAttending;
     @FXML
     private TableColumn<Student, String> colName;
-
+    @FXML
+    private Button btnCheckIn;
+    @FXML
+    private Button btnDelete;
+    
     private AttendanceModel model = new AttendanceModel();
     private LinkedList<Student> checkinList;
     private LinkedList<CheckBox> checkinboxes = new LinkedList<>();
@@ -58,10 +62,6 @@ public class AdminCheckinController implements Initializable
     Student selected = null;
 
     private static Schedule thisSchedule;
-    @FXML
-    private Button btnCheckIn;
-    @FXML
-    private Button btnDelete;
 
     /**
      * Initializes the controller class.

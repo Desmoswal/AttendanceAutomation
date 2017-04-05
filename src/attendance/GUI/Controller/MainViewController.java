@@ -45,7 +45,9 @@ public class MainViewController implements Initializable
     
     private AttendanceModel model = new AttendanceModel();
     private static UserType user = null;
+    
     public static enum UserType {STUDENT,TEACHER};
+    
     private CurrentStudent currentStudent = CurrentStudent.getInstance();
     private CurrentTeacher currentTeacher = CurrentTeacher.getInstance();
     private Date date = new Date();
