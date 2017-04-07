@@ -91,7 +91,6 @@ public class DataHandler {
             float avg = (float) attended / (float) total * 100;
             avgForStudents.add(avg);
         }
-
         float totalPercent = 0;
         for (Float avgForStudent : avgForStudents) {
             totalPercent += avgForStudent;

@@ -33,7 +33,7 @@ public class LoginHandler {
      *      2: invalid password
      *      -1: empty username
      *      -2: empty password
-     *      -3 unknown error (no if() reached (that's impossible but netbeans rulez...)
+     *      -3 unknown error (no if() reached. this can happen if there's no database connection or something)
      * @param username
      * @param password
      * @return "correct status code"

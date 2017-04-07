@@ -12,6 +12,7 @@ import attendance.DAL.SQLConnectionManager;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -23,6 +24,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -55,6 +57,7 @@ public class TodaysCoursesController implements Initializable
     private AttendanceModel model = new AttendanceModel();
     private boolean checkedin = false;
     List<Integer> checkedinIds = new ArrayList<>();
+    Date now = new Date();
 
     /**
      * Initializes the controller class.
@@ -93,7 +96,8 @@ public class TodaysCoursesController implements Initializable
     private void pressedOnTable(MouseEvent event) {
         if(event.isPrimaryButtonDown() && event.getClickCount() == 1) {
             selected = tblCourse.getSelectionModel().getSelectedItem();
-            changeCheckinButton(selected);
+            if(selected != null)
+                changeCheckinButton(selected);
         }
     }
     
@@ -120,6 +124,7 @@ public class TodaysCoursesController implements Initializable
     private void changeCheckedIn() {
         tblCourse.setRowFactory(tv -> new TableRow<Schedule>() {
             AttendanceModel model = new AttendanceModel();
+            Date now = new Date();
             @Override
             public void updateItem(Schedule item,boolean empty) {
                 super.updateItem(item,empty);
@@ -132,9 +137,13 @@ public class TodaysCoursesController implements Initializable
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
                     }
                     if(item.isCanceled()) {
+                        setStyle("-fx-background-color:rgba(0, 0, 0, 0.1);");
+                        setDisable(true);
+                        //setStyle("-fx-background-color:rgba(255, 0, 0, 0.5);");
+                    }
+                    if(item.getEndTime().before(now)) {
                         setStyle("-fx-background-color:rgba(255, 0, 0, 0.5);");
                     }
-                    
                 }
             }
         });
@@ -147,7 +156,7 @@ public class TodaysCoursesController implements Initializable
     }
     
     private void changeCheckinButton(Schedule selected) {
-        if(selected.isCanceled() || checkedinIds.contains(selected.getId())) {
+        if(selected.isCanceled() || checkedinIds.contains(selected.getId()) || selected.getEndTime().before(now)) {
             btnCheckIn.setDisable(true);
         } else {
             btnCheckIn.setDisable(false);
