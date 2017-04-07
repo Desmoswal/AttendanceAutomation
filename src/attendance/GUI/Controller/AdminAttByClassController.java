@@ -95,7 +95,7 @@ public class AdminAttByClassController implements Initializable
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Please be patient.");
-            alert.setHeaderText("Calculations take several seconds, please be patiente.");
+            alert.setHeaderText("Calculations take several seconds, please be patient.");
             alert.setContentText("He that can have patience can have what he will.― Benjamin Franklin");
             alert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
             alert.show();

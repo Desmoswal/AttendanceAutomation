@@ -165,7 +165,7 @@ public class AdminCheckinController implements Initializable
                         System.out.println(thisSchedule.getId());
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
                     }
-                    else
+                    else if(!checkedins.contains(thisSchedule.getId()))
                     {
                         setStyle("");
                     }
