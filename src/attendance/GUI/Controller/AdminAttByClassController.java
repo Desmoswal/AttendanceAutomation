@@ -60,7 +60,7 @@ public class AdminAttByClassController implements Initializable
     
     private SearchHandler.SearchType searchtype = SearchType.CLASS;
     
-Class selected = null;
+    Class selected = null;
     /**
      * Initializes the controller class.
      */
@@ -94,7 +94,7 @@ Class selected = null;
             
             
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Please be patiente.");
+            alert.setTitle("Please be patient.");
             alert.setHeaderText("Calculations take several seconds, please be patiente.");
             alert.setContentText("He that can have patience can have what he will.― Benjamin Franklin");
             alert.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
@@ -103,19 +103,6 @@ Class selected = null;
             
             calculationTask();
             cancelButton.fire();
-            /*lblAvgAttofClass.setText(model.getAvgAttForClass(selected.getId())+"%");//3,48 sec
-            lblMostMissedCourse.setText(model.getMostMissedCourseForClass(selected.getId()));//1,93 sec
-            lblMostAttendCourse.setText(model.getMostAttCourseForClass(selected.getId()));//1,98 sec
-            lblMostMissedStud.setText(model.getMostMissedStudentForClass(selected.getId()).getName());//2,02 sec
-            lblMostMissedStudCourse.setText(model.getMostMissedStudentsMostMissedCourse(selected.getId()));//2 sec
-            Student student = model.getMostAttStudentForClass(selected.getId());//2 sec
-            if(student != null) {
-                lblMostAttStud.setText(student.getName());
-            } else {
-                lblMostAttStud.setText("No attendance data.");
-            }
-            
-            lblMostAttStudCourse.setText(model.getMostAttStudentMostAttCourse(selected.getId()));*/
         }
     }
 

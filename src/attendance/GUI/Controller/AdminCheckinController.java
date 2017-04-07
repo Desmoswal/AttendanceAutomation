@@ -162,7 +162,12 @@ public class AdminCheckinController implements Initializable
                     
                     if (checkedins.contains(thisSchedule.getId()))
                     {
+                        System.out.println(thisSchedule.getId());
                         setStyle("-fx-background-color:rgba(44, 255, 44, 0.5);");
+                    }
+                    else
+                    {
+                        setStyle("");
                     }
                 }
             }

@@ -397,8 +397,6 @@ public class AdminEditSchedulePopupController implements Initializable
 
             alert.showAndWait();
         }
-        
-        
     }    
     
     public void setCurrentTeacher(CurrentTeacher currentTeacher)

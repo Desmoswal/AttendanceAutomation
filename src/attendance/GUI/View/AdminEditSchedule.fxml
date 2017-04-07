@@ -21,7 +21,7 @@
             <TableColumn fx:id="colRoom" prefWidth="100.0" text="Room" />
         </columns>
       </TableView>
-      <Label layoutX="164.0" layoutY="14.0" prefHeight="21.0" prefWidth="122.0" stylesheets="@../../Attendance.css" text="Schedules" />
+      <Label layoutX="295.0" layoutY="14.0" prefHeight="21.0" prefWidth="122.0" stylesheets="@../../Attendance.css" text="Schedules" textAlignment="CENTER" />
       <Label layoutX="107.0" layoutY="384.0" stylesheets="@../../Attendance.css" text="Double click on a course to edit it" />
       <Button fx:id="btnAdd" layoutX="600.0" layoutY="144.0" mnemonicParsing="false" onAction="#onAddButtonPressed" text="Add New" />
       <Button fx:id="btnUpdate" layoutX="606.0" layoutY="191.0" mnemonicParsing="false" onAction="#onUpdateButtonPressed" text="Update" />
