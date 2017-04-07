@@ -6,7 +6,7 @@
 package attendance.GUI.Controller;
 
 import attendance.BE.CurrentStudent;
-import attendance.BE.CurrentTeacher;
+import attendance.BE.CurrentTeacher;    
 import attendance.GUI.Model.AttendanceModel;
 import java.io.IOException;
 import java.net.URL;

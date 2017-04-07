@@ -12,15 +12,20 @@ import attendance.BE.Class;
 import attendance.GUI.Model.AttendanceModel;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -106,6 +111,9 @@ public class AdminEditSchedulePopupController implements Initializable
         isNew = state;
     }
     
+    /**
+     * Sets the textfields with data from the selected schedule.
+     */
     private void setDateText()
     {
         //Start Time
@@ -162,12 +170,23 @@ public class AdminEditSchedulePopupController implements Initializable
         }
     }
     
+    /**
+     * Gets data from textfields for saving the schedule.
+     */
     public void getText()
     {
-        Timestamp startTimestamp = new Timestamp(Integer.parseInt(txtStartYear.getText())-1900, Integer.parseInt(txtStartMonth.getText())-1, Integer.parseInt(txtStartDay.getText()), Integer.parseInt(txtStartHour.getText()), Integer.parseInt(txtStartMinute.getText()), 0, 0);
+        String startMonth = "";
+        if(txtStartMonth.getText().length() == 1)
+        {
+            startMonth = "0"+txtStartMonth.getText();
+        }
+        else
+            startMonth = txtStartMonth.getText();
+        
+        Timestamp startTimestamp = new Timestamp(Integer.parseInt(txtStartYear.getText())-1900, Integer.parseInt(startMonth)-1/*Integer.parseInt(txtStartMonth.getText())-1*/, Integer.parseInt(txtStartDay.getText()), Integer.parseInt(txtStartHour.getText()), Integer.parseInt(txtStartMinute.getText()), 0, 0);
         Timestamp endTimestamp = new Timestamp(Integer.parseInt(txtEndYear.getText())-1900, Integer.parseInt(txtEndMonth.getText())-1, Integer.parseInt(txtEndDay.getText()), Integer.parseInt(txtEndHour.getText()), Integer.parseInt(txtEndMinute.getText()), 0, 0);
 
-        String startTime = txtStartYear.getText() + txtStartMonth.getText() + txtStartDay.getText() + " " + txtStartHour.getText() +":" + txtStartMinute.getText() + ":00";
+        String startTime = txtStartYear.getText() + startMonth/*txtStartMonth.getText()*/ + txtStartDay.getText() + " " + txtStartHour.getText() +":" + txtStartMinute.getText() + ":00";
         String endTime = txtEndYear.getText() + txtEndMonth.getText() + txtEndDay.getText() + " " + txtEndHour.getText() +":" + txtEndMinute.getText() + ":00";
 
         
@@ -193,8 +212,15 @@ public class AdminEditSchedulePopupController implements Initializable
             
             System.out.println("iscancelled" + isCancelled);
             
+            if(cmbSubject.getSelectionModel().getSelectedItem() != null && cmbCourse.getSelectionModel().getSelectedItem() != null)
+            {
+                model.updateSchedule(thisSchedule.getId(), startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId(), isCancelled);
+                Stage curStage = (Stage) btnAccept.getScene().getWindow();
+                System.out.println("Update complete, closing window");
+                curStage.close();
+            }
             //GUIDELINE: model.updateSchedule(int id, String startTime, String endTime, int subject, int classId, String room, int teacher, int canceled);
-            model.updateSchedule(thisSchedule.getId(), startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId(), isCancelled);
+            
         }
         else
         {
@@ -207,15 +233,173 @@ public class AdminEditSchedulePopupController implements Initializable
                 isCancelled = 0;
             }
             
-            model.addSchedule(startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId());
+            if(cmbSubject.getSelectionModel().getSelectedItem() != null && cmbCourse.getSelectionModel().getSelectedItem() != null)
+            {
+                //GUIDELINE: model.addSchedule(startTime, endTime, "Subject", "ClassId", "Room", "Teacher");
+                model.addSchedule(startTime, endTime, cmbSubject.getSelectionModel().getSelectedItem().getId(), cmbCourse.getSelectionModel().getSelectedItem().getId(), txtRoom.getText(), currentTeacher.getId());
+                System.out.println("Add Schedule complete, close window");
+                Stage curStage = (Stage) btnAccept.getScene().getWindow();
+                curStage.close();
+            }
+            else
+            {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Missing information");
+                alert.setHeaderText("You have some information missing.");
+                alert.setContentText("Please fill every detail of the schedule.");
+
+                alert.showAndWait();
+            }
+            
         }
         
         System.out.println("Teacher info: " + currentTeacher.getName());
         System.out.println(currentTeacher.getId());
-        
-        //GUIDELINE: model.addSchedule(startTime, endTime, "Subject", "ClassId", "Room", "Teacher");
-        
+    
     }
+    
+    @FXML
+    private void onAcceptButtonPressed(ActionEvent event)
+    {
+        getText();
+        editSchedController.setTableItems();
+    }
+
+    @FXML
+    private void onCancelButtonPressed(ActionEvent event)
+    {
+        Stage curStage = (Stage) btnCancel.getScene().getWindow();
+        System.out.println("Cancel button clicked, window closing");
+        curStage.close();
+    }
+    
+    @FXML
+    private void checkCorrectFormat(KeyEvent event)
+    {
+        int i = 0;
+        
+        
+        
+        if(txtStartYear.getText().length() == 0 || txtStartYear.getText().length() > 4 || Integer.parseInt(txtStartYear.getText()) < 1901)
+        {
+            txtStartYear.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtStartYear.setStyle("");
+        }
+            
+        
+        if(txtStartMonth.getText().length() == 0 || txtStartMonth.getText().length() > 2 || Integer.parseInt(txtStartMonth.getText()) > 12 || Integer.parseInt(txtStartMonth.getText()) <= 0)
+        {
+            txtStartMonth.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtStartMonth.setStyle("");
+        }
+            
+        
+        if(txtStartDay.getText().length() == 0 || txtStartDay.getText().length() > 2 || Integer.parseInt(txtStartDay.getText()) > 31)
+        {
+            txtStartDay.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtStartDay.setStyle("");
+        }
+            
+        
+        if(txtStartHour.getText().length() == 0 || txtStartHour.getText().length() > 2 || Integer.parseInt(txtStartHour.getText()) > 24)
+        {
+            txtStartHour.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtStartHour.setStyle("");
+        }
+            
+        
+        if(txtStartMinute.getText().length() == 0 || txtStartMinute.getText().length() > 2 || Integer.parseInt(txtStartMinute.getText()) > 59)
+        {
+            txtStartMinute.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtStartMinute.setStyle("");
+        }   
+        
+        
+        if(txtEndYear.getText().length() == 0 || txtEndYear.getText().length() > 4 || Integer.parseInt(txtEndYear.getText()) < 1901)
+        {
+            txtEndYear.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtEndYear.setStyle("");
+        }    
+        
+        if(txtEndMonth.getText().length() == 0 || txtEndMonth.getText().length() > 2 || Integer.parseInt(txtEndMonth.getText()) > 12 || Integer.parseInt(txtEndMonth.getText()) <= 0)
+        {
+            txtEndMonth.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtEndMonth.setStyle("");
+        }    
+        
+        if(txtEndDay.getText().length() == 0 || txtEndDay.getText().length() > 2 || Integer.parseInt(txtEndDay.getText()) > 31)
+        {
+            txtEndDay.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtEndDay.setStyle("");
+        }    
+        
+        if(txtEndHour.getText().length() == 0 || txtEndHour.getText().length() > 2 || Integer.parseInt(txtEndHour.getText()) > 24)
+        {
+            txtEndHour.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtEndHour.setStyle("");
+        }    
+        
+        if(txtEndMinute.getText().length() == 0 || txtEndMinute.getText().length() > 2 || Integer.parseInt(txtEndMinute.getText()) > 59)
+        {
+            txtEndMinute.setStyle("-fx-background-color: red;");
+            i++;
+        }
+        else
+        {
+            txtEndMinute.setStyle("");
+        }
+        
+        
+        if(!txtStartYear.getText().isEmpty() && !txtStartMonth.getText().isEmpty() && !txtStartDay.getText().isEmpty() && !txtStartHour.getText().isEmpty()
+                && !txtStartMinute.getText().isEmpty() && !txtEndYear.getText().isEmpty() && !txtEndMonth.getText().isEmpty() && !txtEndDay.getText().isEmpty()
+                && !txtEndHour.getText().isEmpty() && !txtEndMinute.getText().isEmpty() && i >= 5)
+        {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("WoW");
+            alert.setHeaderText("Nice job, you managed to mess up most of the fields..");
+            alert.setContentText("I'm proud of you.. now get back and try harder!");
+
+            alert.showAndWait();
+        }
+        
+        
+    }    
     
     public void setCurrentTeacher(CurrentTeacher currentTeacher)
     {
@@ -225,23 +409,5 @@ public class AdminEditSchedulePopupController implements Initializable
     public void setController(AdminEditScheduleController c)
     {
         this.editSchedController = c;
-    }
-
-    @FXML
-    private void onAcceptButtonPressed(ActionEvent event)
-    {
-        getText();
-        Stage curStage = (Stage) btnAccept.getScene().getWindow();
-        editSchedController.setTableItems();
-        System.out.println("SetTableItems done");
-        curStage.close();
-    }
-
-    @FXML
-    private void onCancelButtonPressed(ActionEvent event)
-    {
-        Stage curStage = (Stage) btnCancel.getScene().getWindow();
-        System.out.println("Cancel button clicked, window closing");
-        curStage.close();
     }
 }

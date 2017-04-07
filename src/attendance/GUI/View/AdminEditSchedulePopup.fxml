@@ -16,23 +16,23 @@
    <children>
       <Label layoutX="143.0" layoutY="38.0" stylesheets="@../../Attendance.css" text="Edit Schedule" />
       <Label layoutX="54.0" layoutY="87.0" stylesheets="@../../Attendance.css" text="Start Time:" />
-      <TextField fx:id="txtStartYear" layoutX="138.0" layoutY="87.0" prefHeight="27.0" prefWidth="46.0" promptText="YYYY" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtStartYear" layoutX="138.0" layoutY="87.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="46.0" promptText="YYYY" stylesheets="@../../Attendance.css" />
       <Label layoutX="191.0" layoutY="93.0" text="/" />
-      <TextField fx:id="txtStartMonth" layoutX="201.0" layoutY="88.0" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtStartMonth" layoutX="201.0" layoutY="88.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
       <Label layoutX="243.0" layoutY="93.0" text="/" />
-      <TextField fx:id="txtStartDay" layoutX="254.0" layoutY="88.0" prefHeight="27.0" prefWidth="39.0" promptText="DD" stylesheets="@../../Attendance.css" />
-      <TextField fx:id="txtStartHour" layoutX="176.0" layoutY="115.0" prefHeight="27.0" prefWidth="36.0" promptText="HH" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtStartDay" layoutX="254.0" layoutY="88.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="39.0" promptText="DD" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtStartHour" layoutX="176.0" layoutY="115.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="HH" stylesheets="@../../Attendance.css" />
       <Label layoutX="218.0" layoutY="120.0" text=":" />
-      <TextField fx:id="txtStartMinute" layoutX="227.0" layoutY="115.0" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtStartMinute" layoutX="227.0" layoutY="115.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
       <Label layoutX="53.0" layoutY="152.0" stylesheets="@../../Attendance.css" text="End Time:" />
-      <TextField fx:id="txtEndYear" layoutX="144.0" layoutY="152.0" prefHeight="27.0" prefWidth="46.0" promptText="YYYY" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtEndYear" layoutX="144.0" layoutY="152.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="46.0" promptText="YYYY" stylesheets="@../../Attendance.css" />
       <Label layoutX="197.0" layoutY="158.0" text="/" />
-      <TextField fx:id="txtEndMonth" layoutX="207.0" layoutY="153.0" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtEndMonth" layoutX="207.0" layoutY="153.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
       <Label layoutX="249.0" layoutY="158.0" text="/" />
-      <TextField fx:id="txtEndDay" layoutX="260.0" layoutY="153.0" prefHeight="27.0" prefWidth="39.0" promptText="DD" stylesheets="@../../Attendance.css" />
-      <TextField fx:id="txtEndHour" layoutX="182.0" layoutY="180.0" prefHeight="27.0" prefWidth="36.0" promptText="HH" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtEndDay" layoutX="260.0" layoutY="153.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="39.0" promptText="DD" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtEndHour" layoutX="182.0" layoutY="180.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="HH" stylesheets="@../../Attendance.css" />
       <Label layoutX="224.0" layoutY="185.0" text=":" />
-      <TextField fx:id="txtEndMinute" layoutX="233.0" layoutY="180.0" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
+      <TextField fx:id="txtEndMinute" layoutX="233.0" layoutY="180.0" onKeyReleased="#checkCorrectFormat" prefHeight="27.0" prefWidth="36.0" promptText="MM" stylesheets="@../../Attendance.css" />
       <RadioButton fx:id="rbCancelled" layoutX="139.0" layoutY="218.0" mnemonicParsing="false" stylesheets="@../../Attendance.css" text="Cancelled course" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
