@@ -166,7 +166,13 @@ public class AdminAttByStudentController implements Initializable
         Subject selected = cmbStudClassSelect.getSelectionModel().getSelectedItem();
         if(selected != null)
         {
-            setLabels(tblStudents.getSelectionModel().getSelectedItem().getId(), tblClasses.getSelectionModel().getSelectedItem().getId(), selected.getId());
+            int classid;
+            if(tblClasses.getSelectionModel().isEmpty() && !tblStudents.getSelectionModel().isEmpty()) {
+                classid = tblStudents.getSelectionModel().getSelectedItem().getClassid();
+            } else {
+                classid = tblClasses.getSelectionModel().getSelectedItem().getId();
+            }
+            setLabels(tblStudents.getSelectionModel().getSelectedItem().getId(), classid, selected.getId());
         }
         
     }
